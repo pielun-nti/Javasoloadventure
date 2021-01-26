@@ -5,6 +5,15 @@ public class Link {
     private String description;
     private int targetID;
     private int storyID;
+    private int maxChoices;
+
+    public int getMaxChoices() {
+        return maxChoices;
+    }
+
+    public void setMaxChoices(int maxChoices) {
+        this.maxChoices = maxChoices;
+    }
 
     public int getID() {
         return ID;
