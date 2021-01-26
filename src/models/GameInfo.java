@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class GameInfo {
     private int currentRoom;
-    private ArrayList<String> links;
-    private ArrayList<String> story;
+    private ArrayList<Link> links;
+    private ArrayList<Story> stories;
 
     public int getCurrentRoom() {
         return currentRoom;
@@ -23,11 +23,11 @@ public class GameInfo {
         this.links = links;
     }
 
-    public ArrayList<String> getStory() {
-        return story;
+    public ArrayList<String> getStories() {
+        return stories;
     }
 
-    public void setStory(ArrayList<String> story) {
-        this.story = story;
+    public void setStories(ArrayList<String> stories) {
+        this.stories = stories;
     }
 }

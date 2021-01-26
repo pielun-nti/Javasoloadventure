@@ -3,6 +3,7 @@ package core;
 import config.Env;
 import models.DBManager;
 import models.GameInfo;
+import models.Story;
 
 import javax.swing.*;
 import java.awt.*;
@@ -40,7 +41,14 @@ public class mainGame {
                         JOptionPane.showMessageDialog(null, "No story for first scene exists.", Env.GameMessageBoxTitle, JOptionPane.ERROR_MESSAGE);
                         System.exit(2);
                     } else {
-                        ArrayList<String>
+                        ArrayList<String> stories = gameInfo.getStories();
+                        if (stories == null){
+                            stories = new ArrayList<>();
+                        }
+                        Story story = new Story();
+                        story.setID(gameInfo.getCurrentRoom());
+                        story.setBody(rs.getString("body"));
+                        stories.add(story);
                                     /*LoginView loginView = new LoginView();
                 LoginModel loginModel = new LoginModel();
                 LoginController loginController = new LoginController(loginView, loginModel);
