@@ -18,14 +18,82 @@ import java.util.Calendar;
 public class GameModel {
     DBManager dbManager;
     User user;
-    public GameModel(User user){
+    GameInfo gameInfo;
+    public GameModel(User user, GameInfo gameInfo){
         dbManager = new DBManager();
         this.user = user;
+        this.gameInfo = gameInfo;
     }
-    public GameModel(User user, DBManager dbManager){
+    public GameModel(User user, DBManager dbManager, GameInfo gameInfo){
+        this.gameInfo = gameInfo;
         this.dbManager = dbManager;
         this.user = user;
     }
+
+    public void getChoiceA(){
+        try {
+        ArrayList<String> co = new ArrayList<>();
+        ArrayList<String> va = new ArrayList<>();
+        co.add("id");
+        va.add(Integer.toString(gameInfo.getCurrentRoom()));
+        ResultSet rs = dbManager.selectAllWhere("story", co, va);
+        if (!rs.next()) {
+            JOptionPane.showMessageDialog(null, "No story for first scene exists.", Env.GameMessageBoxTitle, JOptionPane.ERROR_MESSAGE);
+            //completed story
+        } else {
+            ArrayList<Story> stories = gameInfo.getStories();
+            if (stories == null) {
+                stories = new ArrayList<>();
+            }
+            Story story = new Story();
+            story.setID(gameInfo.getCurrentRoom());
+            story.setBody(rs.getString("body"));
+            stories.add(story);
+            ArrayList<String> col = new ArrayList<>();
+            ArrayList<String> val = new ArrayList<>();
+            co.add("story_id");
+            va.add(Integer.toString(gameInfo.getCurrentRoom()));
+            ResultSet linksrs = dbManager.selectAllWhere("links", co, va);
+            if (!linksrs.next()) {
+                JOptionPane.showMessageDialog(null, "No story for first scene exists.", Env.GameMessageBoxTitle, JOptionPane.ERROR_MESSAGE);
+                System.exit(2);
+            } else {
+                ArrayList<Link> links = gameInfo.getLinks();
+                if (links == null) {
+                    links = new ArrayList<>();
+                }
+                System.out.println(story.toString());
+                int numberOfChoices = 0;
+                while (linksrs.next()) {
+                    Link link = new Link();
+                    link.setID(gameInfo.getCurrentRoom());
+                    link.setDescription(linksrs.getString("description"));
+                    link.setStoryID(gameInfo.getCurrentRoom());
+                    link.setTargetID(Integer.parseInt(linksrs.getString("target_id")));
+                    links.add(link);
+                    System.out.println(link.toString());
+                    numberOfChoices++;
+                }
+                Choices choices = new Choices();
+                choices.setNumberOfChoices(numberOfChoices);
+                int count = 0;
+                while (linksrs.next()) {
+                    if (count == 0) {
+                        choices.setChoiceA(linksrs.getString("description"));
+                    } else if (count == 1) {
+                        choices.setChoiceB(linksrs.getString("description"));
+                    } else if (count == 2) {
+                        choices.setChoiceC(linksrs.getString("description"));
+                    }
+                    count++;
+                }
+            }
+        }
+            } catch (Exception ex){
+                ex.printStackTrace();
+            }
+    }
+
     /**
      * Kontaktar databasen med dbManager och väljer alla rader i tabellen logs och om det finns så returnar den resultatdatan.
      * @return ResultSet med alla loggar och dess data

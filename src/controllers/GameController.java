@@ -1,6 +1,8 @@
 package controllers;
 
 import config.Env;
+import models.Choices;
+import models.GameInfo;
 import models.GameModel;
 import models.User;
 import views.GameView;
@@ -19,19 +21,26 @@ public class GameController {
     GameView view;
     GameModel model;
     User user;
-
+    GameInfo gameInfo;
+     Choices choices;
     /**
-     * Controls both the logs view and logs model. LogsController adds ActionListener and FrameWindowListener.
+     * Controls both the Game view and Game model. GameController adds ActionListener and FrameWindowListener.
      * @param view
      * @param model
      * @param user
+     * @param gameInfo
+     * @param choices
      */
-    public GameController(GameView view, GameModel model, User user){
+    public GameController(GameView view, GameModel model, User user, GameInfo gameInfo, Choices choices){
+        this.choices = choices;
         this.view = view;
         this.model = model;
         this.user = user;
-        this.view.addListeners(new LogsListener());
+        this.view.addListeners(new GameListener());
         this.view.addFrameWindowListener(new FrameWindowListener());
+        this.gameInfo = gameInfo;
+        view.gettxtStory().setText(gameInfo.getStories().get(gameInfo.getCurrentRoom()).getBody());
+
     }
 
     private class FrameWindowListener implements WindowListener {
@@ -77,7 +86,7 @@ public class GameController {
         }
     }
 
-    private class LogsListener implements ActionListener {
+    private class GameListener implements ActionListener {
         /**
          * Listens for JMenuItem and JCheckBoxMenuItem clicks and then executes methods. Onactionperformed gets called
          * when a JMenuItem or JCheckBoxMenuItem gets clicked by user and then it executes methods.
@@ -90,6 +99,16 @@ public class GameController {
             if (command != null){
                 if (command.equalsIgnoreCase("Exit application")){
                     view.dispose();
+                }
+                if (command.equalsIgnoreCase(choices.getChoiceA())) {
+                    getChoiceA();
+
+                }
+                if (command.equalsIgnoreCase(choices.getChoiceB())){
+
+                }
+                if (command.equalsIgnoreCase(choices.getChoiceC())){
+
                 }
                 if (command.equalsIgnoreCase("Change font size")){
                     int fontSize = view.getFontSize();
@@ -111,6 +130,14 @@ public class GameController {
         }
         }
 
+    /**
+     * Sets current room, then tells model to get story and links, then set story text.
+     */
+    void getChoiceA(){
+        gameInfo.setCurrentRoom(gameInfo.getCurrentRoom() + 1);
+        model.getChoiceA();
+        view.gettxtStory().setText(gameInfo.getStories().get(gameInfo.getCurrentRoom()).getBody());
+    }
 
 
 

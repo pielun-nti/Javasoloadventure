@@ -6,6 +6,16 @@ public class Link {
     private int targetID;
     private int storyID;
 
+    @Override
+    public String toString() {
+        return "Link{" +
+                "ID=" + ID +
+                ", description='" + description + '\'' +
+                ", targetID=" + targetID +
+                ", storyID=" + storyID +
+                '}';
+    }
+
     public int getID() {
         return ID;
     }

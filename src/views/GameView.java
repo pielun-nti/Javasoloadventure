@@ -1,6 +1,7 @@
 package views;
 
 import config.Env;
+import models.Choices;
 import models.User;
 
 import javax.swing.*;
@@ -37,12 +38,13 @@ public class GameView extends javax.swing.JFrame {
     private Font mainFont;
     int fontSize = 18;
     User user;
-
+    Choices choices;
     /**
-     * GameView constructor with user argument.
+     * GameView constructor.
      * @param user
      */
-    public GameView(User user){
+    public GameView(User user, Choices choices){
+        this.choices = choices;
         this.user = user;
         initComponents();
         setFonts();
@@ -64,6 +66,7 @@ public class GameView extends javax.swing.JFrame {
         setFont(mainFont);
         txtStory.setFont(mainFont);
         menuBar.setFont(mainFont);
+        graphicsMenu.setFont(mainFont);
         optionsMenu.setFont(mainFont);
         editMenu.setFont(mainFont);
         aboutMenu.setFont(mainFont);

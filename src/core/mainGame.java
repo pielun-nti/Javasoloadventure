@@ -1,10 +1,9 @@
 package core;
 
 import config.Env;
-import models.DBManager;
-import models.GameInfo;
-import models.Link;
-import models.Story;
+import controllers.GameController;
+import models.*;
+import views.GameView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -63,14 +62,38 @@ public class mainGame {
                             if (links == null){
                                 links = new ArrayList<>();
                             }
-                            Link link = new Link();
-                            link.setID(gameInfo.getCurrentRoom());
-                            link.setDescription(linksrs.getString("description"));
-                            link.setStoryID(gameInfo.getCurrentRoom());
-                            link.setTargetID(Integer.parseInt(linksrs.getString("target_id")));
-                            links.add(link);
-                            System.out.println(link);
-                            System.out.println(story);
+                            System.out.println(story.toString());
+                            User user = new User();
+                            user.setUsername("test");
+                            user.setAdmin(true);
+                            int numberOfChoices = 0;
+                            while(linksrs.next()) {
+                                Link link = new Link();
+                                link.setID(gameInfo.getCurrentRoom());
+                                link.setDescription(linksrs.getString("description"));
+                                link.setStoryID(gameInfo.getCurrentRoom());
+                                link.setTargetID(Integer.parseInt(linksrs.getString("target_id")));
+                                links.add(link);
+                                System.out.println(link.toString());
+                                numberOfChoices++;
+                            }
+                            Choices choices = new Choices();
+                            choices.setNumberOfChoices(numberOfChoices);
+                            int count = 0;
+                            while (linksrs.next()) {
+                                if (count == 0) {
+                                    choices.setChoiceA(linksrs.getString("description"));
+                                } else if (count == 1){
+                                    choices.setChoiceB(linksrs.getString("description"));
+                                } else if (count == 2){
+                                    choices.setChoiceC(linksrs.getString("description"));
+                                }
+                                count++;
+                            }
+                            GameView gameView = new GameView(user, choices);
+                            GameModel gameModel = new GameModel(user, dbManager, gameInfo);
+                            GameController gameController = new GameController(gameView, gameModel, user, gameInfo, choices);
+                            gameView.setVisible(true);
                                     /*LoginView loginView = new LoginView();
                 LoginModel loginModel = new LoginModel();
                 LoginController loginController = new LoginController(loginView, loginModel);

@@ -3,15 +3,15 @@ package models;
 public class Story {
     int ID;
     String body;
-    private int maxChoices;
 
-    public int getMaxChoices() {
-        return maxChoices;
+    @Override
+    public String toString() {
+        return "Story{" +
+                "ID=" + ID +
+                ", body='" + body + '\'' +
+                '}';
     }
 
-    public void setMaxChoices(int maxChoices) {
-        this.maxChoices = maxChoices;
-    }
 
     public int getID() {
         return ID;
