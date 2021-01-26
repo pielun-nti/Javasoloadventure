@@ -1,6 +1,7 @@
 package controllers;
 
 import config.Env;
+import models.GameModel;
 import models.User;
 import views.GameView;
 
@@ -93,7 +94,7 @@ public class GameController {
                 if (command.equalsIgnoreCase("Change font size")){
                     int fontSize = view.getFontSize();
                     try {
-                        fontSize = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter new font size ( current = " + view.getFontSize() + ")", Env.LogsMessageBoxTitle, JOptionPane.INFORMATION_MESSAGE));
+                        fontSize = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter new font size ( current = " + view.getFontSize() + ")", Env.GameMessageBoxTitle, JOptionPane.INFORMATION_MESSAGE));
                     } catch (NumberFormatException ex){
                         ex.printStackTrace();
                         view.displayErrorMsg(ex.toString());
