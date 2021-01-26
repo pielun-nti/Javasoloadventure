@@ -15,19 +15,19 @@ public class GameInfo {
         this.currentRoom = currentRoom;
     }
 
-    public ArrayList<String> getLinks() {
+    public ArrayList<Link> getLinks() {
         return links;
     }
 
-    public void setLinks(ArrayList<String> links) {
+    public void setLinks(ArrayList<Link> links) {
         this.links = links;
     }
 
-    public ArrayList<String> getStories() {
+    public ArrayList<Story> getStories() {
         return stories;
     }
 
-    public void setStories(ArrayList<String> stories) {
+    public void setStories(ArrayList<Story> stories) {
         this.stories = stories;
     }
 }

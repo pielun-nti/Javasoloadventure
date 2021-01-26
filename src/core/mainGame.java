@@ -3,6 +3,7 @@ package core;
 import config.Env;
 import models.DBManager;
 import models.GameInfo;
+import models.Link;
 import models.Story;
 
 import javax.swing.*;
@@ -41,7 +42,7 @@ public class mainGame {
                         JOptionPane.showMessageDialog(null, "No story for first scene exists.", Env.GameMessageBoxTitle, JOptionPane.ERROR_MESSAGE);
                         System.exit(2);
                     } else {
-                        ArrayList<String> stories = gameInfo.getStories();
+                        ArrayList<Story> stories = gameInfo.getStories();
                         if (stories == null){
                             stories = new ArrayList<>();
                         }
@@ -49,11 +50,28 @@ public class mainGame {
                         story.setID(gameInfo.getCurrentRoom());
                         story.setBody(rs.getString("body"));
                         stories.add(story);
+                        ArrayList<String> col= new ArrayList<>();
+                        ArrayList<String> val = new ArrayList<>();
+                        co.add("story_id");
+                        va.add(Integer.toString(gameInfo.getCurrentRoom()));
+                        ResultSet linksrs = dbManager.selectAllWhere("links", co, va);
+                        if (!linksrs.next()){
+                            JOptionPane.showMessageDialog(null, "No story for first scene exists.", Env.GameMessageBoxTitle, JOptionPane.ERROR_MESSAGE);
+                            System.exit(2);
+                        } else {
+                            ArrayList<Link> links = gameInfo.getLinks();
+                            if (links == null){
+                                links = new ArrayList<>();
+                            }
+                            Link link = new Link();
+                            link.setID(gameInfo.getCurrentRoom());
+
                                     /*LoginView loginView = new LoginView();
                 LoginModel loginModel = new LoginModel();
                 LoginController loginController = new LoginController(loginView, loginModel);
                 loginView.setVisible(true);
                 loginView.getTxtUsername().requestFocus();*/
+                        }
                     }
                 } catch (Exception ex){
                     ex.printStackTrace();
