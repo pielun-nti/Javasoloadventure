@@ -84,6 +84,9 @@ public class GameView extends javax.swing.JFrame {
         menuItemFilterLogs.setFont(mainFont);
     }
 
+    /**
+     * Initializes Keystrokes.
+     */
     void initKeystrokes(){
         menuItemChoiceB.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_1, java.awt.event.InputEvent.CTRL_MASK));
         menuItemShowLogHistory.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_2, java.awt.event.InputEvent.CTRL_MASK));
@@ -96,6 +99,9 @@ public class GameView extends javax.swing.JFrame {
         menuItemOpen.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
     }
 
+    /**
+     * Initializes all gui components.
+     */
     void initComponents() {
         setTitle("LogsManager - logged in as: " + user.getUsername());
         menuBar = new JMenuBar();
@@ -124,6 +130,9 @@ public class GameView extends javax.swing.JFrame {
         menuItemFilterLogs = new JMenuItem("Filter Logs");
     }
 
+    /**
+     * Adds all items to menu and then menus to menubar and then to JFrame.
+     */
     void addComponents(){
         optionsMenu.add(menuItemChoiceA);
         optionsMenu.add(menuItemChoiceC);
@@ -346,7 +355,7 @@ public class GameView extends javax.swing.JFrame {
     }
 
 
-    public void setLogsTXT(String text){
+    public void setStoryTXT(String text){
         txtStory.setText(text);
     }
 
