@@ -3,6 +3,15 @@ package models;
 public class Story {
     int ID;
     String body;
+    private int maxChoices;
+
+    public int getMaxChoices() {
+        return maxChoices;
+    }
+
+    public void setMaxChoices(int maxChoices) {
+        this.maxChoices = maxChoices;
+    }
 
     public int getID() {
         return ID;

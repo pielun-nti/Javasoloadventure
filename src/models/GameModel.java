@@ -337,26 +337,7 @@ public class GameModel {
         return null;
     }
 
-    public void saveFileDialog(String textToSave) {
-        final JFileChooser saveAsFileChooser = new JFileChooser();
-        saveAsFileChooser.setApproveButtonText("Save Log");
-        saveAsFileChooser.addChoosableFileFilter(new FileNameExtensionFilter("Data File", "dat"));
-        saveAsFileChooser.addChoosableFileFilter(new FileNameExtensionFilter("Text File", "txt"));
-        int actionDialog = saveAsFileChooser.showOpenDialog(null);
-        if (actionDialog != JFileChooser.APPROVE_OPTION) {
-            return;
-        }
-        File file = saveAsFileChooser.getSelectedFile();
-        if (!file.getName().endsWith(".dat") & (!file.getName().endsWith(".txt"))) {
-            file = new File(file.getAbsolutePath() + ".dat");
-        }
-        boolean saved = saveLogsToDataFile(file.getAbsolutePath(), textToSave);
-        if (!saved) {
-            JOptionPane.showMessageDialog(null, "Error writing to saved file", Env.GameMessageBoxTitle, JOptionPane.WARNING_MESSAGE);
-        }else{
-            JOptionPane.showMessageDialog(null, "Saved log to file", Env.GameMessageBoxTitle, JOptionPane.WARNING_MESSAGE);
-        }
-    }
+
 
     public ResultSet getLogHistory(){
         ResultSet rs = dbManager.selectAll("changes");

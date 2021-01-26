@@ -68,6 +68,9 @@ public class mainGame {
                             link.setDescription(linksrs.getString("description"));
                             link.setStoryID(gameInfo.getCurrentRoom());
                             link.setTargetID(Integer.parseInt(linksrs.getString("target_id")));
+                            links.add(link);
+                            System.out.println(link);
+                            System.out.println(story);
                                     /*LoginView loginView = new LoginView();
                 LoginModel loginModel = new LoginModel();
                 LoginController loginController = new LoginController(loginView, loginModel);
