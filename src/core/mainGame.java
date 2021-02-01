@@ -49,11 +49,12 @@ public class mainGame {
                         story.setID(gameInfo.getCurrentRoom());
                         story.setBody(rs.getString("body"));
                         stories.add(story);
+                        gameInfo.setStories(stories);
                         ArrayList<String> col= new ArrayList<>();
                         ArrayList<String> val = new ArrayList<>();
-                        co.add("story_id");
-                        va.add(Integer.toString(gameInfo.getCurrentRoom()));
-                        ResultSet linksrs = dbManager.selectAllWhere("links", co, va);
+                        col.add("story_id");
+                        val.add(Integer.toString(gameInfo.getCurrentRoom()));
+                        ResultSet linksrs = dbManager.selectAllWhere("links", col, val);
                         if (!linksrs.next()){
                             JOptionPane.showMessageDialog(null, "No story for first scene exists.", Env.GameMessageBoxTitle, JOptionPane.ERROR_MESSAGE);
                             System.exit(2);
@@ -67,17 +68,27 @@ public class mainGame {
                             user.setUsername("test");
                             user.setAdmin(true);
                             int numberOfChoices = 0;
-                            while(linksrs.next()) {
+                            Choices choices = new Choices();
+                            ResultSet linksrsn = dbManager.selectAllWhere("links", col, val);
+                            while(linksrsn.next()) {
                                 Link link = new Link();
-                                link.setID(gameInfo.getCurrentRoom());
+                                link.setID(numberOfChoices + 1);
                                 link.setDescription(linksrs.getString("description"));
                                 link.setStoryID(gameInfo.getCurrentRoom());
                                 link.setTargetID(Integer.parseInt(linksrs.getString("target_id")));
                                 links.add(link);
                                 System.out.println(link.toString());
+                                if (numberOfChoices == 0) {
+                                    choices.setChoiceA(linksrs.getString("description"));
+                                } else if (numberOfChoices == 1){
+                                    choices.setChoiceB(linksrs.getString("description"));
+                                } else if (numberOfChoices == 2){
+                                    choices.setChoiceC(linksrs.getString("description"));
+                                }
+                                System.out.println("choice: " + linksrs.getString("description"));
                                 numberOfChoices++;
                             }
-                            Choices choices = new Choices();
+                            gameInfo.setLinks(links);
                             choices.setNumberOfChoices(numberOfChoices);
                             int count = 0;
                             while (linksrs.next()) {
@@ -91,7 +102,7 @@ public class mainGame {
                                 count++;
                             }
                             GameView gameView = new GameView(user, choices);
-                            GameModel gameModel = new GameModel(user, dbManager, gameInfo);
+                            GameModel gameModel = new GameModel(user, dbManager, gameInfo, choices);
                             GameController gameController = new GameController(gameView, gameModel, user, gameInfo, choices);
                             gameView.setVisible(true);
                                     /*LoginView loginView = new LoginView();

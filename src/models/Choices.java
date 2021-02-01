@@ -2,9 +2,9 @@ package models;
 
 public class Choices {
     private int numberOfChoices;
-    private String choiceA;
-    private String choiceB;
-    private String choiceC;
+    private String choiceA = "hej";
+    private String choiceB = "b";
+    private String choiceC = "c";
 
     public int getNumberOfChoices() {
         return numberOfChoices;

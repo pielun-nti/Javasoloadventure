@@ -19,18 +19,21 @@ public class GameModel {
     DBManager dbManager;
     User user;
     GameInfo gameInfo;
-    public GameModel(User user, GameInfo gameInfo){
+    Choices choices;
+    public GameModel(User user, GameInfo gameInfo, Choices choices){
         dbManager = new DBManager();
         this.user = user;
         this.gameInfo = gameInfo;
+        this.choices = choices;
     }
-    public GameModel(User user, DBManager dbManager, GameInfo gameInfo){
+    public GameModel(User user, DBManager dbManager, GameInfo gameInfo, Choices choices){
         this.gameInfo = gameInfo;
         this.dbManager = dbManager;
         this.user = user;
+        this.choices = choices;
     }
 
-    public void getChoiceA(){
+    public boolean getChoiceA(){
         try {
         ArrayList<String> co = new ArrayList<>();
         ArrayList<String> va = new ArrayList<>();
@@ -38,7 +41,7 @@ public class GameModel {
         va.add(Integer.toString(gameInfo.getCurrentRoom()));
         ResultSet rs = dbManager.selectAllWhere("story", co, va);
         if (!rs.next()) {
-            JOptionPane.showMessageDialog(null, "No story for first scene exists.", Env.GameMessageBoxTitle, JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "No story for next scene exists.", Env.GameMessageBoxTitle, JOptionPane.ERROR_MESSAGE);
             //completed story
         } else {
             ArrayList<Story> stories = gameInfo.getStories();
@@ -51,11 +54,12 @@ public class GameModel {
             stories.add(story);
             ArrayList<String> col = new ArrayList<>();
             ArrayList<String> val = new ArrayList<>();
-            co.add("story_id");
-            va.add(Integer.toString(gameInfo.getCurrentRoom()));
-            ResultSet linksrs = dbManager.selectAllWhere("links", co, va);
+            col.add("story_id");
+            val.add(Integer.toString(gameInfo.getCurrentRoom()));
+            ResultSet linksrs = dbManager.selectAllWhere("links", col, val);
             if (!linksrs.next()) {
-                JOptionPane.showMessageDialog(null, "No story for first scene exists.", Env.GameMessageBoxTitle, JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "No choices for next scene exists.", Env.GameMessageBoxTitle, JOptionPane.ERROR_MESSAGE);
+                //completed game
                 System.exit(2);
             } else {
                 ArrayList<Link> links = gameInfo.getLinks();
@@ -72,26 +76,27 @@ public class GameModel {
                     link.setTargetID(Integer.parseInt(linksrs.getString("target_id")));
                     links.add(link);
                     System.out.println(link.toString());
-                    numberOfChoices++;
-                }
-                Choices choices = new Choices();
-                choices.setNumberOfChoices(numberOfChoices);
-                int count = 0;
-                while (linksrs.next()) {
-                    if (count == 0) {
+                    if (numberOfChoices == 0) {
                         choices.setChoiceA(linksrs.getString("description"));
-                    } else if (count == 1) {
+                    } else if (numberOfChoices == 1) {
                         choices.setChoiceB(linksrs.getString("description"));
-                    } else if (count == 2) {
+                    } else if (numberOfChoices == 2) {
                         choices.setChoiceC(linksrs.getString("description"));
                     }
-                    count++;
+                    numberOfChoices++;
                 }
+                choices.setNumberOfChoices(numberOfChoices);
+                System.out.println("Choice A:" + choices.getChoiceA());
+                System.out.println("Choice B:" + choices.getChoiceB());
+                System.out.println("Choice C:" + choices.getChoiceC());
+                return true;
+
             }
         }
             } catch (Exception ex){
                 ex.printStackTrace();
             }
+        return false;
     }
 
     /**

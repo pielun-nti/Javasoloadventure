@@ -39,7 +39,11 @@ public class GameController {
         this.view.addListeners(new GameListener());
         this.view.addFrameWindowListener(new FrameWindowListener());
         this.gameInfo = gameInfo;
-        view.gettxtStory().setText(gameInfo.getStories().get(gameInfo.getCurrentRoom()).getBody());
+        view.getmenuItemChoiceC().setVisible(false);
+        view.getmenuItemChoiceA().setText(choices.getChoiceA());
+        view.getmenuItemChoiceB().setText(choices.getChoiceB());
+        view.getmenuItemChoiceC().setText(choices.getChoiceC());
+        view.gettxtStory().setText(gameInfo.getStories().get(gameInfo.getCurrentRoom() - 1).getBody());
 
     }
 
@@ -122,6 +126,7 @@ public class GameController {
                     view.setMainFont(mainFont);
                     view.gettxtStory().setFont(mainFont);
                     view.setFont(mainFont);
+                    view.setFontSize(fontSize);
                 }
                 if (command.equalsIgnoreCase("About")){
                     JOptionPane.showMessageDialog(null, "Made by Pierre Lundström", Env.GameMessageBoxTitle, JOptionPane.INFORMATION_MESSAGE);
@@ -131,13 +136,35 @@ public class GameController {
         }
 
     /**
-     * Sets current room, then tells model to get story and links, then set story text.
+     * Sets current room, then tells model to get story and links, then set view story and choice a jmenuitem text.
      */
-    void getChoiceA(){
+    void getChoiceA() {
         gameInfo.setCurrentRoom(gameInfo.getCurrentRoom() + 1);
-        model.getChoiceA();
-        view.gettxtStory().setText(gameInfo.getStories().get(gameInfo.getCurrentRoom()).getBody());
+        boolean done = model.getChoiceA();
+        if (done) {
+            if (!choices.getChoiceA().equalsIgnoreCase("a")){
+                view.getmenuItemChoiceA().setText(choices.getChoiceA());
+                view.getmenuItemChoiceA().setVisible(true);
+            } else {
+                view.getmenuItemChoiceA().setVisible(false);
+            }
+            if (!choices.getChoiceC().equalsIgnoreCase("b")){
+                view.getmenuItemChoiceB().setText(choices.getChoiceB());
+                view.getmenuItemChoiceB().setVisible(true);
+            } else {
+                view.getmenuItemChoiceB().setVisible(false);
+            }
+            if (!choices.getChoiceC().equalsIgnoreCase("c")){
+                view.getmenuItemChoiceC().setText(choices.getChoiceC());
+                view.getmenuItemChoiceC().setVisible(true);
+            } else {
+                view.getmenuItemChoiceC().setVisible(false);
+            }
+            view.gettxtStory().setText(gameInfo.getStories().get(gameInfo.getCurrentRoom() - 1).getBody());
+        }
+
     }
+
 
 
 

@@ -106,7 +106,7 @@ public class GameView extends javax.swing.JFrame {
      * Initializes all gui components.
      */
     void initComponents() {
-        setTitle("LogsManager - logged in as: " + user.getUsername());
+        setTitle("Solo adventure - logged in as: " + user.getUsername());
         menuBar = new JMenuBar();
         optionsMenu = new JMenu("Options");
         editMenu = new JMenu("Edit");
