@@ -9,7 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 /**
- * Class to edit db.
+ * Class to edit database.
  */
 public class DBManager {
     DB db;

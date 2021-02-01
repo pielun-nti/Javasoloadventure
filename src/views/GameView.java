@@ -91,15 +91,9 @@ public class GameView extends javax.swing.JFrame {
      * Initializes Keystrokes.
      */
     void initKeystrokes(){
-        menuItemChoiceB.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_1, java.awt.event.InputEvent.CTRL_MASK));
-        menuItemShowLogHistory.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_2, java.awt.event.InputEvent.CTRL_MASK));
-        menuItemChoiceA.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_3, java.awt.event.InputEvent.CTRL_MASK));
-        menuItemChoiceC.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_4, java.awt.event.InputEvent.CTRL_MASK));
-        menuItemDeleteLog.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_5, java.awt.event.InputEvent.CTRL_MASK));
-        menuItemSaveAs.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
-        menuItemLogout.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.CTRL_MASK));
-        menuItemFilterLogs.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.CTRL_MASK));
-        menuItemOpen.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
+        menuItemChoiceA.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
+        menuItemChoiceB.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.CTRL_MASK));
+        menuItemChoiceC.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
     }
 
     /**
@@ -138,17 +132,17 @@ public class GameView extends javax.swing.JFrame {
      */
     void addComponents(){
         optionsMenu.add(menuItemChoiceA);
-        optionsMenu.add(menuItemChoiceC);
-        optionsMenu.add(menuItemDeleteLog);
+//        optionsMenu.add(menuItemDeleteLog);
         optionsMenu.add(menuItemChoiceB);
-        optionsMenu.add(menuItemShowLogHistory);
+        optionsMenu.add(menuItemChoiceC);
+        /*optionsMenu.add(menuItemShowLogHistory);
         optionsMenu.add(menuItemDeleteAllLogs);
         optionsMenu.add(menuItemDeleteLogHistory);
         optionsMenu.add(menuItemFilterLogs);
         optionsMenu.add(menuItemSaveAs);
         optionsMenu.add(menuItemOpen);
         optionsMenu.add(menuItemLogout);
-        optionsMenu.add(menuItemOpenSecurity);
+        optionsMenu.add(menuItemOpenSecurity);*/
         optionsMenu.add(menuItemExit);
         editMenu.add(menuItemChangeFontSize);
         aboutMenu.add(menuItemAbout);

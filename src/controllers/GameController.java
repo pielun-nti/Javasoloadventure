@@ -109,10 +109,10 @@ public class GameController {
 
                 }
                 if (command.equalsIgnoreCase(choices.getChoiceB())){
-
+                    getChoiceB();
                 }
                 if (command.equalsIgnoreCase(choices.getChoiceC())){
-
+                    getChoiceC();
                 }
                 if (command.equalsIgnoreCase("Change font size")){
                     int fontSize = view.getFontSize();
@@ -135,8 +135,9 @@ public class GameController {
         }
         }
 
+
     /**
-     * Sets menu item text to choices. Also hides / show choice depending on if it exist
+     * Sets menu item text to choices. Also hides / show jmenuitem depending on if choice exist.
      */
     void setMenuItemsText(){
             if (!choices.getChoiceA().equalsIgnoreCase("a") & !choices.getChoiceA().equalsIgnoreCase(choices.getOldChoiceA())){
@@ -160,7 +161,7 @@ public class GameController {
         }
 
     /**
-     * Sets current room, then tells model to get story and links, then set view story and choice a jmenuitem text.
+     * Sets current room, then tells model to get story and links, then set view story and choice in as jmenuitem text.
      */
     void getChoiceA() {
         choices.setOldChoiceA(choices.getChoiceA());
@@ -168,6 +169,38 @@ public class GameController {
         choices.setOldChoiceC(choices.getChoiceC());
         gameInfo.setCurrentRoom(gameInfo.getCurrentRoom() + 1);
         boolean done = model.getChoiceA();
+        if (done) {
+            setMenuItemsText();
+            view.gettxtStory().setText(gameInfo.getStories().get(gameInfo.getCurrentRoom() - 1).getBody());
+        }
+
+    }
+
+    /**
+     * Sets current room, then tells model to get story and links, then set view story and choice in as jmenuitem text.
+     */
+    void getChoiceB() {
+        choices.setOldChoiceA(choices.getChoiceA());
+        choices.setOldChoiceB(choices.getChoiceB());
+        choices.setOldChoiceC(choices.getChoiceC());
+        gameInfo.setCurrentRoom(gameInfo.getCurrentRoom() + 1);
+        boolean done = model.getChoiceB();
+        if (done) {
+            setMenuItemsText();
+            view.gettxtStory().setText(gameInfo.getStories().get(gameInfo.getCurrentRoom() - 1).getBody());
+        }
+
+    }
+
+    /**
+     * Sets current room, then tells model to get story and links, then set view story and choice in as jmenuitem text.
+     */
+    void getChoiceC() {
+        choices.setOldChoiceA(choices.getChoiceA());
+        choices.setOldChoiceB(choices.getChoiceB());
+        choices.setOldChoiceC(choices.getChoiceC());
+        gameInfo.setCurrentRoom(gameInfo.getCurrentRoom() + 1);
+        boolean done = model.getChoiceC();
         if (done) {
             setMenuItemsText();
             view.gettxtStory().setText(gameInfo.getStories().get(gameInfo.getCurrentRoom() - 1).getBody());

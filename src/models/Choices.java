@@ -1,5 +1,8 @@
 package models;
 
+/**
+ * Choices class. Links descriptions.
+ */
 public class Choices {
     private int numberOfChoices;
     private String choiceA = "a";

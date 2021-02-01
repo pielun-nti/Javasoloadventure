@@ -2,6 +2,9 @@ package models;
 
 import java.util.ArrayList;
 
+/**
+ * GameInfo class.
+ */
 public class GameInfo {
     private int currentRoom;
     private ArrayList<Link> links;
