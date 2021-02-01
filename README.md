@@ -43,3 +43,10 @@ och skrivit tidsplan, och sen har jag börjat skriva kod.
 Nästa lektion kommerjag skriva mer kod, 
 mer specifikt så ska jag fortsätta på speläventyrsmotorn
 eller editorn.
+
+01-02-2021: Idag har jag fortsatt koda spelmotorn, jag har lagt till så att användaren kan välja alternativ från databasen 
+genom jmenuitems och klicka sig vidare. Beroende på vad spelaren väljer
+så flyttas currentroom till target id och sen visas story för den idn mm.
+Nästa gång så ska jag färdigställa detta samt fortsätta så att hela storyn har
+fungerade alternativ och story. Sen ska jag också fixa så att svenska Ä och Å 
+visas i texten utan att bli konstiga, ska testa med UTF8.
