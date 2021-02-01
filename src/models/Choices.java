@@ -2,9 +2,36 @@ package models;
 
 public class Choices {
     private int numberOfChoices;
-    private String choiceA = "hej";
+    private String choiceA = "a";
     private String choiceB = "b";
     private String choiceC = "c";
+    private String oldChoiceA = "a";
+    private String oldChoiceB = "b";
+    private String oldChoiceC = "c";
+
+    public String getOldChoiceA() {
+        return oldChoiceA;
+    }
+
+    public void setOldChoiceA(String oldChoiceA) {
+        this.oldChoiceA = oldChoiceA;
+    }
+
+    public String getOldChoiceB() {
+        return oldChoiceB;
+    }
+
+    public void setOldChoiceB(String oldChoiceB) {
+        this.oldChoiceB = oldChoiceB;
+    }
+
+    public String getOldChoiceC() {
+        return oldChoiceC;
+    }
+
+    public void setOldChoiceC(String oldChoiceC) {
+        this.oldChoiceC = oldChoiceC;
+    }
 
     public int getNumberOfChoices() {
         return numberOfChoices;

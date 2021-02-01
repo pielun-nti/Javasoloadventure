@@ -136,30 +136,40 @@ public class GameController {
         }
 
     /**
-     * Sets current room, then tells model to get story and links, then set view story and choice a jmenuitem text.
+     * Sets menu item text to choices. Also hides / show choice depending on if it exist
      */
-    void getChoiceA() {
-        gameInfo.setCurrentRoom(gameInfo.getCurrentRoom() + 1);
-        boolean done = model.getChoiceA();
-        if (done) {
-            if (!choices.getChoiceA().equalsIgnoreCase("a")){
+    void setMenuItemsText(){
+            if (!choices.getChoiceA().equalsIgnoreCase("a") & !choices.getChoiceA().equalsIgnoreCase(choices.getOldChoiceA())){
                 view.getmenuItemChoiceA().setText(choices.getChoiceA());
                 view.getmenuItemChoiceA().setVisible(true);
             } else {
                 view.getmenuItemChoiceA().setVisible(false);
             }
-            if (!choices.getChoiceC().equalsIgnoreCase("b")){
+            if (!choices.getChoiceB().equalsIgnoreCase("b") & !choices.getChoiceB().equalsIgnoreCase(choices.getOldChoiceB())){
                 view.getmenuItemChoiceB().setText(choices.getChoiceB());
                 view.getmenuItemChoiceB().setVisible(true);
             } else {
                 view.getmenuItemChoiceB().setVisible(false);
             }
-            if (!choices.getChoiceC().equalsIgnoreCase("c")){
+            if (!choices.getChoiceC().equalsIgnoreCase("c") & !choices.getChoiceC().equalsIgnoreCase(choices.getOldChoiceC())){
                 view.getmenuItemChoiceC().setText(choices.getChoiceC());
                 view.getmenuItemChoiceC().setVisible(true);
             } else {
                 view.getmenuItemChoiceC().setVisible(false);
             }
+        }
+
+    /**
+     * Sets current room, then tells model to get story and links, then set view story and choice a jmenuitem text.
+     */
+    void getChoiceA() {
+        choices.setOldChoiceA(choices.getChoiceA());
+        choices.setOldChoiceB(choices.getChoiceB());
+        choices.setOldChoiceC(choices.getChoiceC());
+        gameInfo.setCurrentRoom(gameInfo.getCurrentRoom() + 1);
+        boolean done = model.getChoiceA();
+        if (done) {
+            setMenuItemsText();
             view.gettxtStory().setText(gameInfo.getStories().get(gameInfo.getCurrentRoom() - 1).getBody());
         }
 
