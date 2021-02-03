@@ -12,7 +12,7 @@ import java.awt.event.WindowListener;
 /**
  * GameView class that extends Swing JFrame.
  */
-public class GameView extends javax.swing.JFrame {
+public class EditorView extends JFrame {
     JMenuBar menuBar;
     JMenu optionsMenu;
     JMenu editMenu;
@@ -22,10 +22,10 @@ public class GameView extends javax.swing.JFrame {
     JMenuItem menuItemChoiceA;
     JMenuItem menuItemChoiceB;
     JMenuItem menuItemChoiceC;
-    JMenuItem menuItemDeleteLog;
+    JMenuItem menuItemSelectScene;
     JMenuItem menuItemShowLogHistory;
     JMenuItem menuItemDeleteAllLogs;
-    JMenuItem menuItemDeleteLogHistory;
+    JMenuItem menuItemSelectSceneHistory;
     JMenuItem menuItemSaveAs;
     JMenuItem menuItemOpen;
     JMenuItem menuItemOpenSecurity;
@@ -38,15 +38,15 @@ public class GameView extends javax.swing.JFrame {
     private Font mainFont;
     int fontSize = 18;
     User user;
-    Choices choices;
     JLabel storyPicture;
+    Choices choices;
     /**
-     * GameView constructor.
+     * EditorView constructor.
      * @param user
      */
-    public GameView(User user, Choices choices){
-        this.choices = choices;
+    public EditorView(User user, Choices choices){
         this.user = user;
+        this.choices = choices;
         initComponents();
         setFonts();
         initKeystrokes();
@@ -74,11 +74,11 @@ public class GameView extends javax.swing.JFrame {
         aboutMenu.setFont(mainFont);
         menuItemChoiceA.setFont(mainFont);
         menuItemChoiceC.setFont(mainFont);
-        menuItemDeleteLog.setFont(mainFont);
+        menuItemSelectScene.setFont(mainFont);
         menuItemChoiceB.setFont(mainFont);
         menuItemShowLogHistory.setFont(mainFont);
         menuItemDeleteAllLogs.setFont(mainFont);
-        menuItemDeleteLogHistory.setFont(mainFont);
+        menuItemSelectSceneHistory.setFont(mainFont);
         menuItemSaveAs.setFont(mainFont);
         menuItemOpen.setFont(mainFont);
         menuItemExit.setFont(mainFont);
@@ -93,16 +93,16 @@ public class GameView extends javax.swing.JFrame {
      * Initializes Keystrokes.
      */
     void initKeystrokes(){
-        menuItemChoiceA.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
-        menuItemChoiceB.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.CTRL_MASK));
-        menuItemChoiceC.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
+        menuItemChoiceA.setAccelerator(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
+        menuItemChoiceB.setAccelerator(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.CTRL_MASK));
+        menuItemChoiceC.setAccelerator(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
     }
 
     /**
      * Initializes all gui components.
      */
     void initComponents() {
-        setTitle("Solo adventure - logged in as: " + user.getUsername());
+        setTitle("Solo adventure editor - logged in as: " + user.getUsername());
         menuBar = new JMenuBar();
         storyPicture = new JLabel("pic");
         storyPicture.setLocation(100, 100);
@@ -118,8 +118,8 @@ public class GameView extends javax.swing.JFrame {
         menuItemSaveAs = new JMenuItem("Save Logs As");
         menuItemOpen = new JMenuItem("Open Logs");
         menuItemDeleteAllLogs = new JMenuItem("Delete All Logs");
-        menuItemDeleteLogHistory = new JMenuItem("Delete All Logs Changes History");
-        menuItemDeleteLog = new JMenuItem("Delete Log");
+        menuItemSelectSceneHistory = new JMenuItem("Delete All Logs Changes History");
+        menuItemSelectScene = new JMenuItem("Select Scene");
         menuItemChoiceC = new JMenuItem("Choice C");
         menuItemChoiceB = new JMenuItem("Choice B");
         menuItemChoiceA = new JMenuItem("Choice A");
@@ -136,12 +136,13 @@ public class GameView extends javax.swing.JFrame {
      */
     void addComponents(){
         optionsMenu.add(menuItemChoiceA);
-//        optionsMenu.add(menuItemDeleteLog);
+//        optionsMenu.add(menuItemSelectScene);
         optionsMenu.add(menuItemChoiceB);
         optionsMenu.add(menuItemChoiceC);
+        optionsMenu.add(menuItemSelectScene);
         /*optionsMenu.add(menuItemShowLogHistory);
         optionsMenu.add(menuItemDeleteAllLogs);
-        optionsMenu.add(menuItemDeleteLogHistory);
+        optionsMenu.add(menuItemSelectSceneHistory);
         optionsMenu.add(menuItemFilterLogs);
         optionsMenu.add(menuItemSaveAs);
         optionsMenu.add(menuItemOpen);
@@ -228,12 +229,12 @@ public class GameView extends javax.swing.JFrame {
         this.menuItemChoiceC = menuItemChoiceC;
     }
 
-    public JMenuItem getMenuItemDeleteLog() {
-        return menuItemDeleteLog;
+    public JMenuItem getmenuItemSelectScene() {
+        return menuItemSelectScene;
     }
 
-    public void setMenuItemDeleteLog(JMenuItem menuItemDeleteLog) {
-        this.menuItemDeleteLog = menuItemDeleteLog;
+    public void setmenuItemSelectScene(JMenuItem menuItemSelectScene) {
+        this.menuItemSelectScene = menuItemSelectScene;
     }
 
     public JMenuItem getMenuItemShowLogHistory() {
@@ -252,12 +253,12 @@ public class GameView extends javax.swing.JFrame {
         this.menuItemDeleteAllLogs = menuItemDeleteAllLogs;
     }
 
-    public JMenuItem getMenuItemDeleteLogHistory() {
-        return menuItemDeleteLogHistory;
+    public JMenuItem getmenuItemSelectSceneHistory() {
+        return menuItemSelectSceneHistory;
     }
 
-    public void setMenuItemDeleteLogHistory(JMenuItem menuItemDeleteLogHistory) {
-        this.menuItemDeleteLogHistory = menuItemDeleteLogHistory;
+    public void setmenuItemSelectSceneHistory(JMenuItem menuItemSelectSceneHistory) {
+        this.menuItemSelectSceneHistory = menuItemSelectSceneHistory;
     }
 
     public JMenuItem getMenuItemSaveAs() {
@@ -364,11 +365,11 @@ public class GameView extends javax.swing.JFrame {
     public void addListeners(ActionListener listener){
         menuItemChoiceA.addActionListener(listener);
         menuItemChoiceC.addActionListener(listener);
-        menuItemDeleteLog.addActionListener(listener);
+        menuItemSelectScene.addActionListener(listener);
         menuItemChoiceB.addActionListener(listener);
         menuItemShowLogHistory.addActionListener(listener);
         menuItemDeleteAllLogs.addActionListener(listener);
-        menuItemDeleteLogHistory.addActionListener(listener);
+        menuItemSelectSceneHistory.addActionListener(listener);
         menuItemFilterLogs.addActionListener(listener);
         menuItemSaveAs.addActionListener(listener);
         menuItemOpen.addActionListener(listener);

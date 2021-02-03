@@ -32,24 +32,28 @@ public class mainGame {
                     GameInfo gameInfo = new GameInfo();
                     gameInfo.setCurrentRoom(1);
                     DBManager dbManager = new DBManager();
-                    ArrayList<String> co = new ArrayList<>();
+                   /* ArrayList<String> co = new ArrayList<>();
                     ArrayList<String> va = new ArrayList<>();
                     co.add("id");
-                    va.add(Integer.toString(gameInfo.getCurrentRoom()));
-                    ResultSet rs = dbManager.selectAllWhere("story", co, va);
-                    if (!rs.next()) {
-                        JOptionPane.showMessageDialog(null, "No story for first scene exists.", Env.GameMessageBoxTitle, JOptionPane.ERROR_MESSAGE);
-                        System.exit(2);
-                    } else {
-                        ArrayList<Story> stories = gameInfo.getStories();
-                        if (stories == null){
-                            stories = new ArrayList<>();
-                        }
+                    va.add(Integer.toString(gameInfo.getCurrentRoom()));*/
+                    ResultSet rs = dbManager.selectAll("story");
+                    int storyamount = 0;
+                    ArrayList<Story> stories = gameInfo.getStories();
+                    if (stories == null){
+                        stories = new ArrayList<>();
+                    }
+                    while (rs.next()) {
                         Story story = new Story();
-                        story.setID(gameInfo.getCurrentRoom());
+                        story.setID(rs.getInt("id"));
                         story.setBody(rs.getString("body"));
                         stories.add(story);
-                        gameInfo.setStories(stories);
+                        storyamount++;
+                    }
+                    gameInfo.setStories(stories);
+                    if (storyamount == 0) {
+                        JOptionPane.showMessageDialog(null, "No story for first scene exists.", Env.GameMessageBoxTitle, JOptionPane.ERROR_MESSAGE);
+                        System.exit(2);
+                    }
                         ArrayList<String> col= new ArrayList<>();
                         ArrayList<String> val = new ArrayList<>();
                         col.add("story_id");
@@ -63,7 +67,6 @@ public class mainGame {
                             if (links == null){
                                 links = new ArrayList<>();
                             }
-                            System.out.println(story.toString());
                             User user = new User();
                             user.setUsername("test");
                             user.setAdmin(true);
@@ -111,7 +114,6 @@ public class mainGame {
                 loginView.setVisible(true);
                 loginView.getTxtUsername().requestFocus();*/
                         }
-                    }
                 } catch (Exception ex){
                     ex.printStackTrace();
                 }

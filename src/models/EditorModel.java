@@ -1,11 +1,8 @@
 package models;
 
 import config.Env;
-import sun.security.pkcs11.Secmod;
 
 import javax.swing.*;
-import javax.swing.filechooser.FileNameExtensionFilter;
-import java.io.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -13,21 +10,21 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 /**
- * GameModel class.
+ * EditorModel class.
  */
-public class GameModel {
+public class EditorModel {
     DBManager dbManager;
     User user;
     GameInfo gameInfo;
     Choices choices;
 
     /**
-     * GameModel constructor.
+     * EditorModel constructor.
      * @param user
      * @param gameInfo
      * @param choices
      */
-    public GameModel(User user, GameInfo gameInfo, Choices choices){
+    public EditorModel(User user, GameInfo gameInfo, Choices choices){
         dbManager = new DBManager();
         this.user = user;
         this.gameInfo = gameInfo;
@@ -35,13 +32,13 @@ public class GameModel {
     }
 
     /**
-     * Gamemodel constructor two.
+     * editormodel constructor two.
      * @param user
      * @param dbManager
      * @param gameInfo
      * @param choices
      */
-    public GameModel(User user, DBManager dbManager, GameInfo gameInfo, Choices choices){
+    public EditorModel(User user, DBManager dbManager, GameInfo gameInfo, Choices choices){
         this.gameInfo = gameInfo;
         this.dbManager = dbManager;
         this.user = user;

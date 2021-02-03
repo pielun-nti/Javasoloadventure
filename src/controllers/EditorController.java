@@ -2,8 +2,8 @@ package controllers;
 
 import config.Env;
 import models.*;
+import views.EditorView;
 import views.GameView;
-
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,25 +11,26 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class GameController {
-    GameView view;
-    GameModel model;
+/**
+ * Editorcontroller class.
+ */
+public class EditorController {
+    EditorView view;
+    EditorModel model;
     User user;
     GameInfo gameInfo;
      Choices choices;
     /**
-     * Controls both the Game view and Game model. GameController adds ActionListener and FrameWindowListener.
+     * Controls both the Editor view and Editor model. EditorController adds ActionListener and FrameWindowListener.
      * @param view
      * @param model
      * @param user
      * @param gameInfo
      * @param choices
      */
-    public GameController(GameView view, GameModel model, User user, GameInfo gameInfo, Choices choices){
+    public EditorController(EditorView view, EditorModel model, User user, GameInfo gameInfo, Choices choices){
         this.choices = choices;
         this.view = view;
         this.model = model;
@@ -111,6 +112,10 @@ public class GameController {
                 }
                 if (command.equalsIgnoreCase(choices.getChoiceC())){
                     getChoiceC();
+                }
+                if (command.equalsIgnoreCase("Select scene")) {
+                    //selectScene();
+
                 }
                 if (command.equalsIgnoreCase("Change font size")){
                     int fontSize = view.getFontSize();
