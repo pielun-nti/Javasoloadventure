@@ -1,7 +1,9 @@
 package models;
 
 /**
- * Choices class. Links descriptions.
+ * Choices class that links descriptions that the user can see and choose.
+ * There are some choices available and the latest (old) choice is also saved so that the program knows this.
+ * This class also has a numberofchoices variable that tells to the program how many choices that will be shown and selectable.
  */
 public class Choices {
     private int numberOfChoices;

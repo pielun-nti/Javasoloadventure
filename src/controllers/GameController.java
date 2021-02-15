@@ -15,6 +15,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/**
+ * GameController class that handles both the gamemodel and gameview, it acts like a controller and controls these.
+ */
 public class GameController {
     GameView view;
     GameModel model;
@@ -43,7 +46,9 @@ public class GameController {
         view.getmenuItemChoiceC().setText(choices.getChoiceC());
         view.gettxtStory().setText(gameInfo.getStories().get(gameInfo.getCurrentRoom() - 1).getBody());
     }
-
+    /**
+     * FrameWindowListener class that listens for windowevents like open, closing, closed etc.
+     */
     private class FrameWindowListener implements WindowListener {
 
         @Override
@@ -86,7 +91,9 @@ public class GameController {
 
         }
     }
-
+    /**
+     * GameListener class that is a actionlistener that detects jmenuitems clicks.
+     */
     private class GameListener implements ActionListener {
         /**
          * Listens for JMenuItem and JCheckBoxMenuItem clicks and then executes methods. Onactionperformed gets called

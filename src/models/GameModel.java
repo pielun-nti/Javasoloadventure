@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 /**
- * GameModel class.
+ * GameModel class that does all the logic for the game like for example executing updates/queries from database and returns info to the GameController.
  */
 public class GameModel {
     DBManager dbManager;
@@ -23,9 +23,9 @@ public class GameModel {
 
     /**
      * GameModel constructor.
-     * @param user
-     * @param gameInfo
-     * @param choices
+     * @param user The user
+     * @param gameInfo Game info class
+     * @param choices All the current choices for the current scene
      */
     public GameModel(User user, GameInfo gameInfo, Choices choices){
         dbManager = new DBManager();

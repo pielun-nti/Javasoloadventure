@@ -3,7 +3,7 @@ package models;
 import java.util.ArrayList;
 
 /**
- * GameInfo class.
+ * GameInfo class with info about current room and all links and stories that exist in the game.
  */
 public class GameInfo {
     private int currentRoom;

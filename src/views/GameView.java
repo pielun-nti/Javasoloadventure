@@ -11,7 +11,8 @@ import java.awt.event.WindowListener;
 import java.nio.charset.StandardCharsets;
 
 /**
- * GameView class that extends Swing JFrame.
+ * GameView class that extends Swing JFrame. It is the view for the game. It has a jmenubar, jmenus, jmenuitems
+ * and jlabel with image in it etc.
  */
 public class GameView extends javax.swing.JFrame {
     BackgroundMenuBar menuBar;

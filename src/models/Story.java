@@ -1,7 +1,8 @@
 package models;
 
 /**
- * Story model class.
+ * Story model class that contains of id and body. Id is the story id that is unique for each story.
+ * The body is the story text that the user can see.
  */
 public class Story {
     int ID;

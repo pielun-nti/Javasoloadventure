@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 /**
- * EditorModel class.
+ * EditorModel class that handles all the logic for Game Editor.
  */
 public class EditorModel {
     DBManager dbManager;

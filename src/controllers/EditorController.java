@@ -14,7 +14,7 @@ import java.awt.event.WindowListener;
 import java.util.ArrayList;
 
 /**
- * Editorcontroller class.
+ * Editorcontroller class that handles both the gamemodel and gameview, it acts like a controller and controls these.
  */
 public class EditorController {
     EditorView view;
@@ -46,6 +46,9 @@ public class EditorController {
 
     }
 
+    /**
+     * FrameWindowListener class that listens for windowevents like open, closing, closed etc.
+     */
     private class FrameWindowListener implements WindowListener {
 
         @Override
@@ -89,6 +92,9 @@ public class EditorController {
         }
     }
 
+    /**
+     * GameListener class that is a actionlistener that detects jmenuitems clicks.
+     */
     private class GameListener implements ActionListener {
         /**
          * Listens for JMenuItem and JCheckBoxMenuItem clicks and then executes methods. Onactionperformed gets called

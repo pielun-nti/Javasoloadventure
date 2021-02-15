@@ -1,7 +1,7 @@
 package models;
 
 /**
- * User class.
+ * User class with username and admin variables.
  */
 public class User {
     String username;

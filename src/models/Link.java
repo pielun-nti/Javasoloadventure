@@ -1,7 +1,9 @@
 package models;
 
 /**
- * Link class.
+ * Link class that contains id, description, targetid and storyid for the current link. Targetid is the id which story scene the
+ * game will go to if the user click this link. The description is the usage info the user sees about this link.
+ * Storyid is the current storyid for this link, it connects a story to this link.
  */
 public class Link {
     private int ID;
@@ -9,6 +11,10 @@ public class Link {
     private int targetID;
     private int storyID;
 
+    /**
+     *
+     * @return description of link
+     */
     @Override
     public String toString() {
         return "Link{" +
