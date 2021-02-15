@@ -8,12 +8,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowListener;
+import java.nio.charset.StandardCharsets;
 
 /**
  * GameView class that extends Swing JFrame.
  */
 public class GameView extends javax.swing.JFrame {
-    JMenuBar menuBar;
+    BackgroundMenuBar menuBar;
     JMenu optionsMenu;
     JMenu editMenu;
     JMenu graphicsMenu;
@@ -40,6 +41,7 @@ public class GameView extends javax.swing.JFrame {
     User user;
     Choices choices;
     JLabel storyPicture;
+    private JPanel mainPanel;
     /**
      * GameView constructor.
      * @param user
@@ -49,15 +51,28 @@ public class GameView extends javax.swing.JFrame {
         this.user = user;
         initComponents();
         setFonts();
+        setColors();
+        setLocations();
         initKeystrokes();
         addComponents();
         Dimension res = new Dimension(1200, 800);
         setPreferredSize(res);
         setSize(res);
+        setContentPane(mainPanel);
         txtStory.setEditable(true);
         setResizable(false);
         setLocationRelativeTo(null);
         pack();
+    }
+
+    /**
+     * Sets colors of jmenus and jmenuitems.
+     */
+    void setColors(){
+        optionsMenu.setBackground(Color.YELLOW);
+        optionsMenu.setForeground(Color.MAGENTA);
+        menuItemExit.setForeground(Color.BLUE);
+        menuItemExit.setBackground(Color.GREEN);
     }
 
     /**
@@ -90,6 +105,15 @@ public class GameView extends javax.swing.JFrame {
     }
 
     /**
+     * Sets location of jframe components.
+     */
+    void setLocations(){
+        scroll.setLocation(0, 10);
+        scroll.setSize(1170, 310);
+    }
+
+
+    /**
      * Initializes Keystrokes.
      */
     void initKeystrokes(){
@@ -103,9 +127,11 @@ public class GameView extends javax.swing.JFrame {
      */
     void initComponents() {
         setTitle("Solo adventure - logged in as: " + user.getUsername());
-        menuBar = new JMenuBar();
+        menuBar = new BackgroundMenuBar();
+        mainPanel = new JPanel();
+        mainPanel.setLayout(null);
         storyPicture = new JLabel("pic");
-        storyPicture.setLocation(100, 100);
+        //storyPicture.setBounds(getWidth()/2, getHeight(), getWidth()/2, getHeight()/2);
         optionsMenu = new JMenu("Options");
         editMenu = new JMenu("Edit");
         graphicsMenu = new JMenu("Graphics");
@@ -155,12 +181,83 @@ public class GameView extends javax.swing.JFrame {
         menuBar.add(graphicsMenu);
         menuBar.add(aboutMenu);
         setJMenuBar(menuBar);
-        add(scroll);
-        //add(storyPicture);
+        mainPanel.add(scroll);
+        mainPanel.add(storyPicture);
     }
 
+    public JPanel getMainPanel() {
+        return mainPanel;
+    }
 
-    public void setMenuBar(JMenuBar menuBar) {
+    public void setMainPanel(JPanel mainPanel) {
+        this.mainPanel = mainPanel;
+    }
+
+    public JMenu getOptionsMenu() {
+        return optionsMenu;
+    }
+
+    public void setOptionsMenu(JMenu optionsMenu) {
+        this.optionsMenu = optionsMenu;
+    }
+
+    public JMenu getGraphicsMenu() {
+        return graphicsMenu;
+    }
+
+    public void setGraphicsMenu(JMenu graphicsMenu) {
+        this.graphicsMenu = graphicsMenu;
+    }
+
+    public JMenuItem getMenuItemChoiceA() {
+        return menuItemChoiceA;
+    }
+
+    public void setMenuItemChoiceA(JMenuItem menuItemChoiceA) {
+        this.menuItemChoiceA = menuItemChoiceA;
+    }
+
+    public JMenuItem getMenuItemChoiceB() {
+        return menuItemChoiceB;
+    }
+
+    public void setMenuItemChoiceB(JMenuItem menuItemChoiceB) {
+        this.menuItemChoiceB = menuItemChoiceB;
+    }
+
+    public JMenuItem getMenuItemChoiceC() {
+        return menuItemChoiceC;
+    }
+
+    public void setMenuItemChoiceC(JMenuItem menuItemChoiceC) {
+        this.menuItemChoiceC = menuItemChoiceC;
+    }
+
+    public JTextArea getTxtStory() {
+        return txtStory;
+    }
+
+    public void setTxtStory(JTextArea txtStory) {
+        this.txtStory = txtStory;
+    }
+
+    public Choices getChoices() {
+        return choices;
+    }
+
+    public void setChoices(Choices choices) {
+        this.choices = choices;
+    }
+
+    public JLabel getStoryPicture() {
+        return storyPicture;
+    }
+
+    public void setStoryPicture(JLabel storyPicture) {
+        this.storyPicture = storyPicture;
+    }
+
+    public void setMenuBar(BackgroundMenuBar menuBar) {
         this.menuBar = menuBar;
     }
 

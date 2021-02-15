@@ -50,3 +50,8 @@ så flyttas currentroom till target id och sen visas story för den idn mm.
 Nästa gång så ska jag färdigställa detta samt fortsätta så att hela storyn har
 fungerade alternativ och story. Sen ska jag också fixa så att svenska Ä och Å 
 visas i texten utan att bli konstiga, ska testa med UTF8.
+
+2021-02-08: Fortsatt en del på spelmotorn så att alla alternativ är fungerande. Nästa gång fortsätter jag med att lägga till bilder
+eller annat.
+
+2021-02-15: Texten visas med UTF8 nu iallafall. Lagt till bilder i scener i spelet samt gjort början på speländraren.

@@ -3,6 +3,7 @@ package models;
 import config.Env;
 
 import javax.swing.*;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -13,21 +14,29 @@ import java.util.ArrayList;
  */
 public class DBManager {
     DB db;
+    Connection connection;
+
     public DBManager(){
-        db = new DB();
+       /* db = new DB();
         if (!db.initDB()){
             JOptionPane.showMessageDialog(null, "Init DB Error!", Env.DBMessageBoxTitle, JOptionPane.ERROR_MESSAGE);
             System.exit(2);
+        }*/
+        if (DB.getConnection() != null){
+            connection = DB.getConnection();
+        } else {
         }
     }
 
     public DBManager(DB db){
         this.db = db;
-        if (db.getConnection() == null) {
+        if (DB.getConnection() == null) {
             if (!db.initDB()) {
                 JOptionPane.showMessageDialog(null, "Init DB Error!", Env.DBMessageBoxTitle, JOptionPane.ERROR_MESSAGE);
                 System.exit(2);
             }
+        } else {
+            connection = DB.getConnection();
         }
     }
 

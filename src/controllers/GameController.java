@@ -42,7 +42,6 @@ public class GameController {
         view.getmenuItemChoiceB().setText(choices.getChoiceB());
         view.getmenuItemChoiceC().setText(choices.getChoiceC());
         view.gettxtStory().setText(gameInfo.getStories().get(gameInfo.getCurrentRoom() - 1).getBody());
-
     }
 
     private class FrameWindowListener implements WindowListener {
@@ -111,6 +110,12 @@ public class GameController {
                 }
                 if (command.equalsIgnoreCase(choices.getChoiceC())){
                     getChoiceC();
+                }
+                System.out.println("Current room: " + gameInfo.getCurrentRoom());
+                if (gameInfo.getCurrentRoom() != 1){
+                    view.getStoryPicture().setIcon(null);
+                    view.getStoryPicture().setSize(0, 0);
+                    view.getScroll().setSize(view.getWidth() - 50, view.getHeight() - 100);
                 }
                 if (command.equalsIgnoreCase("Change font size")){
                     int fontSize = view.getFontSize();

@@ -13,7 +13,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 /**
- * Java solo adventure gjord av Pierre
+ * Java solo adventure editor gjord av Pierre
  * Innan du startar programmet, fyll i dina databasvariabler i src/config/Env.java filen
  */
 public class mainEditor {

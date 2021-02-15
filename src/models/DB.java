@@ -12,17 +12,17 @@ import java.sql.Statement;
  * Db class that connects to db.
  */
 public class DB {
-    Connection connection;
+    static Connection connection;
     public DB(){
 
     }
 
-    public Connection getConnection() {
+    public static Connection getConnection() {
         return connection;
     }
 
-    public void setConnection(Connection connection) {
-        this.connection = connection;
+    public static void setConnection(Connection connection) {
+        DB.connection = connection;
     }
 
     /**
