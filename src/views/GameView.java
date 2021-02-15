@@ -71,8 +71,24 @@ public class GameView extends javax.swing.JFrame {
     void setColors(){
         optionsMenu.setBackground(Color.YELLOW);
         optionsMenu.setForeground(Color.MAGENTA);
+        editMenu.setBackground(Color.YELLOW);
+        editMenu.setForeground(Color.MAGENTA);
+        graphicsMenu.setBackground(Color.YELLOW);
+        graphicsMenu.setForeground(Color.MAGENTA);
+        aboutMenu.setBackground(Color.YELLOW);
+        aboutMenu.setForeground(Color.MAGENTA);
         menuItemExit.setForeground(Color.BLUE);
         menuItemExit.setBackground(Color.GREEN);
+        menuItemChoiceA.setForeground(Color.BLUE);
+        menuItemChoiceA.setBackground(Color.GREEN);
+        menuItemChoiceB.setForeground(Color.BLUE);
+        menuItemChoiceB.setBackground(Color.GREEN);
+        menuItemChoiceC.setForeground(Color.BLUE);
+        menuItemChoiceC.setBackground(Color.GREEN);
+        menuItemAbout.setForeground(Color.BLUE);
+        menuItemAbout.setBackground(Color.GREEN);
+        menuItemChangeFontSize.setForeground(Color.BLUE);
+        menuItemChangeFontSize.setBackground(Color.GREEN);
     }
 
     /**
@@ -131,7 +147,6 @@ public class GameView extends javax.swing.JFrame {
         mainPanel = new JPanel();
         mainPanel.setLayout(null);
         storyPicture = new JLabel("pic");
-        //storyPicture.setBounds(getWidth()/2, getHeight(), getWidth()/2, getHeight()/2);
         optionsMenu = new JMenu("Options");
         editMenu = new JMenu("Edit");
         graphicsMenu = new JMenu("Graphics");
