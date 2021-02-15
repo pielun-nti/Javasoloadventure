@@ -62,4 +62,5 @@ eller annat.
 endast skapas i början då programmet körs så att inte onödiga nya anslutningar sker. Jag har också gjort så att
 om en bild inte finns så blir scrollviewn med jtextarean hela fönsterstorleken, positionerat element i jframen etc. Nästa gång så tänker jag 
 lägga till så att man kan göra mer i spelet, exempelvis klicka på något och då ritas det ut något på skärmen kanske.
-Jag tänker också fortsätta med editorn till spelet där man kan ändra scener med insert, update etc.
+Jag tänker också fortsätta med editorn till spelet där man kan ändra scener med insert, update etc. Jag ska också lägga till lite fler nya "new lines"
+med \r\n i mysql databas dumpen så att det ser bättre ut och blir lite lättare att läsa i textrutan.
