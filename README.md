@@ -1,5 +1,9 @@
 # Java soloadventure
 
+JavaDocs länk - https://pielun-nti.github.io/Javasoloadventure/
+
+Loggbok, tidsplan och projektplan finns här nere i Readme.
+
 # Projektplan
 Projektet ska innehålla ett soloäventyr med ett tilläggsprogram
 som man kan ändra soloäventyrets scener med. Jag tänker göra
