@@ -491,17 +491,14 @@ public class GameView extends javax.swing.JFrame {
         menuItemAbout.addActionListener(listener);
     }
 
+    /**
+     * Adds window listener to the jframe (exit listener).
+     * @param listener
+     */
     public void addFrameWindowListener(WindowListener listener){
         addWindowListener(listener);
     }
 
-    public String getLogsTXT(){
-        return txtStory.getText();
-    }
-
-    public void appendLogsTXT(String text){
-        txtStory.append(text);
-    }
     public void displayErrorMsg(String msg) {
         JOptionPane.showMessageDialog(this, msg, Env.GameMessageBoxTitle, JOptionPane.ERROR_MESSAGE);
     }

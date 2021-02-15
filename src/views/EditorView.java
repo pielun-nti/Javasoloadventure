@@ -379,7 +379,10 @@ public class EditorView extends JFrame {
         menuItemChangeFontSize.addActionListener(listener);
         menuItemAbout.addActionListener(listener);
     }
-
+    /**
+     * Adds window listener to the jframe (exit listener).
+     * @param listener
+     */
     public void addFrameWindowListener(WindowListener listener){
         addWindowListener(listener);
     }
@@ -388,11 +391,8 @@ public class EditorView extends JFrame {
         return txtStory.getText();
     }
 
-    public void appendLogsTXT(String text){
-        txtStory.append(text);
-    }
     public void displayErrorMsg(String msg) {
-        JOptionPane.showMessageDialog(this, msg, Env.GameMessageBoxTitle, JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(this, msg, Env.EditorMessageBoxTitle, JOptionPane.ERROR_MESSAGE);
     }
     
 

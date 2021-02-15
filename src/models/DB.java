@@ -12,7 +12,14 @@ import java.sql.Statement;
  * Db class that connects to db.
  */
 public class DB {
+    /**
+     * This variable is the connection to the mysql database.
+     */
     static Connection connection;
+
+    /**
+     * DB constructor but it doesnt do anything right now.
+     */
     public DB(){
 
     }
