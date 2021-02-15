@@ -1,5 +1,8 @@
 package models;
 
+/**
+ * Story model class.
+ */
 public class Story {
     int ID;
     String body;

@@ -16,6 +16,9 @@ public class DBManager {
     DB db;
     Connection connection;
 
+    /**
+     * DBManager constructor without db argument.
+     */
     public DBManager(){
        /* db = new DB();
         if (!db.initDB()){
@@ -28,6 +31,10 @@ public class DBManager {
         }
     }
 
+    /**
+     * DBManager constructor
+     * @param db
+     */
     public DBManager(DB db){
         this.db = db;
         if (DB.getConnection() == null) {
@@ -40,6 +47,12 @@ public class DBManager {
         }
     }
 
+    /**
+     * Executes update statement with a query.
+     * @param db
+     * @param query
+     * @return
+     */
     public boolean executeUpdate(DB db, String query){
         Statement stmt= null;
         try {
@@ -61,7 +74,12 @@ public class DBManager {
         }
         return false;
     }
-    
+
+    /**
+     * Executes update statement with a query to specified db argument.
+     * @param query
+     * @return
+     */
     public boolean executeUpdate(String query){
         Statement stmt= null;
         try {
@@ -84,6 +102,12 @@ public class DBManager {
         return false;
     }
 
+    /**
+     * Executes query with db and query argument.
+     * @param db
+     * @param query
+     * @return
+     */
     public ResultSet executeQuery(DB db, String query){
         Statement stmt= null;
         try {
@@ -106,6 +130,11 @@ public class DBManager {
         return null;
     }
 
+    /**
+     * Executes query statement with query.
+     * @param query
+     * @return
+     */
     public ResultSet executeQuery(String query){
         Statement stmt= null;
         try {
@@ -137,6 +166,12 @@ public class DBManager {
         this.db = db;
     }
 
+    /**
+     * Deletes all rows from table in db.
+     * @param db
+     * @param table
+     * @return
+     */
     public int deleteAll(DB db, String table){
         Statement stmt= null;
         try {
@@ -160,6 +195,11 @@ public class DBManager {
         return -1;
     }
 
+    /**
+     * Deletes all rows in table.
+     * @param table
+     * @return
+     */
     public int deleteAll(String table){
         Statement stmt= null;
         try {
@@ -183,6 +223,14 @@ public class DBManager {
         return -1;
     }
 
+    /**
+     * Deletes specified columns and values (filtered) in a specified table in a specified db.
+     * @param db
+     * @param table
+     * @param filtercolumns
+     * @param filtervalues
+     * @return
+     */
     public boolean delete(DB db, String table, ArrayList<String> filtercolumns, ArrayList<String> filtervalues){
         Statement stmt = null;
         try {
@@ -222,6 +270,13 @@ public class DBManager {
         return false;
     }
 
+    /**
+     * Deletes specified columns and values (filtered) in a specified table.
+     * @param table
+     * @param filtercolumns
+     * @param filtervalues
+     * @return
+     */
     public boolean delete(String table, ArrayList<String> filtercolumns, ArrayList<String> filtervalues){
         Statement stmt = null;
         try {
@@ -261,6 +316,12 @@ public class DBManager {
         return false;
     }
 
+    /**
+     * Selects all rows from table in specified db and then returns a resultset with them.
+     * @param db
+     * @param table
+     * @return
+     */
     public ResultSet selectAll(DB db, String table){
         Statement stmt= null;
         try {
@@ -284,6 +345,11 @@ public class DBManager {
         return null;
     }
 
+    /**
+     * Selects all rows from table in db and then returns a resultset with them.
+     * @param table
+     * @return
+     */
     public ResultSet selectAll(String table){
         Statement stmt= null;
         try {
@@ -307,6 +373,14 @@ public class DBManager {
         return null;
     }
 
+    /**
+     * Selects all rows from specified table where the filteredcolums matches filtervalues in a specified db.
+     * @param db
+     * @param table
+     * @param filtercolumns
+     * @param filtervalues
+     * @return
+     */
     public ResultSet selectAllWhere(DB db, String table, ArrayList<String> filtercolumns, ArrayList<String> filtervalues){
         Statement stmt= null;
         try {
@@ -345,6 +419,13 @@ public class DBManager {
         return null;
     }
 
+    /**
+     * Selects all rows from specified table where the filteredcolums matches filtervalues in db.
+     * @param table
+     * @param filtercolumns
+     * @param filtervalues
+     * @return
+     */
     public ResultSet selectAllWhere(String table, ArrayList<String> filtercolumns, ArrayList<String> filtervalues){
         Statement stmt= null;
         try {
@@ -383,6 +464,13 @@ public class DBManager {
         return null;
     }
 
+    /**
+     * Selects all columns in specified table in specified db matching columns specified and returns resultset with the matching columns.
+     * @param db
+     * @param table
+     * @param columns
+     * @return
+     */
     public ResultSet selectColumn(DB db, String table, ArrayList<String> columns){
         Statement stmt= null;
         try {

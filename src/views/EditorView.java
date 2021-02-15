@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowListener;
 
 /**
- * GameView class that extends Swing JFrame.
+ * EditorView class that extends Swing JFrame.
  */
 public class EditorView extends JFrame {
     JMenuBar menuBar;

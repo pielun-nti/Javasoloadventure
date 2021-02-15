@@ -1,5 +1,8 @@
 package models;
 
+/**
+ * Link class.
+ */
 public class Link {
     private int ID;
     private String description;
