@@ -7,9 +7,19 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/**
+ * Class to test dbmanager, also needs db class. Also make sure to change table to the correct one you want to test
+ * as well as changing db credentials and name in db class.
+ */
 public class DBManagerTest {
+    /**
+     * Starts testing db.
+     * @param args
+     */
     public static void main(String[] args){
-        DBManager dbManager = new DBManager();
+        DB db = new DB();
+        db.initDB();
+        DBManager dbManager = new DBManager(db);
         String table = "logs";
         ArrayList<String> columns = new ArrayList<String>();
         columns.add("author");
