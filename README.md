@@ -54,4 +54,8 @@ visas i texten utan att bli konstiga, ska testa med UTF8.
 2021-02-08: Fortsatt en del på spelmotorn så att alla alternativ är fungerande. Nästa gång fortsätter jag med att lägga till bilder
 eller annat.
 
-2021-02-15: Texten visas med UTF8 nu iallafall. Lagt till bilder i scener i spelet samt gjort början på speländraren.
+2021-02-15: Texten visas med UTF8 nu iallafall. Lagt till bilder i scener i spelet samt färger samt ändrat så en anslutning till databasen
+endast skapas i början då programmet körs så att inte onödiga nya anslutningar sker. Jag har också gjort så att
+om en bild inte finns så blir scrollviewn med jtextarean hela fönsterstorleken, positionerat element i jframen etc. Nästa gång så tänker jag 
+lägga till så att man kan göra mer i spelet, exempelvis klicka på något och då ritas det ut något på skärmen kanske.
+Jag tänker också fortsätta med editorn till spelet där man kan ändra scener med insert, update etc.
