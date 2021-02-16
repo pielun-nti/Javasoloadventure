@@ -64,3 +64,5 @@ om en bild inte finns så blir scrollviewn med jtextarean hela fönsterstorleken
 lägga till så att man kan göra mer i spelet, exempelvis klicka på något och då ritas det ut något på skärmen kanske.
 Jag tänker också fortsätta med editorn till spelet där man kan ändra scener med insert, update etc. Jag ska också lägga till lite fler nya "new lines"
 med \r\n i mysql databas dumpen så att det ser bättre ut och blir lite lättare att läsa i textrutan.
+
+2021-02-16: 
