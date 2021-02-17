@@ -8,7 +8,7 @@ import java.awt.event.MouseEvent;
 /**
  * Custom JPanel class that I made so I can change what I like and paint stuff using it.
  */
-class CustomPanel extends JPanel {
+public class CustomPanel extends JPanel {
 
     private int squareX = 50;
     private int squareY = 50;
@@ -16,7 +16,9 @@ class CustomPanel extends JPanel {
     private int squareH = 20;
     int fontSize = 18;
     Font mainFont;
-
+    public static boolean allowMoveSquare;
+    public static boolean drawSquare;
+    public static boolean drawLamp;
     /**
      * CustomPanel constructor with no arguments. It creates the font and adds mouse and mouse motion listeners.
      */
@@ -44,12 +46,14 @@ class CustomPanel extends JPanel {
      * @param y The y position to paint at
      */
     private void moveSquare(int x, int y) {
-        int OFFSET = 1;
-        if ((squareX!=x) || (squareY!=y)) {
-            repaint(squareX,squareY,squareW+OFFSET,squareH+OFFSET);
-            squareX=x;
-            squareY=y;
-            repaint(squareX,squareY,squareW+OFFSET,squareH+OFFSET);
+        if (allowMoveSquare) {
+            int OFFSET = 1;
+            if ((squareX != x) || (squareY != y)) {
+                repaint(squareX, squareY, squareW + OFFSET, squareH + OFFSET);
+                squareX = x;
+                squareY = y;
+                repaint(squareX, squareY, squareW + OFFSET, squareH + OFFSET);
+            }
         }
     }
 
@@ -64,9 +68,11 @@ class CustomPanel extends JPanel {
         g.setFont(mainFont);
         g.drawString("Solo adventure made in java by Pierre",30,getHeight() - 10);
         g.setColor(Color.RED);
-        g.fillRect(squareX,squareY,squareW,squareH);
-        g.setColor(Color.BLACK);
-        g.drawRect(squareX,squareY,squareW,squareH);
+        if (drawSquare) {
+            g.fillRect(squareX, squareY, squareW, squareH);
+            g.setColor(Color.BLACK);
+            g.drawRect(squareX, squareY, squareW, squareH);
+        }
         g.fillOval(10, getHeight() - 20, 10, 10);
         g.setColor(Color.black);
         g.drawOval(10,getHeight() - 20,10,10);
