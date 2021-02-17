@@ -115,7 +115,7 @@ public class mainGame {
                                         getClass().getResource("../views/img/red_riding_hood.jpg"));
                                 Image resizedImg = firstImg.getScaledInstance(gameView.getWidth()/2, gameView.getHeight()/2,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
                                 ImageIcon firstIcon = new ImageIcon(resizedImg);
-                                gameView.getStoryPicture().setLocation(250, 330);
+                                gameView.getStoryPicture().setLocation(560, 330);
                                 gameView.getStoryPicture().setSize(gameView.getWidth()/2, gameView.getHeight()/2);
                                 gameView.getStoryPicture().setIcon(firstIcon);
                             } catch (Exception e) {

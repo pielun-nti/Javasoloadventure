@@ -26,11 +26,11 @@ public class GameController {
      Choices choices;
     /**
      * Controls both the Game view and Game model. GameController adds ActionListener and FrameWindowListener.
-     * @param view
-     * @param model
-     * @param user
-     * @param gameInfo
-     * @param choices
+     * @param view The GameView
+     * @param model The GameModel
+     * @param user The User
+     * @param gameInfo The GameInfo
+     * @param choices The Choices
      */
     public GameController(GameView view, GameModel model, User user, GameInfo gameInfo, Choices choices){
         this.choices = choices;

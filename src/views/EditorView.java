@@ -362,6 +362,10 @@ public class EditorView extends JFrame {
         txtStory.setText(text);
     }
 
+    /**
+     * Adds ActionListeners to each JMenuItem
+     * @param listener The ActionListener
+     */
     public void addListeners(ActionListener listener){
         menuItemChoiceA.addActionListener(listener);
         menuItemChoiceC.addActionListener(listener);

@@ -20,9 +20,9 @@ public class EditorModel {
 
     /**
      * EditorModel constructor.
-     * @param user
-     * @param gameInfo
-     * @param choices
+     * @param user The user
+     * @param gameInfo The GameInfo
+     * @param choices The Choices
      */
     public EditorModel(User user, GameInfo gameInfo, Choices choices){
         dbManager = new DBManager();
@@ -32,7 +32,7 @@ public class EditorModel {
     }
 
     /**
-     * editormodel constructor two.
+     * editormodel constructor two that includes DBManager argument.
      * @param user
      * @param dbManager
      * @param gameInfo

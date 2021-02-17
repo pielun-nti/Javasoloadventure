@@ -42,7 +42,7 @@ public class GameView extends javax.swing.JFrame {
     User user;
     Choices choices;
     JLabel storyPicture;
-    private JPanel mainPanel;
+    private CustomPanel mainPanel;
     /**
      * GameView constructor.
      * @param user
@@ -145,7 +145,7 @@ public class GameView extends javax.swing.JFrame {
     void initComponents() {
         setTitle("Solo adventure - logged in as: " + user.getUsername());
         menuBar = new BackgroundMenuBar();
-        mainPanel = new JPanel();
+        mainPanel = new CustomPanel();
         mainPanel.setLayout(null);
         storyPicture = new JLabel("pic");
         optionsMenu = new JMenu("Options");
@@ -201,11 +201,11 @@ public class GameView extends javax.swing.JFrame {
         mainPanel.add(storyPicture);
     }
 
-    public JPanel getMainPanel() {
+    public CustomPanel getMainPanel() {
         return mainPanel;
     }
 
-    public void setMainPanel(JPanel mainPanel) {
+    public void setMainPanel(CustomPanel mainPanel) {
         this.mainPanel = mainPanel;
     }
 
@@ -474,6 +474,10 @@ public class GameView extends javax.swing.JFrame {
         txtStory.setText(text);
     }
 
+    /**
+     * Adds ActionListeners to each JMenuItem
+     * @param listener The ActionListener
+     */
     public void addListeners(ActionListener listener){
         menuItemChoiceA.addActionListener(listener);
         menuItemChoiceC.addActionListener(listener);

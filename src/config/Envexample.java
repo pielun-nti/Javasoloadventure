@@ -5,7 +5,7 @@ package config;
  */
 public class Envexample {
     public static String dbName = "soloadventure";
-    public static String driverName ="com.mysql.jdbc.Driver";
+    public static String driverName ="com.mysql.cj.jdbc.Driver";
     public static String conURL = "jdbc:mysql://localhost:3306/" + dbName + "?characterEncoding=latin1";
     public static String user = "";
     public static String pass = "";
