@@ -2,6 +2,7 @@ package views;
 
 import config.Env;
 import models.Choices;
+import models.GameInfo;
 import models.User;
 
 import javax.swing.*;
@@ -43,13 +44,15 @@ public class GameView extends javax.swing.JFrame {
     Choices choices;
     JLabel storyPicture;
     private CustomPanel mainPanel;
+    GameInfo gameInfo;
     /**
      * GameView constructor.
      * @param user
      */
-    public GameView(User user, Choices choices){
+    public GameView(User user, Choices choices, GameInfo gameInfo){
         this.choices = choices;
         this.user = user;
+        this.gameInfo = gameInfo;
         initComponents();
         setFonts();
         setColors();
@@ -145,7 +148,7 @@ public class GameView extends javax.swing.JFrame {
     void initComponents() {
         setTitle("Solo adventure - logged in as: " + user.getUsername());
         menuBar = new BackgroundMenuBar();
-        mainPanel = new CustomPanel();
+        mainPanel = new CustomPanel(this);
         mainPanel.setLayout(null);
         storyPicture = new JLabel("pic");
         optionsMenu = new JMenu("Options");
@@ -199,6 +202,15 @@ public class GameView extends javax.swing.JFrame {
         setJMenuBar(menuBar);
         mainPanel.add(scroll);
         mainPanel.add(storyPicture);
+    }
+
+
+    public GameInfo getGameInfo() {
+        return gameInfo;
+    }
+
+    public void setGameInfo(GameInfo gameInfo) {
+        this.gameInfo = gameInfo;
     }
 
     public CustomPanel getMainPanel() {

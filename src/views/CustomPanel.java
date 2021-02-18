@@ -10,49 +10,67 @@ import java.awt.event.MouseEvent;
  */
 public class CustomPanel extends JPanel {
 
-    private int squareX = 50;
-    private int squareY = 50;
-    private int squareW = 20;
-    private int squareH = 20;
+    public static int redSquareX = 50;
+    public static int redSquareY = 50;
+    public static int redSquareW = 20;
+    public static int redSquareH = 20;
+    int blackSquareX = 20;
+    int blackSquareY = 500;
+    int blackSquareW = 80;
+    int blackSquareH = 80;
     int fontSize = 18;
     Font mainFont;
-    public static boolean allowMoveSquare;
-    public static boolean drawSquare;
+    public static boolean allowMoveRedSquare;
+    public static boolean drawSquares;
     public static boolean drawLamp;
+    GameView view;
     /**
      * CustomPanel constructor with no arguments. It creates the font and adds mouse and mouse motion listeners.
      */
-    public CustomPanel() {
-
+    public CustomPanel(GameView view) {
+        this.view = view;
         //setBorder(BorderFactory.createLineBorder(Color.black));
         mainFont = new Font("Verdana", Font.BOLD, fontSize);
         addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent e) {
-                moveSquare(e.getX(),e.getY());
+                moveRedSquare(e.getX(),e.getY());
             }
         });
 
         addMouseMotionListener(new MouseAdapter() {
             public void mouseDragged(MouseEvent e) {
-                moveSquare(e.getX(),e.getY());
+                moveRedSquare(e.getX(),e.getY());
             }
         });
 
     }
 
     /**
-     * Repaints square at x and y position on this JPanel.
+     * Repaints redSquare at x and y position on this JPanel.
      * @param x The x position to paint at
      * @param y The y position to paint at
      */
-    private void moveSquare(int x, int y) {
-        if (allowMoveSquare) {
+    private void moveRedSquare(int x, int y) {
+        if (allowMoveRedSquare) {
             int OFFSET = 1;
-            if ((squareX != x) || (squareY != y)) {
-                repaint(squareX, squareY, squareW + OFFSET, squareH + OFFSET);
-                squareX = x;
-                squareY = y;
-                repaint(squareX, squareY, squareW + OFFSET, squareH + OFFSET);
+            if (x <= (blackSquareX + 50) & x > (blackSquareX - 50) & y >= (blackSquareY - 50) & y <= (blackSquareY + 50)){
+                drawSquares = false;
+                allowMoveRedSquare = false;
+                repaint();
+                view.getmenuItemChoiceA().setVisible(true);
+                view.getmenuItemChoiceB().setVisible(true);
+                view.getmenuItemChoiceC().setVisible(true);
+                view.gettxtStory().setText(view.getGameInfo().getStories().get(view.getGameInfo().getCurrentRoom() - 1).getBody());
+                view.getScroll().setSize(view.getWidth() - 50, view.getHeight() - 100);
+
+            } /*else if (x >= (blackSquareX - 50) & x < (blackSquareX + 50) & y <= (blackSquareY + 50)  & y >= (blackSquareY - 50)) {
+                JOptionPane.showMessageDialog(null, "It matches2!");
+            }*/
+            if ((redSquareX != x) || (redSquareY != y)) {
+                repaint(redSquareX, redSquareY, redSquareW + OFFSET, redSquareH + OFFSET);
+                redSquareX = x;
+                redSquareY = y;
+                repaint(redSquareX, redSquareY, redSquareW + OFFSET, redSquareH + OFFSET);
             }
         }
     }
@@ -67,14 +85,16 @@ public class CustomPanel extends JPanel {
         g.setColor(Color.GREEN);
         g.setFont(mainFont);
         g.drawString("Solo adventure made in java by Pierre",30,getHeight() - 10);
-        g.setColor(Color.RED);
-        if (drawSquare) {
-            g.fillRect(squareX, squareY, squareW, squareH);
+        if (drawSquares) {
             g.setColor(Color.BLACK);
-            g.drawRect(squareX, squareY, squareW, squareH);
+            g.fillRect(blackSquareX, blackSquareY, blackSquareW, blackSquareH);
+            g.drawRect(blackSquareX, blackSquareY, blackSquareW, blackSquareH);
+            g.setColor(Color.RED);
+            g.fillRect(redSquareX, redSquareY, redSquareW, redSquareH);
+            g.drawRect(redSquareX, redSquareY, redSquareW, redSquareH);
         }
-        g.fillOval(10, getHeight() - 20, 10, 10);
         g.setColor(Color.black);
+        g.fillOval(10, getHeight() - 20, 10, 10);
         g.drawOval(10,getHeight() - 20,10,10);
     }
 }

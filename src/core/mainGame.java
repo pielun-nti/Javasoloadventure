@@ -107,7 +107,7 @@ public class mainGame {
                                 }
                                 count++;
                             }
-                            GameView gameView = new GameView(user, choices);
+                            GameView gameView = new GameView(user, choices, gameInfo);
                             GameModel gameModel = new GameModel(user, dbManager, gameInfo, choices);
                             GameController gameController = new GameController(gameView, gameModel, user, gameInfo, choices);
                             try {

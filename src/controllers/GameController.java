@@ -2,6 +2,7 @@ package controllers;
 
 import config.Env;
 import models.*;
+import views.CustomPanel;
 import views.GameView;
 
 
@@ -123,6 +124,28 @@ public class GameController {
                     view.getStoryPicture().setIcon(null);
                     view.getStoryPicture().setSize(0, 0);
                     view.getScroll().setSize(view.getWidth() - 50, view.getHeight() - 100);
+                }
+                if (gameInfo.getCurrentRoom() == 2){
+                    view.getmenuItemChoiceA().setVisible(false);
+                    view.getmenuItemChoiceB().setVisible(false);
+                    view.getmenuItemChoiceC().setVisible(false);
+                    CustomPanel.redSquareX = view.getWidth()/2;
+                    CustomPanel.redSquareY = view.getHeight()/2;
+                    CustomPanel.redSquareH = 40;
+                    CustomPanel.redSquareW = 40;
+                    CustomPanel.drawSquares = true;
+                    CustomPanel.allowMoveRedSquare = true;
+                    view.getScroll().setLocation(0, 10);
+                    view.getScroll().setSize(1170, 210);
+                    view.gettxtStory().setText("Move the red square to within the black square in order to continue playing.");
+                    view.repaint();
+                } else if (gameInfo.getCurrentRoom() == 3 & CustomPanel.allowMoveRedSquare & CustomPanel.drawSquares){
+                    CustomPanel.drawSquares = false;
+                    CustomPanel.allowMoveRedSquare = false;
+                    view.repaint();
+                    view.getmenuItemChoiceA().setVisible(true);
+                    view.getmenuItemChoiceB().setVisible(true);
+                    view.getmenuItemChoiceC().setVisible(true);
                 }
                 if (command.equalsIgnoreCase("Change font size")){
                     int fontSize = view.getFontSize();
