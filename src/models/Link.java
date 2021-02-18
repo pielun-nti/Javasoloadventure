@@ -25,14 +25,26 @@ public class Link {
                 '}';
     }
 
+    /**
+     *
+     * @return Id of this link
+     */
     public int getID() {
         return ID;
     }
 
+    /**
+     * Sets id of this link
+     * @param ID
+     */
     public void setID(int ID) {
         this.ID = ID;
     }
 
+    /**
+     *
+     * @return Description of this link
+     */
     public String getDescription() {
         return description;
     }
@@ -41,6 +53,10 @@ public class Link {
         this.description = description;
     }
 
+    /**
+     *
+     * @return Target id of this link. The target id is used to know which story it points to.
+     */
     public int getTargetID() {
         return targetID;
     }
@@ -49,6 +65,10 @@ public class Link {
         this.targetID = targetID;
     }
 
+    /**
+     *
+     * @return Story id for this link. It is just used to know which story that had this link.
+     */
     public int getStoryID() {
         return storyID;
     }

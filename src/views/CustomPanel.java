@@ -47,6 +47,7 @@ public class CustomPanel extends JPanel {
 
     /**
      * Repaints redSquare at x and y position on this JPanel.
+     * If red square is at black square location then continue playing and show jmenuitems and story text etc.
      * @param x The x position to paint at
      * @param y The y position to paint at
      */

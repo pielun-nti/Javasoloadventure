@@ -16,9 +16,21 @@ import java.util.Calendar;
  * GameModel class that does all the logic for the game like for example executing updates/queries from database and returns info to the GameController.
  */
 public class GameModel {
+    /**
+     * The database manager.
+     */
     DBManager dbManager;
+    /**
+     * The user.
+     */
     User user;
+    /**
+     * The Gameinfo class.
+     */
     GameInfo gameInfo;
+    /**
+     * The choices class.
+     */
     Choices choices;
 
     /**
@@ -36,10 +48,10 @@ public class GameModel {
 
     /**
      * Gamemodel constructor two.
-     * @param user
-     * @param dbManager
-     * @param gameInfo
-     * @param choices
+     * @param user The user
+     * @param dbManager The database manager
+     * @param gameInfo Game info class
+     * @param choices All the current choices for the current scene
      */
     public GameModel(User user, DBManager dbManager, GameInfo gameInfo, Choices choices){
         this.gameInfo = gameInfo;
@@ -50,8 +62,8 @@ public class GameModel {
 
 
     /**
-     * Get choice A from database links and get story etc.
-     * @return
+     * Get choice A from database links and get story, links for the story etc.
+     * @return if the story, links and choices was found successful or not
      */
     public boolean getChoiceA(){
         try {
@@ -126,8 +138,8 @@ public class GameModel {
     }
 
     /**
-     * Get choice B from database links and get story etc.
-     * @return
+     * Get choice B from database links and get story, links for the story etc.
+     * @return if the story, links and choices was found successful or not
      */
     public boolean getChoiceB(){
         try {
@@ -202,8 +214,8 @@ public class GameModel {
     }
 
     /**
-     * Get choice C from database links and get story etc.
-     * @return
+     * Get choice C from database links and get story, links for the story etc.
+     * @return if the story, links and choices was found successful or not
      */
     public boolean getChoiceC(){
         try {

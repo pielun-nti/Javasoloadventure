@@ -16,19 +16,34 @@ public class Story {
                 '}';
     }
 
-
+    /**
+     *
+     * @return Id of story that can be used to know which story is currently being shown.
+     */
     public int getID() {
         return ID;
     }
 
+    /**
+     * Sets id of story
+     * @param ID An unique id for this story
+     */
     public void setID(int ID) {
         this.ID = ID;
     }
 
+    /**
+     *
+     * @return The story text.
+     */
     public String getBody() {
         return body;
     }
 
+    /**
+     * Sets text for this story
+     * @param body The story text to set
+     */
     public void setBody(String body) {
         this.body = body;
     }

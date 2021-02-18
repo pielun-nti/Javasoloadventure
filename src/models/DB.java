@@ -24,10 +24,18 @@ public class DB {
 
     }
 
+    /**
+     *
+     * @return The connection the database variable.
+     */
     public static Connection getConnection() {
         return connection;
     }
 
+    /**
+     * Sets database connection variable.
+     * @param connection The connection variable.
+     */
     public static void setConnection(Connection connection) {
         DB.connection = connection;
     }

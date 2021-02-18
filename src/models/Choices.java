@@ -14,6 +14,10 @@ public class Choices {
     private String oldChoiceB = "b";
     private String oldChoiceC = "c";
 
+    /**
+     *
+     * @return Old choice a to know what the old choice a was.
+     */
     public String getOldChoiceA() {
         return oldChoiceA;
     }

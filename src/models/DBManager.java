@@ -466,10 +466,10 @@ public class DBManager {
 
     /**
      * Selects all columns in specified table in specified db matching columns specified and returns resultset with the matching columns.
-     * @param db
-     * @param table
-     * @param columns
-     * @return
+     * @param db Database to search in
+     * @param table Table to search in
+     * @param columns Columns to select
+     * @return ResultSet with the selected columns
      */
     public ResultSet selectColumn(DB db, String table, ArrayList<String> columns){
         Statement stmt= null;
