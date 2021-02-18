@@ -21,7 +21,7 @@ public class mainGame {
      * Main method. Starts the game. Uses EventQueue.invokeLater to run after other UI swing events have been run to prevent UI lag. Tries to make GUI look more alike windows programs GUIs by using UIManager.
      * This method also starts the game program, it starts by connecting to the database and then it sets
      * current room to 1 and then it gets the data from database and does things with it etc.
-     * @param args
+     * @param args The Java Command line arguments stored in a String array.
      */
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {

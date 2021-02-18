@@ -61,6 +61,10 @@ public class Link {
         return targetID;
     }
 
+    /**
+     * Sets target id for this link.
+     * @param targetID This is used to know which story this link points to.
+     */
     public void setTargetID(int targetID) {
         this.targetID = targetID;
     }
@@ -73,6 +77,10 @@ public class Link {
         return storyID;
     }
 
+    /**
+     * Sets story id for this link.
+     * @param storyID This is used to know which story that had this link.
+     */
     public void setStoryID(int storyID) {
         this.storyID = storyID;
     }

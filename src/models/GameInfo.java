@@ -50,6 +50,10 @@ public class GameInfo {
         return stories;
     }
 
+    /**
+     * Sets stories arraylist.
+     * @param stories An array of stories that contains all stories in database.
+     */
     public void setStories(ArrayList<Story> stories) {
         this.stories = stories;
     }

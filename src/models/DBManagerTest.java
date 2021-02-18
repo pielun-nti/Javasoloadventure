@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class DBManagerTest {
     /**
      * Starts testing db.
-     * @param args
+     * @param args Java command line arguments.
      */
     public static void main(String[] args){
         DB db = new DB();
