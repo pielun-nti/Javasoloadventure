@@ -94,6 +94,8 @@ public class CustomPanel extends JPanel {
             g.fillRect(redSquareX, redSquareY, redSquareW, redSquareH);
             g.drawRect(redSquareX, redSquareY, redSquareW, redSquareH);
         }
+        g.setColor(Color.BLUE);
+        g.drawLine(5, getHeight() - 5, 420, getHeight() - 5);
         g.setColor(Color.black);
         g.fillOval(10, getHeight() - 20, 10, 10);
         g.drawOval(10,getHeight() - 20,10,10);

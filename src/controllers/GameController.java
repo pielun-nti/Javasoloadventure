@@ -26,7 +26,7 @@ public class GameController {
     GameInfo gameInfo;
      Choices choices;
     /**
-     * Controls both the Game view and Game model. GameController adds ActionListener and FrameWindowListener.
+     * GameController Constructor that controls both the Game view and Game model. GameController adds ActionListener and FrameWindowListener.
      * @param view The GameView
      * @param model The GameModel
      * @param user The User

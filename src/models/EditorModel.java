@@ -32,7 +32,7 @@ public class EditorModel {
     }
 
     /**
-     * editormodel constructor two that includes DBManager argument.
+     * EditorModel constructor two that includes DBManager argument.
      * @param user
      * @param dbManager
      * @param gameInfo
