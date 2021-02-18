@@ -65,4 +65,8 @@ lägga till så att man kan göra mer i spelet, exempelvis klicka på något och
 Jag tänker också fortsätta med editorn till spelet där man kan ändra scener med insert, update etc. Jag ska också lägga till lite fler nya "new lines"
 med \r\n i mysql databas dumpen så att det ser bättre ut och blir lite lättare att läsa i textrutan.
 
-2021-02-16: 
+2021-02-16: Jag har gjort så att man måste flytta på en röd ruta till en svart ruta för att fortsätta spela på rum/scene
+nr 2. Jag har gjort ritningen genom en custom JPanel. Jag har också lagt till några fler new lines i mysql db dumpen med mera.
+Nästa gång så ska jag göra så att man kan tända en lampa på en viss scen/rum och när man gör klickar på lampan
+så tänds den och någonting händer kanske någon färgändring eller objekt som dyker upp eller att man kommer till en
+speciell scen eller något. Jag ska också nästa gång fortsätta på speländraren.
