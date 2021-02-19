@@ -6,6 +6,7 @@ import views.CustomPanel;
 import views.GameView;
 
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -120,7 +121,7 @@ public class GameController {
                     getChoiceC();
                 }
                 System.out.println("Current room: " + gameInfo.getCurrentRoom());
-                if (gameInfo.getCurrentRoom() != 1){
+                if (gameInfo.getCurrentRoom() != 1 & gameInfo.getCurrentRoom() != 3){
                     view.getStoryPicture().setIcon(null);
                     view.getStoryPicture().setSize(0, 0);
                     view.getScroll().setSize(view.getWidth() - 50, view.getHeight() - 100);
@@ -139,13 +140,33 @@ public class GameController {
                     view.getScroll().setSize(1170, 210);
                     view.gettxtStory().setText("Move the red square to within the black square in order to continue playing.");
                     view.repaint();
-                } else if (gameInfo.getCurrentRoom() == 3 & CustomPanel.allowMoveRedSquare & CustomPanel.drawSquares){
+                } else if (gameInfo.getCurrentRoom() == 3) {
+                    CustomPanel.drawSquares = false;
+                    CustomPanel.allowMoveRedSquare = false;
+                    CustomPanel.drawLamp = true;
+                    view.getScroll().setLocation(0, 10);
+                    view.getScroll().setSize(1170, 210);
+                    view.getContentPane().setBackground(Color.BLACK);
+                    view.gettxtStory().setText("Click on the lamp if you dare.");
+                    view.gettxtStory().setBackground(Color.GREEN);
+                    view.repaint();
+                    view.getmenuItemChoiceA().setVisible(false);
+                    view.getmenuItemChoiceB().setVisible(false);
+                    view.getmenuItemChoiceC().setVisible(false);
+                }
+                if ( CustomPanel.allowMoveRedSquare & CustomPanel.drawSquares){
                     CustomPanel.drawSquares = false;
                     CustomPanel.allowMoveRedSquare = false;
                     view.repaint();
                     view.getmenuItemChoiceA().setVisible(true);
                     view.getmenuItemChoiceB().setVisible(true);
                     view.getmenuItemChoiceC().setVisible(true);
+                }
+                if (view.getContentPane().getBackground() != Color.YELLOW & gameInfo.getCurrentRoom() != 3){
+                    view.getContentPane().setBackground(Color.YELLOW);
+                }
+                if (view.gettxtStory().getBackground() != Color.WHITE & gameInfo.getCurrentRoom() != 3){
+                    view.gettxtStory().setBackground(Color.WHITE);
                 }
                 if (command.equalsIgnoreCase("Change font size")){
                     int fontSize = view.getFontSize();

@@ -1,9 +1,12 @@
 package views;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.io.IOException;
 
 /**
  * Custom JPanel class that I made so I can change what I like and paint stuff using it.
@@ -94,10 +97,82 @@ public class CustomPanel extends JPanel {
             g.fillRect(redSquareX, redSquareY, redSquareW, redSquareH);
             g.drawRect(redSquareX, redSquareY, redSquareW, redSquareH);
         }
+        if (drawLamp){
+        try {
+            Image firstImg = ImageIO.read(
+                    getClass().getResource("./img/lampblack.jpg"));
+            Image resizedImg = firstImg.getScaledInstance(view.getWidth()/2, view.getHeight()/2,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
+            ImageIcon firstIcon = new ImageIcon(resizedImg);
+            view.getStoryPicture().setLocation(460, 330);
+            view.getStoryPicture().setSize((view.getWidth()/2) - 20, (view.getHeight()/2) - 20);
+            view.getStoryPicture().setIcon(firstIcon);
+            view.getStoryPicture().addMouseListener(new MyMouseListener());
+        } catch (Exception e) {
+            e.printStackTrace();
+            drawLamp = false;
+            view.gettxtStory().setText(view.getGameInfo().getStories().get(view.getGameInfo().getCurrentRoom() - 1).getBody());
+            view.gettxtStory().setBackground(Color.WHITE);
+            view.getmenuItemChoiceA().setVisible(true);
+            view.getmenuItemChoiceB().setVisible(true);
+            view.getmenuItemChoiceC().setVisible(true);
+            repaint();
+        }
+        }
         g.setColor(Color.BLUE);
         g.drawLine(5, getHeight() - 5, 420, getHeight() - 5);
+
         g.setColor(Color.black);
         g.fillOval(10, getHeight() - 20, 10, 10);
         g.drawOval(10,getHeight() - 20,10,10);
+    }
+
+    private class MyMouseListener implements MouseListener {
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            drawLamp = false;
+            view.gettxtStory().setText(view.getGameInfo().getStories().get(view.getGameInfo().getCurrentRoom() - 1).getBody());
+            new Thread(new Runnable() { //new thread to fix lag/wait
+                @Override
+                public void run() {
+                    try {
+                        view.getScroll().setLocation(0, 10);
+                        view.getScroll().setSize(1170, 210);
+                        Image firstImg = ImageIO.read(
+                                getClass().getResource("./img/argvarg.jpg"));
+                        Image resizedImg = firstImg.getScaledInstance(view.getWidth()/2, view.getHeight()/2,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
+                        ImageIcon firstIcon = new ImageIcon(resizedImg);
+                        view.getStoryPicture().setLocation(10, 230);
+                        view.getStoryPicture().setSize(view.getWidth()/2, view.getHeight()/2);
+                        view.getStoryPicture().setIcon(firstIcon);
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            }).start();
+            view.getmenuItemChoiceA().setVisible(true);
+            view.getmenuItemChoiceB().setVisible(true);
+            view.getmenuItemChoiceC().setVisible(true);
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+
+        }
     }
 }
