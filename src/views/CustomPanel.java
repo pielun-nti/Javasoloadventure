@@ -126,8 +126,16 @@ public class CustomPanel extends JPanel {
         g.drawOval(10,getHeight() - 20,10,10);
     }
 
+    /**
+     * MouseListener class for do stuff when an object is clicked with mouse.
+     */
     private class MyMouseListener implements MouseListener {
 
+        /**
+         * When user clicks on the lamp image it will show the story text and show an image of an angry wolf
+         * and allow user to select choices from menu items.
+         * @param e The mouse event
+         */
         @Override
         public void mouseClicked(MouseEvent e) {
             drawLamp = false;
