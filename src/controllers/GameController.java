@@ -154,7 +154,7 @@ public class GameController {
                     view.getmenuItemChoiceB().setVisible(false);
                     view.getmenuItemChoiceC().setVisible(false);
                 }
-                if ( CustomPanel.allowMoveRedSquare & CustomPanel.drawSquares){
+                if ( CustomPanel.allowMoveRedSquare & CustomPanel.drawSquares & gameInfo.getCurrentRoom() != 2){
                     CustomPanel.drawSquares = false;
                     CustomPanel.allowMoveRedSquare = false;
                     view.repaint();
