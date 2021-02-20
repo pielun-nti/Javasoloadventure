@@ -34,13 +34,9 @@ public class EditorController {
         this.view = view;
         this.model = model;
         this.user = user;
-        this.view.addListeners(new GameListener());
+        this.view.addListeners(new EditorListener());
         this.view.addFrameWindowListener(new FrameWindowListener());
         this.gameInfo = gameInfo;
-        view.getmenuItemChoiceC().setVisible(false);
-        view.getmenuItemChoiceA().setText(choices.getChoiceA());
-        view.getmenuItemChoiceB().setText(choices.getChoiceB());
-        view.getmenuItemChoiceC().setText(choices.getChoiceC());
         addScenesToComboBox();
         addStoryAndLinksToTextArea();
         view.addItemListeners(new ItemChangeListener());
@@ -164,9 +160,9 @@ public class EditorController {
     }
 
     /**
-     * GameListener class that is a actionlistener that detects jmenuitems clicks.
+     * EditorListener class that is a actionlistener that detects jmenuitems clicks.
      */
-    private class GameListener implements ActionListener {
+    private class EditorListener implements ActionListener {
         /**
          * Listens for JMenuItem and JCheckBoxMenuItem clicks and then executes methods. Onactionperformed gets called
          * when a JMenuItem or JCheckBoxMenuItem gets clicked by user and then it executes methods.
@@ -180,10 +176,7 @@ public class EditorController {
                 if (command.equalsIgnoreCase("Exit application")){
                     view.dispose();
                 }
-                if (command.equalsIgnoreCase("Select scene")) {
-                    //selectScene();
 
-                }
                 if (command.equalsIgnoreCase("Change font size")){
                     int fontSize = view.getFontSize();
                     try {
@@ -205,30 +198,6 @@ public class EditorController {
         }
         }
 
-
-    /**
-     * Sets menu item text to choices. Also hides / show jmenuitem depending on if choice exist.
-     */
-    void setMenuItemsText(){
-            if (!choices.getChoiceA().equalsIgnoreCase("a") & !choices.getChoiceA().equalsIgnoreCase(choices.getOldChoiceA())){
-                view.getmenuItemChoiceA().setText(choices.getChoiceA());
-                view.getmenuItemChoiceA().setVisible(true);
-            } else {
-                view.getmenuItemChoiceA().setVisible(false);
-            }
-            if (!choices.getChoiceB().equalsIgnoreCase("b") & !choices.getChoiceB().equalsIgnoreCase(choices.getOldChoiceB())){
-                view.getmenuItemChoiceB().setText(choices.getChoiceB());
-                view.getmenuItemChoiceB().setVisible(true);
-            } else {
-                view.getmenuItemChoiceB().setVisible(false);
-            }
-            if (!choices.getChoiceC().equalsIgnoreCase("c") & !choices.getChoiceC().equalsIgnoreCase(choices.getOldChoiceC())){
-                view.getmenuItemChoiceC().setText(choices.getChoiceC());
-                view.getmenuItemChoiceC().setVisible(true);
-            } else {
-                view.getmenuItemChoiceC().setVisible(false);
-            }
-        }
 
 
 

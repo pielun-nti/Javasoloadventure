@@ -23,9 +23,9 @@ public class EditorView extends javax.swing.JFrame {
     JMenu graphicsMenu;
     JMenu aboutMenu;
     JScrollPane scroll;
-    JMenuItem menuItemChoiceA;
-    JMenuItem menuItemChoiceB;
-    JMenuItem menuItemChoiceC;
+    JMenuItem menuItemEditStoryBody;
+    JMenuItem menuItemEditStoryID;
+    JMenuItem menuItemAddStory;
     JMenuItem menuItemDeleteLog;
     JMenuItem menuItemShowLogHistory;
     JMenuItem menuItemDeleteAllLogs;
@@ -86,12 +86,12 @@ public class EditorView extends javax.swing.JFrame {
         aboutMenu.setForeground(Color.MAGENTA);
         menuItemExit.setForeground(Color.BLUE);
         menuItemExit.setBackground(Color.GREEN);
-        menuItemChoiceA.setForeground(Color.BLUE);
-        menuItemChoiceA.setBackground(Color.GREEN);
-        menuItemChoiceB.setForeground(Color.BLUE);
-        menuItemChoiceB.setBackground(Color.GREEN);
-        menuItemChoiceC.setForeground(Color.BLUE);
-        menuItemChoiceC.setBackground(Color.GREEN);
+        menuItemEditStoryBody.setForeground(Color.BLUE);
+        menuItemEditStoryBody.setBackground(Color.GREEN);
+        menuItemEditStoryID.setForeground(Color.BLUE);
+        menuItemEditStoryID.setBackground(Color.GREEN);
+        menuItemAddStory.setForeground(Color.BLUE);
+        menuItemAddStory.setBackground(Color.GREEN);
         menuItemAbout.setForeground(Color.BLUE);
         menuItemAbout.setBackground(Color.GREEN);
         menuItemChangeFontSize.setForeground(Color.BLUE);
@@ -110,10 +110,10 @@ public class EditorView extends javax.swing.JFrame {
         optionsMenu.setFont(mainFont);
         editMenu.setFont(mainFont);
         aboutMenu.setFont(mainFont);
-        menuItemChoiceA.setFont(mainFont);
-        menuItemChoiceC.setFont(mainFont);
+        menuItemEditStoryBody.setFont(mainFont);
+        menuItemAddStory.setFont(mainFont);
         menuItemDeleteLog.setFont(mainFont);
-        menuItemChoiceB.setFont(mainFont);
+        menuItemEditStoryID.setFont(mainFont);
         menuItemShowLogHistory.setFont(mainFont);
         menuItemDeleteAllLogs.setFont(mainFont);
         menuItemDeleteLogHistory.setFont(mainFont);
@@ -151,9 +151,9 @@ public class EditorView extends javax.swing.JFrame {
      * Initializes Keystrokes.
      */
     void initKeystrokes(){
-        menuItemChoiceA.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
-        menuItemChoiceB.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.CTRL_MASK));
-        menuItemChoiceC.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
+        menuItemEditStoryBody.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
+        menuItemEditStoryID.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.CTRL_MASK));
+        menuItemAddStory.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
     }
     /*
      * combo.addActionListener (new ActionListener () {
@@ -194,9 +194,9 @@ public class EditorView extends javax.swing.JFrame {
         menuItemDeleteAllLogs = new JMenuItem("Delete All Logs");
         menuItemDeleteLogHistory = new JMenuItem("Delete All Logs Changes History");
         menuItemDeleteLog = new JMenuItem("Delete Log");
-        menuItemChoiceC = new JMenuItem("Choice C");
-        menuItemChoiceB = new JMenuItem("Choice B");
-        menuItemChoiceA = new JMenuItem("Choice A");
+        menuItemAddStory = new JMenuItem("Add New Story");
+        menuItemEditStoryID = new JMenuItem("Edit Story ID");
+        menuItemEditStoryBody = new JMenuItem("Edit Story Body");
         menuItemChangeFontSize = new JMenuItem("Change Font Size");
         menuItemShowLogHistory = new JMenuItem("Get Logs Changes History");
         menuItemAbout = new JMenuItem("About");
@@ -209,10 +209,10 @@ public class EditorView extends javax.swing.JFrame {
      * Adds all items to menu and then menus to menubar and then to JFrame.
      */
     void addComponents(){
-        optionsMenu.add(menuItemChoiceA);
+        optionsMenu.add(menuItemEditStoryBody);
 //        optionsMenu.add(menuItemDeleteLog);
-        optionsMenu.add(menuItemChoiceB);
-        optionsMenu.add(menuItemChoiceC);
+        optionsMenu.add(menuItemEditStoryID);
+        optionsMenu.add(menuItemAddStory);
         /*optionsMenu.add(menuItemShowLogHistory);
         optionsMenu.add(menuItemDeleteAllLogs);
         optionsMenu.add(menuItemDeleteLogHistory);
@@ -267,28 +267,28 @@ public class EditorView extends javax.swing.JFrame {
         this.graphicsMenu = graphicsMenu;
     }
 
-    public JMenuItem getMenuItemChoiceA() {
-        return menuItemChoiceA;
+    public JMenuItem getMenuItemEditStoryBody() {
+        return menuItemEditStoryBody;
     }
 
-    public void setMenuItemChoiceA(JMenuItem menuItemChoiceA) {
-        this.menuItemChoiceA = menuItemChoiceA;
+    public void setMenuItemEditStoryBody(JMenuItem menuItemEditStoryBody) {
+        this.menuItemEditStoryBody = menuItemEditStoryBody;
     }
 
-    public JMenuItem getMenuItemChoiceB() {
-        return menuItemChoiceB;
+    public JMenuItem getMenuItemEditStoryID() {
+        return menuItemEditStoryID;
     }
 
-    public void setMenuItemChoiceB(JMenuItem menuItemChoiceB) {
-        this.menuItemChoiceB = menuItemChoiceB;
+    public void setMenuItemEditStoryID(JMenuItem menuItemEditStoryID) {
+        this.menuItemEditStoryID = menuItemEditStoryID;
     }
 
-    public JMenuItem getMenuItemChoiceC() {
-        return menuItemChoiceC;
+    public JMenuItem getMenuItemAddStory() {
+        return menuItemAddStory;
     }
 
-    public void setMenuItemChoiceC(JMenuItem menuItemChoiceC) {
-        this.menuItemChoiceC = menuItemChoiceC;
+    public void setMenuItemAddStory(JMenuItem menuItemAddStory) {
+        this.menuItemAddStory = menuItemAddStory;
     }
 
     public JTextArea getTxtStory() {
@@ -359,28 +359,28 @@ public class EditorView extends javax.swing.JFrame {
         this.scroll = scroll;
     }
 
-    public JMenuItem getmenuItemChoiceA() {
-        return menuItemChoiceA;
+    public JMenuItem getmenuItemEditStoryBody() {
+        return menuItemEditStoryBody;
     }
 
-    public void setmenuItemChoiceA(JMenuItem menuItemChoiceA) {
-        this.menuItemChoiceA = menuItemChoiceA;
+    public void setmenuItemEditStoryBody(JMenuItem menuItemEditStoryBody) {
+        this.menuItemEditStoryBody = menuItemEditStoryBody;
     }
 
-    public JMenuItem getmenuItemChoiceB() {
-        return menuItemChoiceB;
+    public JMenuItem getmenuItemEditStoryID() {
+        return menuItemEditStoryID;
     }
 
-    public void setmenuItemChoiceB(JMenuItem menuItemChoiceB) {
-        this.menuItemChoiceB = menuItemChoiceB;
+    public void setmenuItemEditStoryID(JMenuItem menuItemEditStoryID) {
+        this.menuItemEditStoryID = menuItemEditStoryID;
     }
 
-    public JMenuItem getmenuItemChoiceC() {
-        return menuItemChoiceC;
+    public JMenuItem getmenuItemAddStory() {
+        return menuItemAddStory;
     }
 
-    public void setmenuItemChoiceC(JMenuItem menuItemChoiceC) {
-        this.menuItemChoiceC = menuItemChoiceC;
+    public void setmenuItemAddStory(JMenuItem menuItemAddStory) {
+        this.menuItemAddStory = menuItemAddStory;
     }
 
     public JMenuItem getMenuItemDeleteLog() {
@@ -530,10 +530,10 @@ public class EditorView extends javax.swing.JFrame {
      * @param listener The ActionListener
      */
     public void addListeners(ActionListener listener){
-        menuItemChoiceA.addActionListener(listener);
-        menuItemChoiceC.addActionListener(listener);
+        menuItemEditStoryBody.addActionListener(listener);
+        menuItemAddStory.addActionListener(listener);
         menuItemDeleteLog.addActionListener(listener);
-        menuItemChoiceB.addActionListener(listener);
+        menuItemEditStoryID.addActionListener(listener);
         menuItemShowLogHistory.addActionListener(listener);
         menuItemDeleteAllLogs.addActionListener(listener);
         menuItemDeleteLogHistory.addActionListener(listener);
