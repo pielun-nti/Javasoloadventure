@@ -132,10 +132,10 @@ public class EditorView extends javax.swing.JFrame {
      * Sets location of jframe components.
      */
     void setLocations(){
-        scroll.setLocation(0, 400);
-        scroll.setSize(1170, 310);
+        scroll.setLocation(0, 60);
+        scroll.setSize(1180, 670);
         sceneSelector.setSize(500, 50);
-        sceneSelector.setLocation(20, 20);
+        sceneSelector.setLocation(5, 5);
     }
 
     /**

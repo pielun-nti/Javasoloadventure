@@ -19,7 +19,7 @@ public class EditorController {
     EditorModel model;
     User user;
     GameInfo gameInfo;
-     Choices choices;
+    Choices choices;
     ArrayList<Link> allLinks;
     /**
      * Controls both the Editor view and Editor model. EditorController adds ActionListener and FrameWindowListener.
@@ -82,7 +82,7 @@ public class EditorController {
             }
         }
         Story story = gameInfo.getStories().get(gameInfo.getCurrentRoom() - 1);
-        view.gettxtStory().setText("Story:\r\n" + story.getBody());
+        view.gettxtStory().setText("Story Body:\r\n" + story.getBody());
         view.gettxtStory().append("\r\n\r\nLinks:\r\n");
         for (int i = 0; i < allLinks.size(); i++){
             Link link = allLinks.get(i);
