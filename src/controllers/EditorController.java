@@ -8,6 +8,7 @@ import views.GameView;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 
 /**
@@ -19,6 +20,7 @@ public class EditorController {
     User user;
     GameInfo gameInfo;
      Choices choices;
+    ArrayList<Link> allLinks;
     /**
      * Controls both the Editor view and Editor model. EditorController adds ActionListener and FrameWindowListener.
      * @param view
@@ -62,15 +64,34 @@ public class EditorController {
      * Show story and links for current scene/room on jtextarea.
      */
     void addStoryAndLinksToTextArea(){
+        if (allLinks == null) {
+            try {
+                ResultSet rs = model.getAllLinks();
+                allLinks = new ArrayList<>();
+                while (rs.next()) {
+                    try {
+                        Link link = new Link();
+                        link.setDescription(rs.getString("description"));
+                        link.setStoryID(rs.getInt("story_id"));
+                        link.setTargetID(rs.getInt("target_id"));
+                        link.setID(rs.getInt("id"));
+                        allLinks.add(link);
+                    } catch (Exception ex){
+                        ex.printStackTrace();
+                    }
+                }
+            } catch (Exception ex){
+                ex.printStackTrace();
+                JOptionPane.showMessageDialog(null, "Error when adding all links: " + ex.toString(), Env.EditorMessageBoxTitle, JOptionPane.ERROR_MESSAGE);
+            }
+        }
         Story story = gameInfo.getStories().get(gameInfo.getCurrentRoom() - 1);
         view.gettxtStory().setText("Story:\r\n" + story.getBody());
         view.gettxtStory().append("\r\n\r\nLinks:\r\n");
-        for (int i = 0; i < gameInfo.getLinks().size(); i++){
-            Link link = gameInfo.getLinks().get(i);
+        for (int i = 0; i < allLinks.size(); i++){
+            Link link = allLinks.get(i);
             if (link.getStoryID() == gameInfo.getCurrentRoom()) {
                 view.getTxtStory().append("Story ID:" + link.getStoryID() + "\r\nTarget ID: " + link.getTargetID() + "\r\nDescription: " + link.getDescription() + "\r\n----------------------------\r\n");
-            } else {
-                System.out.println("Konstigt: " + link.getStoryID());
             }
         }
     }
@@ -159,16 +180,6 @@ public class EditorController {
                 if (command.equalsIgnoreCase("Exit application")){
                     view.dispose();
                 }
-                if (command.equalsIgnoreCase(choices.getChoiceA())) {
-                    getChoiceA();
-
-                }
-                if (command.equalsIgnoreCase(choices.getChoiceB())){
-                    getChoiceB();
-                }
-                if (command.equalsIgnoreCase(choices.getChoiceC())){
-                    getChoiceC();
-                }
                 if (command.equalsIgnoreCase("Select scene")) {
                     //selectScene();
 
@@ -219,75 +230,7 @@ public class EditorController {
             }
         }
 
-    /**
-     * Sets current room, then tells model to get story and links, then set view story and choice in as jmenuitem text.
-     */
-    void getChoiceA() {
-        choices.setOldChoiceA(choices.getChoiceA());
-        choices.setOldChoiceB(choices.getChoiceB());
-        choices.setOldChoiceC(choices.getChoiceC());
-        //gameInfo.setCurrentRoom(gameInfo.getCurrentRoom() + 1);
-        ArrayList<Link> links = gameInfo.getLinks();
-        for (int i = 0; i < links.size(); i++) {
-            Link link = links.get(i);
-            if (link.getDescription().equalsIgnoreCase(choices.getChoiceA())) {
-                gameInfo.setCurrentRoom(link.getTargetID());
-            }
-        }
-        boolean done = model.getChoiceA();
-        if (done) {
-            setMenuItemsText();
-            //view.gettxtStory().setText(gameInfo.getStories().get(gameInfo.getCurrentRoom() - 1).getBody());
-            view.gettxtStory().setText(gameInfo.getStories().get(gameInfo.getCurrentRoom() - 1).getBody());
-        }
 
-    }
-
-    /**
-     * Sets current room, then tells model to get story and links, then set view story and choice in as jmenuitem text.
-     */
-    void getChoiceB() {
-        choices.setOldChoiceA(choices.getChoiceA());
-        choices.setOldChoiceB(choices.getChoiceB());
-        choices.setOldChoiceC(choices.getChoiceC());
-        //gameInfo.setCurrentRoom(gameInfo.getCurrentRoom() + 1);
-        ArrayList<Link> links = gameInfo.getLinks();
-        for (int i = 0; i < links.size(); i++) {
-            Link link = links.get(i);
-            if (link.getDescription().equalsIgnoreCase(choices.getChoiceB())) {
-                gameInfo.setCurrentRoom(link.getTargetID());
-            }
-        }
-        boolean done = model.getChoiceB();
-        if (done) {
-            setMenuItemsText();
-            view.gettxtStory().setText(gameInfo.getStories().get(gameInfo.getCurrentRoom() - 1).getBody());
-        }
-
-    }
-
-    /**
-     * Sets current room, then tells model to get story and links, then set view story and choice in as jmenuitem text.
-     */
-    void getChoiceC() {
-        choices.setOldChoiceA(choices.getChoiceA());
-        choices.setOldChoiceB(choices.getChoiceB());
-        choices.setOldChoiceC(choices.getChoiceC());
-        //gameInfo.setCurrentRoom(gameInfo.getCurrentRoom() + 1);
-        ArrayList<Link> links = gameInfo.getLinks();
-        for (int i = 0; i < links.size(); i++) {
-            Link link = links.get(i);
-            if (link.getDescription().equalsIgnoreCase(choices.getChoiceC())) {
-                gameInfo.setCurrentRoom(link.getTargetID());
-            }
-        }
-        boolean done = model.getChoiceC();
-        if (done) {
-            setMenuItemsText();
-            view.gettxtStory().setText(gameInfo.getStories().get(gameInfo.getCurrentRoom() - 1).getBody());
-        }
-
-    }
 
 
 
