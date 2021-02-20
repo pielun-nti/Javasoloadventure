@@ -80,7 +80,7 @@ public class mainEditor {
                             Link link = new Link();
                             link.setID(numberOfChoices + 1);
                             link.setDescription(linksrs.getString("description"));
-                            link.setStoryID(gameInfo.getCurrentRoom());
+                            link.setStoryID(Integer.parseInt(linksrs.getString("story_id")));
                             link.setTargetID(Integer.parseInt(linksrs.getString("target_id")));
                             links.add(link);
                             System.out.println(link.toString());
