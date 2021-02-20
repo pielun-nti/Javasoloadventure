@@ -2,17 +2,21 @@ package views;
 
 import config.Env;
 import models.Choices;
+import models.GameInfo;
 import models.User;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemListener;
 import java.awt.event.WindowListener;
+import java.nio.charset.StandardCharsets;
 
 /**
- * EditorView class that extends Swing JFrame.
+ * EditorView class that extends Swing JFrame. It is the view for the game editor. It has a jmenubar, jmenus, jmenuitems
+ * and image and combobox etc.
  */
-public class EditorView extends JFrame {
+public class EditorView extends javax.swing.JFrame {
     JMenuBar menuBar;
     JMenu optionsMenu;
     JMenu editMenu;
@@ -22,10 +26,10 @@ public class EditorView extends JFrame {
     JMenuItem menuItemChoiceA;
     JMenuItem menuItemChoiceB;
     JMenuItem menuItemChoiceC;
-    JMenuItem menuItemSelectScene;
+    JMenuItem menuItemDeleteLog;
     JMenuItem menuItemShowLogHistory;
     JMenuItem menuItemDeleteAllLogs;
-    JMenuItem menuItemSelectSceneHistory;
+    JMenuItem menuItemDeleteLogHistory;
     JMenuItem menuItemSaveAs;
     JMenuItem menuItemOpen;
     JMenuItem menuItemOpenSecurity;
@@ -38,26 +42,60 @@ public class EditorView extends JFrame {
     private Font mainFont;
     int fontSize = 18;
     User user;
-    JLabel storyPicture;
     Choices choices;
+    JLabel storyPicture;
+    private JPanel mainPanel;
+    GameInfo gameInfo;
+    JComboBox sceneSelector;
+
     /**
      * EditorView constructor.
      * @param user
      */
-    public EditorView(User user, Choices choices){
-        this.user = user;
+    public EditorView(User user, Choices choices, GameInfo gameInfo){
         this.choices = choices;
+        this.user = user;
+        this.gameInfo = gameInfo;
         initComponents();
         setFonts();
+        setColors();
+        setLocations();
         initKeystrokes();
         addComponents();
         Dimension res = new Dimension(1200, 800);
         setPreferredSize(res);
         setSize(res);
+        setContentPane(mainPanel);
         txtStory.setEditable(true);
         setResizable(false);
         setLocationRelativeTo(null);
         pack();
+    }
+
+    /**
+     * Sets colors of jmenus and jmenuitems.
+     */
+    void setColors(){
+        optionsMenu.setBackground(Color.YELLOW);
+        optionsMenu.setForeground(Color.MAGENTA);
+        editMenu.setBackground(Color.YELLOW);
+        editMenu.setForeground(Color.MAGENTA);
+        graphicsMenu.setBackground(Color.YELLOW);
+        graphicsMenu.setForeground(Color.MAGENTA);
+        aboutMenu.setBackground(Color.YELLOW);
+        aboutMenu.setForeground(Color.MAGENTA);
+        menuItemExit.setForeground(Color.BLUE);
+        menuItemExit.setBackground(Color.GREEN);
+        menuItemChoiceA.setForeground(Color.BLUE);
+        menuItemChoiceA.setBackground(Color.GREEN);
+        menuItemChoiceB.setForeground(Color.BLUE);
+        menuItemChoiceB.setBackground(Color.GREEN);
+        menuItemChoiceC.setForeground(Color.BLUE);
+        menuItemChoiceC.setBackground(Color.GREEN);
+        menuItemAbout.setForeground(Color.BLUE);
+        menuItemAbout.setBackground(Color.GREEN);
+        menuItemChangeFontSize.setForeground(Color.BLUE);
+        menuItemChangeFontSize.setBackground(Color.GREEN);
     }
 
     /**
@@ -74,14 +112,15 @@ public class EditorView extends JFrame {
         aboutMenu.setFont(mainFont);
         menuItemChoiceA.setFont(mainFont);
         menuItemChoiceC.setFont(mainFont);
-        menuItemSelectScene.setFont(mainFont);
+        menuItemDeleteLog.setFont(mainFont);
         menuItemChoiceB.setFont(mainFont);
         menuItemShowLogHistory.setFont(mainFont);
         menuItemDeleteAllLogs.setFont(mainFont);
-        menuItemSelectSceneHistory.setFont(mainFont);
+        menuItemDeleteLogHistory.setFont(mainFont);
         menuItemSaveAs.setFont(mainFont);
         menuItemOpen.setFont(mainFont);
         menuItemExit.setFont(mainFont);
+        sceneSelector.setFont(mainFont);
         menuItemChangeFontSize.setFont(mainFont);
         menuItemAbout.setFont(mainFont);
         menuItemLogout.setFont(mainFont);
@@ -90,22 +129,57 @@ public class EditorView extends JFrame {
     }
 
     /**
+     * Sets location of jframe components.
+     */
+    void setLocations(){
+        scroll.setLocation(0, 400);
+        scroll.setSize(1170, 310);
+        sceneSelector.setSize(500, 50);
+        sceneSelector.setLocation(20, 20);
+    }
+
+    /**
+     * Add item listeners.
+     * @param itemListener Listening for item change events.
+     */
+    public void addItemListeners(ItemListener itemListener){
+        sceneSelector.addItemListener(itemListener);
+    }
+
+
+    /**
      * Initializes Keystrokes.
      */
     void initKeystrokes(){
-        menuItemChoiceA.setAccelerator(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
-        menuItemChoiceB.setAccelerator(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.CTRL_MASK));
-        menuItemChoiceC.setAccelerator(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
+        menuItemChoiceA.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
+        menuItemChoiceB.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.CTRL_MASK));
+        menuItemChoiceC.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
     }
-
+    /*
+     * combo.addActionListener (new ActionListener () {
+     *     public void actionPerformed(ActionEvent e) {
+     *         doSomething();
+     *     }
+     * });
+     */
+  /*  class ItemChangeListener implements ItemListener{
+        @Override
+        public void itemStateChanged(ItemEvent event) {
+            if (event.getStateChange() == ItemEvent.SELECTED) {
+                Object item = event.getItem();
+            }
+        }
+    }*/
     /**
      * Initializes all gui components.
      */
     void initComponents() {
-        setTitle("Solo adventure editor - logged in as: " + user.getUsername());
+        setTitle("Solo adventure - logged in as: " + user.getUsername());
         menuBar = new JMenuBar();
+        mainPanel = new JPanel();
+        mainPanel.setLayout(null);
+        sceneSelector = new JComboBox<String>();
         storyPicture = new JLabel("pic");
-        storyPicture.setLocation(100, 100);
         optionsMenu = new JMenu("Options");
         editMenu = new JMenu("Edit");
         graphicsMenu = new JMenu("Graphics");
@@ -118,8 +192,8 @@ public class EditorView extends JFrame {
         menuItemSaveAs = new JMenuItem("Save Logs As");
         menuItemOpen = new JMenuItem("Open Logs");
         menuItemDeleteAllLogs = new JMenuItem("Delete All Logs");
-        menuItemSelectSceneHistory = new JMenuItem("Delete All Logs Changes History");
-        menuItemSelectScene = new JMenuItem("Select Scene");
+        menuItemDeleteLogHistory = new JMenuItem("Delete All Logs Changes History");
+        menuItemDeleteLog = new JMenuItem("Delete Log");
         menuItemChoiceC = new JMenuItem("Choice C");
         menuItemChoiceB = new JMenuItem("Choice B");
         menuItemChoiceA = new JMenuItem("Choice A");
@@ -136,13 +210,12 @@ public class EditorView extends JFrame {
      */
     void addComponents(){
         optionsMenu.add(menuItemChoiceA);
-//        optionsMenu.add(menuItemSelectScene);
+//        optionsMenu.add(menuItemDeleteLog);
         optionsMenu.add(menuItemChoiceB);
         optionsMenu.add(menuItemChoiceC);
-        optionsMenu.add(menuItemSelectScene);
         /*optionsMenu.add(menuItemShowLogHistory);
         optionsMenu.add(menuItemDeleteAllLogs);
-        optionsMenu.add(menuItemSelectSceneHistory);
+        optionsMenu.add(menuItemDeleteLogHistory);
         optionsMenu.add(menuItemFilterLogs);
         optionsMenu.add(menuItemSaveAs);
         optionsMenu.add(menuItemOpen);
@@ -156,10 +229,91 @@ public class EditorView extends JFrame {
         menuBar.add(graphicsMenu);
         menuBar.add(aboutMenu);
         setJMenuBar(menuBar);
-        add(scroll);
-        //add(storyPicture);
+        mainPanel.add(scroll);
+        mainPanel.add(storyPicture);
+        mainPanel.add(sceneSelector);
     }
 
+
+    public GameInfo getGameInfo() {
+        return gameInfo;
+    }
+
+    public void setGameInfo(GameInfo gameInfo) {
+        this.gameInfo = gameInfo;
+    }
+
+    public JPanel getMainPanel() {
+        return mainPanel;
+    }
+
+    public void setMainPanel(JPanel mainPanel) {
+        this.mainPanel = mainPanel;
+    }
+
+    public JMenu getOptionsMenu() {
+        return optionsMenu;
+    }
+
+    public void setOptionsMenu(JMenu optionsMenu) {
+        this.optionsMenu = optionsMenu;
+    }
+
+    public JMenu getGraphicsMenu() {
+        return graphicsMenu;
+    }
+
+    public void setGraphicsMenu(JMenu graphicsMenu) {
+        this.graphicsMenu = graphicsMenu;
+    }
+
+    public JMenuItem getMenuItemChoiceA() {
+        return menuItemChoiceA;
+    }
+
+    public void setMenuItemChoiceA(JMenuItem menuItemChoiceA) {
+        this.menuItemChoiceA = menuItemChoiceA;
+    }
+
+    public JMenuItem getMenuItemChoiceB() {
+        return menuItemChoiceB;
+    }
+
+    public void setMenuItemChoiceB(JMenuItem menuItemChoiceB) {
+        this.menuItemChoiceB = menuItemChoiceB;
+    }
+
+    public JMenuItem getMenuItemChoiceC() {
+        return menuItemChoiceC;
+    }
+
+    public void setMenuItemChoiceC(JMenuItem menuItemChoiceC) {
+        this.menuItemChoiceC = menuItemChoiceC;
+    }
+
+    public JTextArea getTxtStory() {
+        return txtStory;
+    }
+
+    public void setTxtStory(JTextArea txtStory) {
+        this.txtStory = txtStory;
+    }
+
+    public Choices getChoices() {
+        return choices;
+    }
+
+    public void setChoices(Choices choices) {
+        this.choices = choices;
+    }
+
+    public JLabel getStoryPicture() {
+        return storyPicture;
+    }
+
+    public void setStoryPicture(JLabel storyPicture) {
+        this.storyPicture = storyPicture;
+    }
 
     public void setMenuBar(JMenuBar menuBar) {
         this.menuBar = menuBar;
@@ -229,12 +383,12 @@ public class EditorView extends JFrame {
         this.menuItemChoiceC = menuItemChoiceC;
     }
 
-    public JMenuItem getmenuItemSelectScene() {
-        return menuItemSelectScene;
+    public JMenuItem getMenuItemDeleteLog() {
+        return menuItemDeleteLog;
     }
 
-    public void setmenuItemSelectScene(JMenuItem menuItemSelectScene) {
-        this.menuItemSelectScene = menuItemSelectScene;
+    public void setMenuItemDeleteLog(JMenuItem menuItemDeleteLog) {
+        this.menuItemDeleteLog = menuItemDeleteLog;
     }
 
     public JMenuItem getMenuItemShowLogHistory() {
@@ -253,12 +407,12 @@ public class EditorView extends JFrame {
         this.menuItemDeleteAllLogs = menuItemDeleteAllLogs;
     }
 
-    public JMenuItem getmenuItemSelectSceneHistory() {
-        return menuItemSelectSceneHistory;
+    public JMenuItem getMenuItemDeleteLogHistory() {
+        return menuItemDeleteLogHistory;
     }
 
-    public void setmenuItemSelectSceneHistory(JMenuItem menuItemSelectSceneHistory) {
-        this.menuItemSelectSceneHistory = menuItemSelectSceneHistory;
+    public void setMenuItemDeleteLogHistory(JMenuItem menuItemDeleteLogHistory) {
+        this.menuItemDeleteLogHistory = menuItemDeleteLogHistory;
     }
 
     public JMenuItem getMenuItemSaveAs() {
@@ -291,6 +445,15 @@ public class EditorView extends JFrame {
 
     public void setMenuItemFilterLogs(JMenuItem menuItemFilterLogs) {
         this.menuItemFilterLogs = menuItemFilterLogs;
+    }
+
+
+    public JComboBox getSceneSelector() {
+        return sceneSelector;
+    }
+
+    public void setSceneSelector(JComboBox sceneSelector) {
+        this.sceneSelector = sceneSelector;
     }
 
     public JTextArea gettxtStory() {
@@ -369,11 +532,11 @@ public class EditorView extends JFrame {
     public void addListeners(ActionListener listener){
         menuItemChoiceA.addActionListener(listener);
         menuItemChoiceC.addActionListener(listener);
-        menuItemSelectScene.addActionListener(listener);
+        menuItemDeleteLog.addActionListener(listener);
         menuItemChoiceB.addActionListener(listener);
         menuItemShowLogHistory.addActionListener(listener);
         menuItemDeleteAllLogs.addActionListener(listener);
-        menuItemSelectSceneHistory.addActionListener(listener);
+        menuItemDeleteLogHistory.addActionListener(listener);
         menuItemFilterLogs.addActionListener(listener);
         menuItemSaveAs.addActionListener(listener);
         menuItemOpen.addActionListener(listener);
@@ -383,6 +546,7 @@ public class EditorView extends JFrame {
         menuItemChangeFontSize.addActionListener(listener);
         menuItemAbout.addActionListener(listener);
     }
+
     /**
      * Adds window listener to the jframe (exit listener).
      * @param listener
@@ -391,13 +555,9 @@ public class EditorView extends JFrame {
         addWindowListener(listener);
     }
 
-    public String getLogsTXT(){
-        return txtStory.getText();
+    public void displayErrorMsg(String msg) {
+        JOptionPane.showMessageDialog(this, msg, Env.GameMessageBoxTitle, JOptionPane.ERROR_MESSAGE);
     }
 
-    public void displayErrorMsg(String msg) {
-        JOptionPane.showMessageDialog(this, msg, Env.EditorMessageBoxTitle, JOptionPane.ERROR_MESSAGE);
-    }
-    
 
 }

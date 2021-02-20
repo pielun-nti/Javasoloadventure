@@ -7,10 +7,7 @@ import views.GameView;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
+import java.awt.event.*;
 import java.util.ArrayList;
 
 /**
@@ -42,8 +39,61 @@ public class EditorController {
         view.getmenuItemChoiceA().setText(choices.getChoiceA());
         view.getmenuItemChoiceB().setText(choices.getChoiceB());
         view.getmenuItemChoiceC().setText(choices.getChoiceC());
-        view.gettxtStory().setText(gameInfo.getStories().get(gameInfo.getCurrentRoom() - 1).getBody());
+        addScenesToComboBox();
+        addStoryAndLinksToTextArea();
+        view.addItemListeners(new ItemChangeListener());
+    }
 
+    /**
+     * Adds scenes/stories text and id to jcombobox.
+     */
+    void addScenesToComboBox(){
+        for (int i = 0; i < gameInfo.getStories().size(); i++){
+            Story story = gameInfo.getStories().get(i);
+            if (story.getBody() != null){
+                if (!story.getBody().trim().equals("") & !story.getBody().trim().equalsIgnoreCase("Kommer sen")) {
+                    view.getSceneSelector().addItem(story.getID() + " | " + story.getBody());
+                }
+            }
+        }
+    }
+
+    /**
+     * Show story and links for current scene/room on jtextarea.
+     */
+    void addStoryAndLinksToTextArea(){
+        Story story = gameInfo.getStories().get(gameInfo.getCurrentRoom() - 1);
+        view.gettxtStory().setText("Story:\r\n" + story.getBody());
+        view.gettxtStory().append("\r\n\r\nLinks:\r\n");
+        for (int i = 0; i < gameInfo.getLinks().size(); i++){
+            Link link = gameInfo.getLinks().get(i);
+            if (link.getStoryID() == gameInfo.getCurrentRoom()) {
+                view.getTxtStory().append("Story ID:" + link.getStoryID() + "\r\nTarget ID: " + link.getTargetID() + "\r\nDescription: " + link.getDescription() + "\r\n----------------------------\r\n");
+            } else {
+                System.out.println("Konstigt: " + link.getStoryID());
+            }
+        }
+    }
+
+    /**
+     * ItemListener that listens for JComboBox item clicks.
+     */
+    private class ItemChangeListener implements ItemListener{
+        /**
+         * Sets current room depending on story id for clicked item and then shows story and links for the current scene selected when user clicks on a scene in the JComboBox.
+         * I get the story id from the whole item string by splitting it and parsing it to an int. Using trim() to remove blank spaces.
+         * @param event The itemevent that happens when user click on a JComboBox item.
+         */
+        @Override
+        public void itemStateChanged(ItemEvent event) {
+            if (event.getStateChange() == ItemEvent.SELECTED) {
+                String scene = (String) event.getItem();
+                String[] args = scene.split("\\|");
+                int storyId = Integer.parseInt(args[0].trim());
+                gameInfo.setCurrentRoom(storyId);
+                addStoryAndLinksToTextArea();
+            }
+        }
     }
 
     /**

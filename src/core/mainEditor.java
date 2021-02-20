@@ -32,6 +32,8 @@ public class mainEditor {
                 try {
                     GameInfo gameInfo = new GameInfo();
                     gameInfo.setCurrentRoom(1);
+                    DB db = new DB();
+                    db.initDB();
                     DBManager dbManager = new DBManager();
                    /* ArrayList<String> co = new ArrayList<>();
                     ArrayList<String> va = new ArrayList<>();
@@ -105,7 +107,7 @@ public class mainEditor {
                             }
                             count++;
                         }
-                        EditorView editorView = new EditorView(user, choices);
+                        EditorView editorView = new EditorView(user, choices, gameInfo);
                         EditorModel editorModel = new EditorModel(user, dbManager, gameInfo, choices);
                         EditorController editorController = new EditorController(editorView, editorModel, user, gameInfo, choices);
                         editorView.setVisible(true);
