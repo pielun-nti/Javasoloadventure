@@ -17,19 +17,16 @@ public class EditorModel {
     DBManager dbManager;
     User user;
     GameInfo gameInfo;
-    Choices choices;
 
     /**
      * EditorModel constructor.
      * @param user The user
      * @param gameInfo The GameInfo
-     * @param choices The Choices
      */
-    public EditorModel(User user, GameInfo gameInfo, Choices choices){
+    public EditorModel(User user, GameInfo gameInfo){
         dbManager = new DBManager();
         this.user = user;
         this.gameInfo = gameInfo;
-        this.choices = choices;
     }
 
     /**
@@ -37,13 +34,11 @@ public class EditorModel {
      * @param user
      * @param dbManager
      * @param gameInfo
-     * @param choices
      */
-    public EditorModel(User user, DBManager dbManager, GameInfo gameInfo, Choices choices){
+    public EditorModel(User user, DBManager dbManager, GameInfo gameInfo){
         this.gameInfo = gameInfo;
         this.dbManager = dbManager;
         this.user = user;
-        this.choices = choices;
     }
 
     /**

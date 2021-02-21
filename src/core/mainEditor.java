@@ -57,7 +57,7 @@ public class mainEditor {
                         JOptionPane.showMessageDialog(null, "No story for first scene exists.", Env.GameMessageBoxTitle, JOptionPane.ERROR_MESSAGE);
                         System.exit(2);
                     }*/
-                    ArrayList<String> col= new ArrayList<>();
+                  /*  ArrayList<String> col= new ArrayList<>();
                     ArrayList<String> val = new ArrayList<>();
                     col.add("story_id");
                     val.add(Integer.toString(gameInfo.getCurrentRoom()));
@@ -66,7 +66,7 @@ public class mainEditor {
                       //  JOptionPane.showMessageDialog(null, "No story for first scene exists.", Env.GameMessageBoxTitle, JOptionPane.ERROR_MESSAGE);
                      //   System.exit(2);
                     } else {*/
-                        ArrayList<Link> links = gameInfo.getLinks();
+                      /*  ArrayList<Link> links = gameInfo.getLinks();
                         if (links == null){
                             links = new ArrayList<>();
                         }
@@ -96,7 +96,7 @@ public class mainEditor {
                                 numberOfChoices++;
                             }
                         } catch (Exception ex){
-                            ex.printStackTrace();
+                           // ex.printStackTrace();
                         }
                         gameInfo.setLinks(links);
                         choices.setNumberOfChoices(numberOfChoices);
@@ -113,11 +113,14 @@ public class mainEditor {
                             count++;
                         }
                         } catch (Exception ex){
-                            ex.printStackTrace();
-                        }
-                        EditorView editorView = new EditorView(user, choices, gameInfo);
-                        EditorModel editorModel = new EditorModel(user, dbManager, gameInfo, choices);
-                        EditorController editorController = new EditorController(editorView, editorModel, user, gameInfo, choices);
+                         //   ex.printStackTrace();
+                        }*/
+                    User user = new User();
+                    user.setUsername("test");
+                    user.setAdmin(true);
+                        EditorView editorView = new EditorView(user, gameInfo);
+                        EditorModel editorModel = new EditorModel(user, dbManager, gameInfo);
+                        EditorController editorController = new EditorController(editorView, editorModel, user, gameInfo);
                         editorView.setVisible(true);
                                     /*LoginView loginView = new LoginView();
                 LoginModel loginModel = new LoginModel();

@@ -19,17 +19,14 @@ public class EditorController {
     EditorModel model;
     User user;
     GameInfo gameInfo;
-    Choices choices;
     /**
      * Controls both the Editor view and Editor model. EditorController adds ActionListener and FrameWindowListener.
      * @param view
      * @param model
      * @param user
      * @param gameInfo
-     * @param choices
      */
-    public EditorController(EditorView view, EditorModel model, User user, GameInfo gameInfo, Choices choices){
-        this.choices = choices;
+    public EditorController(EditorView view, EditorModel model, User user, GameInfo gameInfo){
         this.view = view;
         this.model = model;
         this.user = user;
@@ -56,6 +53,9 @@ public class EditorController {
         }
     }
 
+    /**
+     * Gets story and links from database.
+     */
     void refreshStoryAndLinksFromDatabase(){
         try {
             ResultSet rs = model.getAllLinks();

@@ -42,7 +42,6 @@ public class EditorView extends javax.swing.JFrame {
     private Font mainFont;
     int fontSize = 18;
     User user;
-    Choices choices;
     JLabel storyPicture;
     private JPanel mainPanel;
     GameInfo gameInfo;
@@ -50,10 +49,10 @@ public class EditorView extends javax.swing.JFrame {
 
     /**
      * EditorView constructor.
-     * @param user
+     * @param user The user
+     * @param gameInfo The gameinfo
      */
-    public EditorView(User user, Choices choices, GameInfo gameInfo){
-        this.choices = choices;
+    public EditorView(User user, GameInfo gameInfo){
         this.user = user;
         this.gameInfo = gameInfo;
         initComponents();
@@ -287,13 +286,6 @@ public class EditorView extends javax.swing.JFrame {
         this.txtStory = txtStory;
     }
 
-    public Choices getChoices() {
-        return choices;
-    }
-
-    public void setChoices(Choices choices) {
-        this.choices = choices;
-    }
 
     public JLabel getStoryPicture() {
         return storyPicture;
