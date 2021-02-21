@@ -61,6 +61,53 @@ public class EditorModel {
 
     }
 
+    /**
+     * Add new Story to database
+     * @return boolean that tells if insert was successful
+     */
+    public boolean addNewStory(){
+        try {
+            int storyId = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter ID for new Story", Env.EditorMessageBoxTitle, JOptionPane.QUESTION_MESSAGE));
+
+            if (storyId < 0) {
+                JOptionPane.showMessageDialog(null, "Invalid story ID. Must be 0 or greater.", Env.EditorMessageBoxTitle, JOptionPane.QUESTION_MESSAGE);
+                return false;
+            }
+            //check here if a story exist with that id. if it does then show error and return false;
+            ArrayList<String> co = new ArrayList<>();
+            ArrayList<String> va = new ArrayList<>();
+            co.add("id");
+            va.add(Integer.toString(storyId));
+            ResultSet rs = dbManager.selectAllWhere("story", co, va);
+            if (rs.next()){
+                JOptionPane.showMessageDialog(null, "A story with that ID already exist.\r\nYou cannot create duplicate stories.", Env.GameMessageBoxTitle, JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+            String body = JOptionPane.showInputDialog(null, "Enter Body for new Story", Env.EditorMessageBoxTitle, JOptionPane.QUESTION_MESSAGE);
+            if (body == null) {
+                JOptionPane.showMessageDialog(null, "Invalid story Body. Cannot be empty.", Env.EditorMessageBoxTitle, JOptionPane.QUESTION_MESSAGE);
+                return false;
+            }
+            if (body.trim().equals("")) {
+                JOptionPane.showMessageDialog(null, "Invalid story Body. Cannot be empty.", Env.EditorMessageBoxTitle, JOptionPane.QUESTION_MESSAGE);
+                return false;
+            }
+            ArrayList<String> setc = new ArrayList<>();
+            ArrayList<String> setv = new ArrayList<>();
+            setc.add("id");
+            setv.add(Integer.toString(storyId));
+            setc.add("body");
+            setv.add(body);
+            boolean inserted = dbManager.insert("story", setc, setv);
+            if (inserted){
+                return true;
+            }
+        } catch (Exception ex){
+            ex.printStackTrace();
+        }
+        return false;
+    }
+
 
     /**
      * Edit Story ID
@@ -112,12 +159,15 @@ public class EditorModel {
     public boolean editStoryBody(){
         try {
             String storyBody = JOptionPane.showInputDialog(null, "Enter new Story Body", Env.EditorMessageBoxTitle, JOptionPane.QUESTION_MESSAGE);
-            if (storyBody != null) {
-                if (storyBody.trim().equals("")) {
-                    JOptionPane.showMessageDialog(null, "Invalid story Body. Cannot be empty.", Env.EditorMessageBoxTitle, JOptionPane.QUESTION_MESSAGE);
-                    return false;
-                }
+            if (storyBody == null) {
+                JOptionPane.showMessageDialog(null, "Invalid story Body. Cannot be empty.", Env.EditorMessageBoxTitle, JOptionPane.QUESTION_MESSAGE);
+                return false;
             }
+            if (storyBody.trim().equals("")) {
+                JOptionPane.showMessageDialog(null, "Invalid story Body. Cannot be empty.", Env.EditorMessageBoxTitle, JOptionPane.QUESTION_MESSAGE);
+                return false;
+            }
+
             ArrayList<String> filterc = new ArrayList<>();
             ArrayList<String> filterv = new ArrayList<>();
             ArrayList<String> setc = new ArrayList<>();

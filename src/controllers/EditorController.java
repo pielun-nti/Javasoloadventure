@@ -253,7 +253,16 @@ public class EditorController {
         }
 
     private void addNewStory() {
+        boolean success = model.addNewStory();
+        if (success){
+            //update stories in combobox etc.
+            refreshStoryAndLinksFromDatabase();
+            view.getSceneSelector().removeAllItems();
+            addScenesToComboBox();
+            // addStoryAndLinksToTextArea();
+        } else {
 
+        }
     }
 
     private void editStoryBody() {

@@ -197,9 +197,9 @@ public class EditorView extends javax.swing.JFrame {
      */
     void addComponents(){
         optionsMenu.add(menuItemEditStoryBody);
-        optionsMenu.add(menuItemRefreshStoriesLinks);
         optionsMenu.add(menuItemEditStoryID);
         optionsMenu.add(menuItemAddStory);
+        optionsMenu.add(menuItemRefreshStoriesLinks);
         /*optionsMenu.add(menuItemShowLogHistory);
         optionsMenu.add(menuItemDeleteAllLogs);
         optionsMenu.add(menuItemRefreshStoriesLinksHistory);
@@ -536,7 +536,7 @@ public class EditorView extends javax.swing.JFrame {
     }
 
     public void displayErrorMsg(String msg) {
-        JOptionPane.showMessageDialog(this, msg, Env.GameMessageBoxTitle, JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(this, msg, Env.EditorMessageBoxTitle, JOptionPane.ERROR_MESSAGE);
     }
 
 
