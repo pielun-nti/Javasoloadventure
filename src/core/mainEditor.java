@@ -35,18 +35,6 @@ public class mainEditor {
                     DB db = new DB();
                     db.initDB();
                     DBManager dbManager = new DBManager();
-                    ResultSet rs = dbManager.selectAll("story");
-                    ArrayList<Story> stories = gameInfo.getStories();
-                    if (stories == null){
-                        stories = new ArrayList<>();
-                    }
-                    while (rs.next()) {
-                        Story story = new Story();
-                        story.setID(rs.getInt("id"));
-                        story.setBody(rs.getString("body"));
-                        stories.add(story);
-                    }
-                    gameInfo.setStories(stories);
                     User user = new User();
                     user.setUsername("test");
                     user.setAdmin(true);
