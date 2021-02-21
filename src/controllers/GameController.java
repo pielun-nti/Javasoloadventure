@@ -110,9 +110,12 @@ public class GameController {
                 if (command.equalsIgnoreCase("Exit application")){
                     view.dispose();
                 }
+                if (command.equalsIgnoreCase("Restart Game")){
+                    //change current room to 1 and then get all links, stories and current story and connected
+                    //links.
+                }
                 if (command.equalsIgnoreCase(choices.getChoiceA())) {
                     getChoiceA();
-
                 }
                 if (command.equalsIgnoreCase(choices.getChoiceB())){
                     getChoiceB();

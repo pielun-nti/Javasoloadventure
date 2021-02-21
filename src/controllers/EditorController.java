@@ -259,7 +259,6 @@ public class EditorController {
             refreshStoryAndLinksFromDatabase();
             view.getSceneSelector().removeAllItems();
             addScenesToComboBox();
-            // addStoryAndLinksToTextArea();
         } else {
 
         }
