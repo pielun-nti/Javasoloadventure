@@ -14,7 +14,7 @@ import java.nio.charset.StandardCharsets;
 
 /**
  * EditorView class that extends Swing JFrame. It is the view for the game editor. It has a jmenubar, jmenus, jmenuitems
- * and image and combobox etc.
+ * and image and jcombobox etc.
  */
 public class EditorView extends javax.swing.JFrame {
     JMenuBar menuBar;
@@ -26,10 +26,10 @@ public class EditorView extends javax.swing.JFrame {
     JMenuItem menuItemEditStoryBody;
     JMenuItem menuItemEditStoryID;
     JMenuItem menuItemAddStory;
-    JMenuItem menuItemDeleteLog;
+    JMenuItem menuItemRefreshStoriesLinks;
     JMenuItem menuItemShowLogHistory;
     JMenuItem menuItemDeleteAllLogs;
-    JMenuItem menuItemDeleteLogHistory;
+    JMenuItem menuItemRefreshStoriesLinksHistory;
     JMenuItem menuItemSaveAs;
     JMenuItem menuItemOpen;
     JMenuItem menuItemOpenSecurity;
@@ -92,6 +92,8 @@ public class EditorView extends javax.swing.JFrame {
         menuItemEditStoryID.setBackground(Color.GREEN);
         menuItemAddStory.setForeground(Color.BLUE);
         menuItemAddStory.setBackground(Color.GREEN);
+        menuItemRefreshStoriesLinks.setForeground(Color.BLUE);
+        menuItemRefreshStoriesLinks.setBackground(Color.GREEN);
         menuItemAbout.setForeground(Color.BLUE);
         menuItemAbout.setBackground(Color.GREEN);
         menuItemChangeFontSize.setForeground(Color.BLUE);
@@ -112,11 +114,11 @@ public class EditorView extends javax.swing.JFrame {
         aboutMenu.setFont(mainFont);
         menuItemEditStoryBody.setFont(mainFont);
         menuItemAddStory.setFont(mainFont);
-        menuItemDeleteLog.setFont(mainFont);
+        menuItemRefreshStoriesLinks.setFont(mainFont);
         menuItemEditStoryID.setFont(mainFont);
         menuItemShowLogHistory.setFont(mainFont);
         menuItemDeleteAllLogs.setFont(mainFont);
-        menuItemDeleteLogHistory.setFont(mainFont);
+        menuItemRefreshStoriesLinksHistory.setFont(mainFont);
         menuItemSaveAs.setFont(mainFont);
         menuItemOpen.setFont(mainFont);
         menuItemExit.setFont(mainFont);
@@ -155,21 +157,7 @@ public class EditorView extends javax.swing.JFrame {
         menuItemEditStoryID.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.CTRL_MASK));
         menuItemAddStory.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
     }
-    /*
-     * combo.addActionListener (new ActionListener () {
-     *     public void actionPerformed(ActionEvent e) {
-     *         doSomething();
-     *     }
-     * });
-     */
-  /*  class ItemChangeListener implements ItemListener{
-        @Override
-        public void itemStateChanged(ItemEvent event) {
-            if (event.getStateChange() == ItemEvent.SELECTED) {
-                Object item = event.getItem();
-            }
-        }
-    }*/
+
     /**
      * Initializes all gui components.
      */
@@ -192,8 +180,8 @@ public class EditorView extends javax.swing.JFrame {
         menuItemSaveAs = new JMenuItem("Save Logs As");
         menuItemOpen = new JMenuItem("Open Logs");
         menuItemDeleteAllLogs = new JMenuItem("Delete All Logs");
-        menuItemDeleteLogHistory = new JMenuItem("Delete All Logs Changes History");
-        menuItemDeleteLog = new JMenuItem("Delete Log");
+        menuItemRefreshStoriesLinksHistory = new JMenuItem("Delete All Logs Changes History");
+        menuItemRefreshStoriesLinks = new JMenuItem("Refresh Stories And Links");
         menuItemAddStory = new JMenuItem("Add New Story");
         menuItemEditStoryID = new JMenuItem("Edit Story ID");
         menuItemEditStoryBody = new JMenuItem("Edit Story Body");
@@ -210,12 +198,12 @@ public class EditorView extends javax.swing.JFrame {
      */
     void addComponents(){
         optionsMenu.add(menuItemEditStoryBody);
-//        optionsMenu.add(menuItemDeleteLog);
+        optionsMenu.add(menuItemRefreshStoriesLinks);
         optionsMenu.add(menuItemEditStoryID);
         optionsMenu.add(menuItemAddStory);
         /*optionsMenu.add(menuItemShowLogHistory);
         optionsMenu.add(menuItemDeleteAllLogs);
-        optionsMenu.add(menuItemDeleteLogHistory);
+        optionsMenu.add(menuItemRefreshStoriesLinksHistory);
         optionsMenu.add(menuItemFilterLogs);
         optionsMenu.add(menuItemSaveAs);
         optionsMenu.add(menuItemOpen);
@@ -383,12 +371,12 @@ public class EditorView extends javax.swing.JFrame {
         this.menuItemAddStory = menuItemAddStory;
     }
 
-    public JMenuItem getMenuItemDeleteLog() {
-        return menuItemDeleteLog;
+    public JMenuItem getmenuItemRefreshStoriesLinks() {
+        return menuItemRefreshStoriesLinks;
     }
 
-    public void setMenuItemDeleteLog(JMenuItem menuItemDeleteLog) {
-        this.menuItemDeleteLog = menuItemDeleteLog;
+    public void setmenuItemRefreshStoriesLinks(JMenuItem menuItemRefreshStoriesLinks) {
+        this.menuItemRefreshStoriesLinks = menuItemRefreshStoriesLinks;
     }
 
     public JMenuItem getMenuItemShowLogHistory() {
@@ -407,12 +395,12 @@ public class EditorView extends javax.swing.JFrame {
         this.menuItemDeleteAllLogs = menuItemDeleteAllLogs;
     }
 
-    public JMenuItem getMenuItemDeleteLogHistory() {
-        return menuItemDeleteLogHistory;
+    public JMenuItem getmenuItemRefreshStoriesLinksHistory() {
+        return menuItemRefreshStoriesLinksHistory;
     }
 
-    public void setMenuItemDeleteLogHistory(JMenuItem menuItemDeleteLogHistory) {
-        this.menuItemDeleteLogHistory = menuItemDeleteLogHistory;
+    public void setmenuItemRefreshStoriesLinksHistory(JMenuItem menuItemRefreshStoriesLinksHistory) {
+        this.menuItemRefreshStoriesLinksHistory = menuItemRefreshStoriesLinksHistory;
     }
 
     public JMenuItem getMenuItemSaveAs() {
@@ -532,11 +520,11 @@ public class EditorView extends javax.swing.JFrame {
     public void addListeners(ActionListener listener){
         menuItemEditStoryBody.addActionListener(listener);
         menuItemAddStory.addActionListener(listener);
-        menuItemDeleteLog.addActionListener(listener);
+        menuItemRefreshStoriesLinks.addActionListener(listener);
         menuItemEditStoryID.addActionListener(listener);
         menuItemShowLogHistory.addActionListener(listener);
         menuItemDeleteAllLogs.addActionListener(listener);
-        menuItemDeleteLogHistory.addActionListener(listener);
+        menuItemRefreshStoriesLinksHistory.addActionListener(listener);
         menuItemFilterLogs.addActionListener(listener);
         menuItemSaveAs.addActionListener(listener);
         menuItemOpen.addActionListener(listener);
