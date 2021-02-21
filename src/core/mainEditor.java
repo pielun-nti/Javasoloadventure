@@ -53,19 +53,19 @@ public class mainEditor {
                         storyamount++;
                     }
                     gameInfo.setStories(stories);
-                    if (storyamount == 0) {
+                    /*if (storyamount == 0) {
                         JOptionPane.showMessageDialog(null, "No story for first scene exists.", Env.GameMessageBoxTitle, JOptionPane.ERROR_MESSAGE);
                         System.exit(2);
-                    }
+                    }*/
                     ArrayList<String> col= new ArrayList<>();
                     ArrayList<String> val = new ArrayList<>();
                     col.add("story_id");
                     val.add(Integer.toString(gameInfo.getCurrentRoom()));
                     ResultSet linksrs = dbManager.selectAllWhere("links", col, val);
-                    if (!linksrs.next()){
-                        JOptionPane.showMessageDialog(null, "No story for first scene exists.", Env.GameMessageBoxTitle, JOptionPane.ERROR_MESSAGE);
-                        System.exit(2);
-                    } else {
+                  /*  if (!linksrs.next()){
+                      //  JOptionPane.showMessageDialog(null, "No story for first scene exists.", Env.GameMessageBoxTitle, JOptionPane.ERROR_MESSAGE);
+                     //   System.exit(2);
+                    } else {*/
                         ArrayList<Link> links = gameInfo.getLinks();
                         if (links == null){
                             links = new ArrayList<>();
@@ -76,27 +76,32 @@ public class mainEditor {
                         int numberOfChoices = 0;
                         Choices choices = new Choices();
                         ResultSet linksrsn = dbManager.selectAllWhere("links", col, val);
-                        while(linksrsn.next()) {
-                            Link link = new Link();
-                            link.setID(numberOfChoices + 1);
-                            link.setDescription(linksrs.getString("description"));
-                            link.setStoryID(Integer.parseInt(linksrs.getString("story_id")));
-                            link.setTargetID(Integer.parseInt(linksrs.getString("target_id")));
-                            links.add(link);
-                            System.out.println(link.toString());
-                            if (numberOfChoices == 0) {
-                                choices.setChoiceA(linksrs.getString("description"));
-                            } else if (numberOfChoices == 1){
-                                choices.setChoiceB(linksrs.getString("description"));
-                            } else if (numberOfChoices == 2){
-                                choices.setChoiceC(linksrs.getString("description"));
+                        try {
+                            while (linksrsn.next()) {
+                                Link link = new Link();
+                                link.setID(numberOfChoices + 1);
+                                link.setDescription(linksrs.getString("description"));
+                                link.setStoryID(Integer.parseInt(linksrs.getString("story_id")));
+                                link.setTargetID(Integer.parseInt(linksrs.getString("target_id")));
+                                links.add(link);
+                                System.out.println(link.toString());
+                                if (numberOfChoices == 0) {
+                                    choices.setChoiceA(linksrs.getString("description"));
+                                } else if (numberOfChoices == 1) {
+                                    choices.setChoiceB(linksrs.getString("description"));
+                                } else if (numberOfChoices == 2) {
+                                    choices.setChoiceC(linksrs.getString("description"));
+                                }
+                                System.out.println("choice: " + linksrs.getString("description"));
+                                numberOfChoices++;
                             }
-                            System.out.println("choice: " + linksrs.getString("description"));
-                            numberOfChoices++;
+                        } catch (Exception ex){
+                            ex.printStackTrace();
                         }
                         gameInfo.setLinks(links);
                         choices.setNumberOfChoices(numberOfChoices);
                         int count = 0;
+                        try {
                         while (linksrs.next()) {
                             if (count == 0) {
                                 choices.setChoiceA(linksrs.getString("description"));
@@ -107,6 +112,9 @@ public class mainEditor {
                             }
                             count++;
                         }
+                        } catch (Exception ex){
+                            ex.printStackTrace();
+                        }
                         EditorView editorView = new EditorView(user, choices, gameInfo);
                         EditorModel editorModel = new EditorModel(user, dbManager, gameInfo, choices);
                         EditorController editorController = new EditorController(editorView, editorModel, user, gameInfo, choices);
@@ -116,7 +124,6 @@ public class mainEditor {
                 LoginController loginController = new LoginController(loginView, loginModel);
                 loginView.setVisible(true);
                 loginView.getTxtUsername().requestFocus();*/
-                    }
                 } catch (Exception ex){
                     ex.printStackTrace();
                 }

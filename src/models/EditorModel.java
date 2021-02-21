@@ -1,5 +1,6 @@
 package models;
 
+import com.sun.rmi.rmid.ExecPermission;
 import config.Env;
 
 import javax.swing.*;
@@ -45,11 +46,102 @@ public class EditorModel {
         this.choices = choices;
     }
 
+    /**
+     * Get all links.
+     * @return ResultSet with all links from database.
+     */
     public ResultSet getAllLinks(){
         ResultSet rs = dbManager.selectAll("links");
         return rs;
 
     }
+
+    /**
+     * Get all stories.
+     * @return ResultSet with all stories from database.
+     */
+    public ResultSet getAllStories(){
+        ResultSet rs = dbManager.selectAll("story");
+        return rs;
+
+    }
+
+
+    /**
+     * Edit Story ID
+     * @return boolean that tells if edit was successful
+     */
+    public boolean editStoryID(){
+        try {
+            int storyId = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter new Story ID"
+                    + "\r\n" +
+                    "Doing this will also edit storyid for the links connected to the current story."
+                            + "\r\nRemember that id needs to be equal to the scene/room.\r\n" +
+                    "First story should always have" + " ID 1, second story ID 2 etc.", Env.EditorMessageBoxTitle, JOptionPane.QUESTION_MESSAGE));
+
+            if (storyId < 0) {
+                JOptionPane.showMessageDialog(null, "Invalid story ID. Must be 0 or greater.", Env.EditorMessageBoxTitle, JOptionPane.QUESTION_MESSAGE);
+                return false;
+            }
+            ArrayList<String> filterc = new ArrayList<>();
+            ArrayList<String> filterv = new ArrayList<>();
+            ArrayList<String> setc = new ArrayList<>();
+            ArrayList<String> setv = new ArrayList<>();
+            filterc.add("id");
+            filterv.add(Integer.toString(gameInfo.getCurrentRoom()));
+            setc.add("id");
+            setv.add(Integer.toString(storyId));
+            boolean edited = dbManager.edit("story", filterc, filterv, setc, setv);
+            if (edited){
+                ArrayList<String> filterco = new ArrayList<>();
+                ArrayList<String> filterva = new ArrayList<>();
+                ArrayList<String> setco = new ArrayList<>();
+                ArrayList<String> setva = new ArrayList<>();
+                filterco.add("story_id");
+                filterva.add(Integer.toString(gameInfo.getCurrentRoom()));
+                setco.add("story_id");
+                setva.add(Integer.toString(storyId));
+                boolean editedlinks = dbManager.edit("links", filterco, filterva, setco, setva);
+                return true;
+            }
+        } catch (Exception ex){
+            ex.printStackTrace();
+        }
+        return false;
+    }
+
+    /**
+     * Edit Story Body
+     * @return boolean that tells if edit was successful
+     */
+    public boolean editStoryBody(){
+        try {
+            String storyBody = JOptionPane.showInputDialog(null, "Enter new Story Body", Env.EditorMessageBoxTitle, JOptionPane.QUESTION_MESSAGE);
+            if (storyBody != null) {
+                if (storyBody.trim().equals("")) {
+                    JOptionPane.showMessageDialog(null, "Invalid story Body. Cannot be empty.", Env.EditorMessageBoxTitle, JOptionPane.QUESTION_MESSAGE);
+                    return false;
+                }
+            }
+            ArrayList<String> filterc = new ArrayList<>();
+            ArrayList<String> filterv = new ArrayList<>();
+            ArrayList<String> setc = new ArrayList<>();
+            ArrayList<String> setv = new ArrayList<>();
+            filterc.add("id");
+            filterv.add(Integer.toString(gameInfo.getCurrentRoom()));
+            setc.add("body");
+            setv.add(storyBody);
+            boolean edited = dbManager.edit("story", filterc, filterv, setc, setv);
+            if (edited){
+                return true;
+            }
+        } catch (Exception ex){
+            ex.printStackTrace();
+        }
+        return false;
+    }
+
+
 
 
 }

@@ -20,7 +20,6 @@ public class EditorController {
     User user;
     GameInfo gameInfo;
     Choices choices;
-    ArrayList<Link> allLinks;
     /**
      * Controls both the Editor view and Editor model. EditorController adds ActionListener and FrameWindowListener.
      * @param view
@@ -37,6 +36,7 @@ public class EditorController {
         this.view.addListeners(new EditorListener());
         this.view.addFrameWindowListener(new FrameWindowListener());
         this.gameInfo = gameInfo;
+        refreshStoryAndLinksFromDatabase();
         addScenesToComboBox();
         addStoryAndLinksToTextArea();
         view.addItemListeners(new ItemChangeListener());
@@ -56,39 +56,65 @@ public class EditorController {
         }
     }
 
+    void refreshStoryAndLinksFromDatabase(){
+        try {
+            ResultSet rs = model.getAllLinks();
+            ArrayList<Link> allLinks = new ArrayList<>();
+            while (rs.next()) {
+                try {
+                    Link link = new Link();
+                    link.setDescription(rs.getString("description"));
+                    link.setStoryID(rs.getInt("story_id"));
+                    link.setTargetID(rs.getInt("target_id"));
+                    link.setID(rs.getInt("id"));
+                    allLinks.add(link);
+                } catch (Exception ex){
+                    ex.printStackTrace();
+                }
+            }
+            gameInfo.setLinks(allLinks);
+        } catch (Exception ex){
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error when adding all links: " + ex.toString(), Env.EditorMessageBoxTitle, JOptionPane.ERROR_MESSAGE);
+        }
+        try {
+            ResultSet rs = model.getAllStories();
+            ArrayList<Story> stories = new ArrayList<>();
+
+            while (rs.next()) {
+                try {
+                    Story story = new Story();
+                    story.setID(rs.getInt("id"));
+                    story.setBody(rs.getString("body"));
+                    stories.add(story);
+                } catch (Exception ex){
+                    ex.printStackTrace();
+                }
+            }
+            gameInfo.setStories(stories);
+        } catch (Exception ex){
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error when adding all stories: " + ex.toString(), Env.EditorMessageBoxTitle, JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
     /**
      * Show story and links for current scene/room on jtextarea.
      */
-    void addStoryAndLinksToTextArea(){
-        if (allLinks == null) {
-            try {
-                ResultSet rs = model.getAllLinks();
-                allLinks = new ArrayList<>();
-                while (rs.next()) {
-                    try {
-                        Link link = new Link();
-                        link.setDescription(rs.getString("description"));
-                        link.setStoryID(rs.getInt("story_id"));
-                        link.setTargetID(rs.getInt("target_id"));
-                        link.setID(rs.getInt("id"));
-                        allLinks.add(link);
-                    } catch (Exception ex){
-                        ex.printStackTrace();
-                    }
+    void addStoryAndLinksToTextArea() {
+        try {
+            Story story = gameInfo.getStories().get(gameInfo.getCurrentRoom() - 1);
+            view.gettxtStory().setText("Body for this story:\r\n" + story.getBody());
+            view.gettxtStory().append("\r\n\r\nLinks for this story:\r\n----------------------------\r\n");
+            for (int i = 0; i < gameInfo.getLinks().size(); i++) {
+                Link link = gameInfo.getLinks().get(i);
+                if (link.getStoryID() == gameInfo.getCurrentRoom()) {
+                    view.getTxtStory().append("Story ID:" + link.getStoryID() + "\r\nTarget ID: " + link.getTargetID() + "\r\nDescription: " + link.getDescription() + "\r\n----------------------------\r\n");
                 }
-            } catch (Exception ex){
-                ex.printStackTrace();
-                JOptionPane.showMessageDialog(null, "Error when adding all links: " + ex.toString(), Env.EditorMessageBoxTitle, JOptionPane.ERROR_MESSAGE);
             }
-        }
-        Story story = gameInfo.getStories().get(gameInfo.getCurrentRoom() - 1);
-        view.gettxtStory().setText("Story Body:\r\n" + story.getBody());
-        view.gettxtStory().append("\r\n\r\nLinks:\r\n");
-        for (int i = 0; i < allLinks.size(); i++){
-            Link link = allLinks.get(i);
-            if (link.getStoryID() == gameInfo.getCurrentRoom()) {
-                view.getTxtStory().append("Story ID:" + link.getStoryID() + "\r\nTarget ID: " + link.getTargetID() + "\r\nDescription: " + link.getDescription() + "\r\n----------------------------\r\n");
-            }
+        } catch (Exception ex){
+            System.err.println("Error occured when getting story and links for current scene/room.\r\n" +
+                    "Maybe the story ID is incorrect.");
         }
     }
 
@@ -104,11 +130,15 @@ public class EditorController {
         @Override
         public void itemStateChanged(ItemEvent event) {
             if (event.getStateChange() == ItemEvent.SELECTED) {
-                String scene = (String) event.getItem();
-                String[] args = scene.split("\\|");
-                int storyId = Integer.parseInt(args[0].trim());
-                gameInfo.setCurrentRoom(storyId);
-                addStoryAndLinksToTextArea();
+                try {
+                    String scene = (String) event.getItem();
+                    String[] args = scene.split("\\|");
+                    int storyId = Integer.parseInt(args[0].trim());
+                    gameInfo.setCurrentRoom(storyId);
+                    addStoryAndLinksToTextArea();
+                } catch (Exception ex){
+                    ex.printStackTrace();
+                }
             }
         }
     }
@@ -176,7 +206,31 @@ public class EditorController {
                 if (command.equalsIgnoreCase("Exit application")){
                     view.dispose();
                 }
+                if (command.equalsIgnoreCase("Edit Story ID")){
+                    editStoryID();
+                }
+                if (command.equalsIgnoreCase("Edit Story Body")){
+                    editStoryBody();
+                }
+                if (command.equalsIgnoreCase("Add New Story")){
+                    addNewStory();
+                }
+                if (command.equalsIgnoreCase("Refresh stories and links")){
+                    //get all stories from db again and add to combobox.
+                    refreshStoryAndLinksFromDatabase();
+                }
+                if (command.equalsIgnoreCase("Edit Link")){
+                    //ask user for link target id and then allow edit.
+                }
+                if (command.equalsIgnoreCase("Add New Link")){
 
+                }
+                if (command.equalsIgnoreCase("Delete Link")){
+
+                }
+                if (command.equalsIgnoreCase("Delete Story")){
+
+                }
                 if (command.equalsIgnoreCase("Change font size")){
                     int fontSize = view.getFontSize();
                     try {
@@ -198,11 +252,33 @@ public class EditorController {
         }
         }
 
+    private void addNewStory() {
 
+    }
 
+    private void editStoryBody() {
+        boolean success = model.editStoryBody();
+        if (success){
+            //update stories in combobox etc.
+            refreshStoryAndLinksFromDatabase();
+            view.getSceneSelector().removeAllItems();
+            addScenesToComboBox();
+        } else {
 
+        }
+    }
 
+    private void editStoryID() {
+        boolean success = model.editStoryID();
+        if (success){
+            //update stories in combobox etc.
+            refreshStoryAndLinksFromDatabase();
+            view.getSceneSelector().removeAllItems();
+            addScenesToComboBox();
+        } else {
 
+        }
+    }
 
 
 }
