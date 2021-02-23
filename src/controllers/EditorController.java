@@ -109,7 +109,7 @@ public class EditorController {
             for (int i = 0; i < gameInfo.getLinks().size(); i++) {
                 Link link = gameInfo.getLinks().get(i);
                 if (link.getStoryID() == gameInfo.getCurrentRoom()) {
-                    view.getTxtStory().append("Story ID:" + link.getStoryID() + "\r\nTarget ID: " + link.getTargetID() + "\r\nDescription: " + link.getDescription() + "\r\n----------------------------\r\n");
+                    view.getTxtStory().append("Link ID: " + link.getID() + "\r\nStory ID:" + link.getStoryID() + "\r\nTarget ID: " + link.getTargetID() + "\r\nDescription: " + link.getDescription() + "\r\n----------------------------\r\n");
                 }
             }
         } catch (Exception ex){
@@ -221,6 +221,7 @@ public class EditorController {
                 }
                 if (command.equalsIgnoreCase("Edit Link")){
                     //ask user for link target id and then allow edit.
+                    editLink();
                 }
                 if (command.equalsIgnoreCase("Add New Link")){
 
@@ -251,6 +252,18 @@ public class EditorController {
             }
         }
         }
+
+    private void editLink() {
+       /* boolean success = model.editLink();
+        if (success){
+            //update stories in combobox etc.
+            refreshStoryAndLinksFromDatabase();
+            view.getSceneSelector().removeAllItems();
+            addScenesToComboBox();
+        } else {
+
+        }*/
+    }
 
     private void addNewStory() {
         boolean success = model.addNewStory();
