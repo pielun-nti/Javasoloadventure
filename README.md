@@ -71,3 +71,6 @@ användaren måste klicka på den för att försätta och om den gör det så vi
 Jag har också lagt till så att man kan välja scen i speländraren och redigera story id, story body och lägga till nya stories med mera.
 Nästa gång så ska jag nästa gång fortsätta på speländraren, till exempel så att man kan ändra, ta bort eller skapa specifika länkar samt ta bort stories etc och kanske lägga till något mer i spelet.
 
+2021-02-23: Gjort så att användaren kan ändra en links egenskaper dvs id, storyid,targetid och description. 
+Nästa gång så ska jag göra så att användaren kan skapa nya länkar och ta bort länkar samt stories och kanske
+mer i spelet. 
