@@ -67,5 +67,7 @@ med \r\n i mysql databas dumpen så att det ser bättre ut och blir lite lättar
 
 2021-02-16: Jag har gjort så att man måste flytta på en röd ruta till en svart ruta för att fortsätta spela på rum/scene
 nr 2. Jag har gjort ritningen genom en custom JPanel. Jag har också lagt till i scene/rum 3 så att en lampa visas och att
-användaren måste klicka på den för att försätta och om den gör det så visas storyn och en varg med mera. Jag har också lagt till några fler new lines i mysql db dumpen med mera.
-Nästa gång så ska jag nästa gång fortsätta på speländraren och kanske lägga till något mer i spelet.
+användaren måste klicka på den för att försätta och om den gör det så visas storyn och en varg med mera.
+Jag har också lagt till så att man kan välja scen i speländraren och redigera story id, story body och lägga till nya stories med mera.
+Nästa gång så ska jag nästa gång fortsätta på speländraren, till exempel så att man kan ändra, ta bort eller skapa specifika länkar samt ta bort stories etc och kanske lägga till något mer i spelet.
+
