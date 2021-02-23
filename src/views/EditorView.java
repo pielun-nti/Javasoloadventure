@@ -27,15 +27,15 @@ public class EditorView extends javax.swing.JFrame {
     JMenuItem menuItemEditStoryID;
     JMenuItem menuItemAddStory;
     JMenuItem menuItemRefreshStoriesLinks;
-    JMenuItem menuItemShowLogHistory;
-    JMenuItem menuItemDeleteAllLogs;
-    JMenuItem menuItemRefreshStoriesLinksHistory;
+    JMenuItem menuitemEditLink;
+    JMenuItem menuItemAddLink;
+    JMenuItem menuItemDeleteLink;
     JMenuItem menuItemSaveAs;
     JMenuItem menuItemOpen;
     JMenuItem menuItemOpenSecurity;
     JMenuItem menuItemLogout;
     JMenuItem menuItemExit;
-    JMenuItem menuItemFilterLogs;
+    JMenuItem menuItemDeleteStory;
     JTextArea txtStory;
     JMenuItem menuItemChangeFontSize;
     JMenuItem menuItemAbout;
@@ -97,6 +97,16 @@ public class EditorView extends javax.swing.JFrame {
         menuItemAbout.setBackground(Color.GREEN);
         menuItemChangeFontSize.setForeground(Color.BLUE);
         menuItemChangeFontSize.setBackground(Color.GREEN);
+        menuitemEditLink.setBackground(Color.GREEN);
+        menuitemEditLink.setForeground(Color.BLUE);
+        menuItemAddLink.setBackground(Color.GREEN);
+        menuItemAddLink.setForeground(Color.BLUE);
+        menuItemRefreshStoriesLinks.setBackground(Color.GREEN);
+        menuItemRefreshStoriesLinks.setForeground(Color.BLUE);
+        menuItemDeleteStory.setBackground(Color.GREEN);
+        menuItemDeleteStory.setForeground(Color.BLUE);
+        menuItemDeleteLink.setForeground(Color.BLUE);
+        menuItemDeleteLink.setBackground(Color.GREEN);
     }
 
     /**
@@ -115,9 +125,9 @@ public class EditorView extends javax.swing.JFrame {
         menuItemAddStory.setFont(mainFont);
         menuItemRefreshStoriesLinks.setFont(mainFont);
         menuItemEditStoryID.setFont(mainFont);
-        menuItemShowLogHistory.setFont(mainFont);
-        menuItemDeleteAllLogs.setFont(mainFont);
-        menuItemRefreshStoriesLinksHistory.setFont(mainFont);
+        menuitemEditLink.setFont(mainFont);
+        menuItemAddLink.setFont(mainFont);
+        menuItemDeleteLink.setFont(mainFont);
         menuItemSaveAs.setFont(mainFont);
         menuItemOpen.setFont(mainFont);
         menuItemExit.setFont(mainFont);
@@ -126,7 +136,7 @@ public class EditorView extends javax.swing.JFrame {
         menuItemAbout.setFont(mainFont);
         menuItemLogout.setFont(mainFont);
         menuItemOpenSecurity.setFont(mainFont);
-        menuItemFilterLogs.setFont(mainFont);
+        menuItemDeleteStory.setFont(mainFont);
     }
 
     /**
@@ -155,6 +165,11 @@ public class EditorView extends javax.swing.JFrame {
         menuItemEditStoryBody.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
         menuItemEditStoryID.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.CTRL_MASK));
         menuItemAddStory.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
+        menuItemDeleteStory.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, java.awt.event.InputEvent.CTRL_MASK));
+        menuItemRefreshStoriesLinks.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_MASK));
+        menuitemEditLink.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
+        menuItemAddLink.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.CTRL_MASK));
+        menuItemDeleteLink.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.CTRL_MASK));
     }
 
     /**
@@ -178,18 +193,18 @@ public class EditorView extends javax.swing.JFrame {
         menuItemExit = new JMenuItem("Exit application");
         menuItemSaveAs = new JMenuItem("Save Logs As");
         menuItemOpen = new JMenuItem("Open Logs");
-        menuItemDeleteAllLogs = new JMenuItem("Delete All Logs");
-        menuItemRefreshStoriesLinksHistory = new JMenuItem("Delete All Logs Changes History");
+        menuItemAddLink = new JMenuItem("Add New Link");
+        menuItemDeleteLink = new JMenuItem("Delete Link");
         menuItemRefreshStoriesLinks = new JMenuItem("Refresh Stories And Links");
         menuItemAddStory = new JMenuItem("Add New Story");
         menuItemEditStoryID = new JMenuItem("Edit Story ID");
         menuItemEditStoryBody = new JMenuItem("Edit Story Body");
         menuItemChangeFontSize = new JMenuItem("Change Font Size");
-        menuItemShowLogHistory = new JMenuItem("Get Logs Changes History");
+        menuitemEditLink = new JMenuItem("Edit Link");
         menuItemAbout = new JMenuItem("About");
         menuItemLogout = new JMenuItem("Logout");
         menuItemOpenSecurity = new JMenuItem("Open Security");
-        menuItemFilterLogs = new JMenuItem("Filter Logs");
+        menuItemDeleteStory = new JMenuItem("Delete Story");
     }
 
     /**
@@ -199,12 +214,12 @@ public class EditorView extends javax.swing.JFrame {
         optionsMenu.add(menuItemEditStoryBody);
         optionsMenu.add(menuItemEditStoryID);
         optionsMenu.add(menuItemAddStory);
+        optionsMenu.add(menuItemDeleteStory);
         optionsMenu.add(menuItemRefreshStoriesLinks);
-        /*optionsMenu.add(menuItemShowLogHistory);
-        optionsMenu.add(menuItemDeleteAllLogs);
-        optionsMenu.add(menuItemRefreshStoriesLinksHistory);
-        optionsMenu.add(menuItemFilterLogs);
-        optionsMenu.add(menuItemSaveAs);
+        optionsMenu.add(menuitemEditLink);
+        optionsMenu.add(menuItemAddLink);
+        optionsMenu.add(menuItemDeleteLink);
+        /*optionsMenu.add(menuItemSaveAs);
         optionsMenu.add(menuItemOpen);
         optionsMenu.add(menuItemLogout);
         optionsMenu.add(menuItemOpenSecurity);*/
@@ -371,28 +386,28 @@ public class EditorView extends javax.swing.JFrame {
         this.menuItemRefreshStoriesLinks = menuItemRefreshStoriesLinks;
     }
 
-    public JMenuItem getMenuItemShowLogHistory() {
-        return menuItemShowLogHistory;
+    public JMenuItem getMenuitemEditLink() {
+        return menuitemEditLink;
     }
 
-    public void setMenuItemShowLogHistory(JMenuItem menuItemShowLogHistory) {
-        this.menuItemShowLogHistory = menuItemShowLogHistory;
+    public void setMenuitemEditLink(JMenuItem menuitemEditLink) {
+        this.menuitemEditLink = menuitemEditLink;
     }
 
-    public JMenuItem getMenuItemDeleteAllLogs() {
-        return menuItemDeleteAllLogs;
+    public JMenuItem getmenuItemAddLink() {
+        return menuItemAddLink;
     }
 
-    public void setMenuItemDeleteAllLogs(JMenuItem menuItemDeleteAllLogs) {
-        this.menuItemDeleteAllLogs = menuItemDeleteAllLogs;
+    public void setmenuItemAddLink(JMenuItem menuItemAddLink) {
+        this.menuItemAddLink = menuItemAddLink;
     }
 
-    public JMenuItem getmenuItemRefreshStoriesLinksHistory() {
-        return menuItemRefreshStoriesLinksHistory;
+    public JMenuItem getmenuItemDeleteLink() {
+        return menuItemDeleteLink;
     }
 
-    public void setmenuItemRefreshStoriesLinksHistory(JMenuItem menuItemRefreshStoriesLinksHistory) {
-        this.menuItemRefreshStoriesLinksHistory = menuItemRefreshStoriesLinksHistory;
+    public void setmenuItemDeleteLink(JMenuItem menuItemDeleteLink) {
+        this.menuItemDeleteLink = menuItemDeleteLink;
     }
 
     public JMenuItem getMenuItemSaveAs() {
@@ -419,12 +434,12 @@ public class EditorView extends javax.swing.JFrame {
         this.menuItemExit = menuItemExit;
     }
 
-    public JMenuItem getMenuItemFilterLogs() {
-        return menuItemFilterLogs;
+    public JMenuItem getmenuItemDeleteStory() {
+        return menuItemDeleteStory;
     }
 
-    public void setMenuItemFilterLogs(JMenuItem menuItemFilterLogs) {
-        this.menuItemFilterLogs = menuItemFilterLogs;
+    public void setmenuItemDeleteStory(JMenuItem menuItemDeleteStory) {
+        this.menuItemDeleteStory = menuItemDeleteStory;
     }
 
 
@@ -514,10 +529,10 @@ public class EditorView extends javax.swing.JFrame {
         menuItemAddStory.addActionListener(listener);
         menuItemRefreshStoriesLinks.addActionListener(listener);
         menuItemEditStoryID.addActionListener(listener);
-        menuItemShowLogHistory.addActionListener(listener);
-        menuItemDeleteAllLogs.addActionListener(listener);
-        menuItemRefreshStoriesLinksHistory.addActionListener(listener);
-        menuItemFilterLogs.addActionListener(listener);
+        menuitemEditLink.addActionListener(listener);
+        menuItemAddLink.addActionListener(listener);
+        menuItemDeleteLink.addActionListener(listener);
+        menuItemDeleteStory.addActionListener(listener);
         menuItemSaveAs.addActionListener(listener);
         menuItemOpen.addActionListener(listener);
         menuItemLogout.addActionListener(listener);
