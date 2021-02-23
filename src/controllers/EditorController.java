@@ -254,7 +254,7 @@ public class EditorController {
         }
 
     private void editLink() {
-       /* boolean success = model.editLink();
+       boolean success = model.editLink();
         if (success){
             //update stories in combobox etc.
             refreshStoryAndLinksFromDatabase();
@@ -262,7 +262,7 @@ public class EditorController {
             addScenesToComboBox();
         } else {
 
-        }*/
+        }
     }
 
     private void addNewStory() {
