@@ -74,3 +74,7 @@ Nästa gång så ska jag nästa gång fortsätta på speländraren, till exempel
 2021-02-23: Gjort så att användaren kan ändra en links egenskaper dvs id, storyid,targetid och description. 
 Nästa gång så ska jag göra så att användaren kan skapa nya länkar och ta bort länkar samt stories och kanske
 mer i spelet. 
+
+2021-02-28: Gjort så att användaren kan skapa nya länkar samt lagt till en backup metod för att ändra länkar utifall
+den första metoden inte fungerar. Nästa gång så ska jag göra så att användarne kan ta bort länkar samt stories
+samt kanske lägga till något mer i spelet.
