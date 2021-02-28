@@ -62,12 +62,78 @@ public class EditorModel {
     }
 
     /**
+     * Add new Link to database
+     * @return boolean that tells if insert was successful
+     */
+    public boolean addNewLink(){
+        try {
+            int linkId = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter ID for new Link", Env.EditorMessageBoxTitle, JOptionPane.QUESTION_MESSAGE));
+
+            if (linkId < 0) {
+                JOptionPane.showMessageDialog(null, "Invalid Link ID. Must be 0 or greater.", Env.EditorMessageBoxTitle, JOptionPane.QUESTION_MESSAGE);
+                return false;
+            }
+            ArrayList<String> co = new ArrayList<>();
+            ArrayList<String> va = new ArrayList<>();
+            co.add("id");
+            va.add(Integer.toString(linkId));
+            ResultSet rs = dbManager.selectAllWhere("links", co, va);
+            if (rs.next()){
+                JOptionPane.showMessageDialog(null, "A link with that ID already exist.\r\nYou cannot create duplicate links.", Env.EditorMessageBoxTitle, JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+            String desc = JOptionPane.showInputDialog(null, "Enter Description for new Link", Env.EditorMessageBoxTitle, JOptionPane.QUESTION_MESSAGE);
+            if (desc == null) {
+                JOptionPane.showMessageDialog(null, "Invalid Link Description. Cannot be empty.", Env.EditorMessageBoxTitle, JOptionPane.QUESTION_MESSAGE);
+                return false;
+            }
+            if (desc.trim().equals("")) {
+                JOptionPane.showMessageDialog(null, "Invalid Link Description. Cannot be empty.", Env.EditorMessageBoxTitle, JOptionPane.QUESTION_MESSAGE);
+                return false;
+            }
+            int newStoryID = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter Story ID for new link", Env.EditorMessageBoxTitle, JOptionPane.QUESTION_MESSAGE));
+            if (newStoryID < 0) {
+                JOptionPane.showMessageDialog(null, "Invalid Story ID. Must be 0 or greater.", Env.EditorMessageBoxTitle, JOptionPane.QUESTION_MESSAGE);
+                return false;
+            }
+            int newTargetID = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter Target ID for new link", Env.EditorMessageBoxTitle, JOptionPane.QUESTION_MESSAGE));
+            if (newTargetID < 0) {
+                JOptionPane.showMessageDialog(null, "Invalid Target ID. Must be 0 or greater.", Env.EditorMessageBoxTitle, JOptionPane.QUESTION_MESSAGE);
+                return false;
+            }
+            ArrayList<String> setc = new ArrayList<>();
+            ArrayList<String> setv = new ArrayList<>();
+            setc.add("id");
+            setv.add(Integer.toString(linkId));
+            setc.add("description");
+            setv.add(desc);
+            setc.add("target_id");
+            setv.add(Integer.toString(newTargetID));
+            setc.add("story_id");
+            setv.add(Integer.toString(newStoryID));
+            boolean inserted = dbManager.insert("links", setc, setv);
+            if (inserted){
+                return true;
+            }
+        } catch (Exception ex){
+            ex.printStackTrace();
+        }
+        return false;
+    }
+
+    /**
+     *
      * Edit Link
      * @return boolean that tells if edit was successful
      */
     public boolean editLink(){
+        int linkId = -1;
+        int newLinkID = -1;
+        int newStoryID = -1;
+        int newTargetID = -1;
+        String newDesc = null;
         try {
-            int linkId = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter Link ID of the link you want to edit", Env.EditorMessageBoxTitle, JOptionPane.QUESTION_MESSAGE));
+            linkId = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter Link ID of the link you want to edit", Env.EditorMessageBoxTitle, JOptionPane.QUESTION_MESSAGE));
             if (linkId < 0) {
                 JOptionPane.showMessageDialog(null, "Invalid Link ID. Must be 0 or greater.", Env.EditorMessageBoxTitle, JOptionPane.QUESTION_MESSAGE);
                 return false;
@@ -81,22 +147,22 @@ public class EditorModel {
                 JOptionPane.showMessageDialog(null, "A link with that ID does not exist.", Env.EditorMessageBoxTitle, JOptionPane.ERROR_MESSAGE);
                 return false;
             }
-            int newLinkID = Integer.parseInt((String) JOptionPane.showInputDialog(null, "Enter new ID for this link", Env.EditorMessageBoxTitle, JOptionPane.QUESTION_MESSAGE, null, null, Integer.toString(rs.getInt("id"))));
+            newLinkID = Integer.parseInt((String) JOptionPane.showInputDialog(null, "Enter new ID for this link", Env.EditorMessageBoxTitle, JOptionPane.QUESTION_MESSAGE, null, null, Integer.toString(rs.getInt("id"))));
             if (newLinkID < 0) {
                 JOptionPane.showMessageDialog(null, "Invalid New Link ID. Must be 0 or greater.", Env.EditorMessageBoxTitle, JOptionPane.QUESTION_MESSAGE);
                 return false;
             }
-            int newStoryID = Integer.parseInt((String) JOptionPane.showInputDialog(null, "Enter new Story ID for this link", Env.EditorMessageBoxTitle, JOptionPane.QUESTION_MESSAGE, null, null, Integer.toString(rs.getInt("story_id"))));
+            newStoryID = Integer.parseInt((String) JOptionPane.showInputDialog(null, "Enter new Story ID for this link", Env.EditorMessageBoxTitle, JOptionPane.QUESTION_MESSAGE, null, null, Integer.toString(rs.getInt("story_id"))));
             if (newStoryID < 0) {
                 JOptionPane.showMessageDialog(null, "Invalid New Story ID. Must be 0 or greater.", Env.EditorMessageBoxTitle, JOptionPane.QUESTION_MESSAGE);
                 return false;
             }
-            int newTargetID = Integer.parseInt((String) JOptionPane.showInputDialog(null, "Enter new Target ID for this link", Env.EditorMessageBoxTitle, JOptionPane.QUESTION_MESSAGE, null, null, Integer.toString(rs.getInt("target_id"))));
+            newTargetID = Integer.parseInt((String) JOptionPane.showInputDialog(null, "Enter new Target ID for this link", Env.EditorMessageBoxTitle, JOptionPane.QUESTION_MESSAGE, null, null, Integer.toString(rs.getInt("target_id"))));
             if (newTargetID < 0) {
                 JOptionPane.showMessageDialog(null, "Invalid New Target ID. Must be 0 or greater.", Env.EditorMessageBoxTitle, JOptionPane.QUESTION_MESSAGE);
                 return false;
             }
-            String newDesc = (String) JOptionPane.showInputDialog(null, "Enter new Description for this link", Env.EditorMessageBoxTitle, JOptionPane.QUESTION_MESSAGE, null, null, rs.getString("description"));
+            newDesc = (String) JOptionPane.showInputDialog(null, "Enter new Description for this link", Env.EditorMessageBoxTitle, JOptionPane.QUESTION_MESSAGE, null, null, rs.getString("description"));
             if (newDesc == null){
                 JOptionPane.showMessageDialog(null, "New Link Description cannot be empty.", Env.EditorMessageBoxTitle, JOptionPane.ERROR_MESSAGE);
                 return false;
@@ -113,18 +179,74 @@ public class EditorModel {
             filterv.add(Integer.toString(linkId));
             setc.add("id");
             setv.add(Integer.toString(newLinkID));
-            setc.add("story_id");
-            setv.add(Integer.toString(newStoryID));
-            setc.add("target_id");
-            setv.add(Integer.toString(newTargetID));
             setc.add("description");
             setv.add(newDesc);
+            setc.add("target_id");
+            setv.add(Integer.toString(newTargetID));
+            setc.add("story_id");
+            setv.add(Integer.toString(newStoryID));
             boolean edited = dbManager.edit("links", filterc, filterv, setc, setv);
             if (edited){
                 return true;
+            } else {
+                //another backup method, delete and then create new link
+                ArrayList<String> c = new ArrayList<>();
+                ArrayList<String> v = new ArrayList<>();
+                c.add("id");
+                v.add(Integer.toString(linkId));
+                boolean deleted = dbManager.delete("links", c, v);
+                if (deleted) {
+                    ArrayList<String> setca = new ArrayList<>();
+                    ArrayList<String> setva = new ArrayList<>();
+                    setca.add("id");
+                    setva.add(Integer.toString(linkId));
+                    setca.add("description");
+                    setva.add(newDesc);
+                    setca.add("target_id");
+                    setva.add(Integer.toString(newTargetID));
+                    setca.add("story_id");
+                    setva.add(Integer.toString(newStoryID));
+                    boolean inserted = dbManager.insert("links", setca, setva);
+                    if (inserted) {
+                        return true;
+                    }
+                }
             }
         } catch (Exception ex){
             ex.printStackTrace();
+            try {
+                ArrayList<String> co = new ArrayList<>();
+                ArrayList<String> va = new ArrayList<>();
+                co.add("id");
+                va.add(Integer.toString(linkId));
+                ResultSet rs = dbManager.selectAllWhere("links", co, va);
+                if (rs.next()) {
+                    //another backup method, delete and then create new link
+                    ArrayList<String> c = new ArrayList<>();
+                    ArrayList<String> v = new ArrayList<>();
+                    c.add("id");
+                    v.add(Integer.toString(linkId));
+                    boolean deleted = dbManager.delete("links", c, v);
+                    if (deleted) {
+                        ArrayList<String> setca = new ArrayList<>();
+                        ArrayList<String> setva = new ArrayList<>();
+                        setca.add("id");
+                        setva.add(Integer.toString(linkId));
+                        setca.add("description");
+                        setva.add(newDesc);
+                        setca.add("target_id");
+                        setva.add(Integer.toString(newTargetID));
+                        setca.add("story_id");
+                        setva.add(Integer.toString(newStoryID));
+                        boolean inserted = dbManager.insert("links", setca, setva);
+                        if (inserted) {
+                            return true;
+                        }
+                    }
+                }
+            } catch (Exception ex2){
+                ex2.printStackTrace();
+            }
         }
         return false;
     }

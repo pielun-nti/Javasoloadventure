@@ -215,6 +215,9 @@ public class EditorController {
                 if (command.equalsIgnoreCase("Add New Story")){
                     addNewStory();
                 }
+                if (command.equalsIgnoreCase("Add New Link")){
+                    addNewLink();
+                }
                 if (command.equalsIgnoreCase("Refresh stories and links")){
                     //get all stories from db again and add to combobox.
                     refreshStoryAndLinksFromDatabase();
@@ -252,6 +255,18 @@ public class EditorController {
             }
         }
         }
+
+    private void addNewLink() {
+        boolean success = model.addNewLink();
+        if (success){
+            //update stories in combobox etc.
+            refreshStoryAndLinksFromDatabase();
+            view.getSceneSelector().removeAllItems();
+            addScenesToComboBox();
+        } else {
+
+        }
+    }
 
     private void editLink() {
        boolean success = model.editLink();
