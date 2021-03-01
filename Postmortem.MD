@@ -123,10 +123,10 @@ Jag tycker jag har gjort de två programmen effektiva
 och laggfria genom att skapa ny tråd när programmet gör mycket samtidigt eller gör
 stora operationer i ui tråden.
 
-# 1.5 
+# 1.5 Negativa erfarenheter
 Nej inte vad jag kommer på.
 
-# 1.6 
+# 1.6 Sammanfattning
 Jag tycker allt gått bra med arbetet. Jag hann det mesta
 med arbetet, men det finns nya funktioner man kan lägga till som
 det gör i alla program. Jag skrev några förbättringsmöjligheter under positiva erfarenheter.
