@@ -67,9 +67,7 @@ public class CustomPanel extends JPanel {
                 view.gettxtStory().setText(view.getGameInfo().getStories().get(view.getGameInfo().getCurrentRoom() - 1).getBody());
                 view.getScroll().setSize(view.getWidth() - 50, view.getHeight() - 100);
 
-            } /*else if (x >= (blackSquareX - 50) & x < (blackSquareX + 50) & y <= (blackSquareY + 50)  & y >= (blackSquareY - 50)) {
-                JOptionPane.showMessageDialog(null, "It matches2!");
-            }*/
+            }
             if ((redSquareX != x) || (redSquareY != y)) {
                 repaint(redSquareX, redSquareY, redSquareW + OFFSET, redSquareH + OFFSET);
                 redSquareX = x;

@@ -30,10 +30,6 @@ public class EditorView extends javax.swing.JFrame {
     JMenuItem menuitemEditLink;
     JMenuItem menuItemAddLink;
     JMenuItem menuItemDeleteLink;
-    JMenuItem menuItemSaveAs;
-    JMenuItem menuItemOpen;
-    JMenuItem menuItemOpenSecurity;
-    JMenuItem menuItemLogout;
     JMenuItem menuItemExit;
     JMenuItem menuItemDeleteStory;
     JTextArea txtStory;
@@ -128,14 +124,10 @@ public class EditorView extends javax.swing.JFrame {
         menuitemEditLink.setFont(mainFont);
         menuItemAddLink.setFont(mainFont);
         menuItemDeleteLink.setFont(mainFont);
-        menuItemSaveAs.setFont(mainFont);
-        menuItemOpen.setFont(mainFont);
         menuItemExit.setFont(mainFont);
         sceneSelector.setFont(mainFont);
         menuItemChangeFontSize.setFont(mainFont);
         menuItemAbout.setFont(mainFont);
-        menuItemLogout.setFont(mainFont);
-        menuItemOpenSecurity.setFont(mainFont);
         menuItemDeleteStory.setFont(mainFont);
     }
 
@@ -191,8 +183,6 @@ public class EditorView extends javax.swing.JFrame {
         scroll = new JScrollPane(txtStory,
                 JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         menuItemExit = new JMenuItem("Exit application");
-        menuItemSaveAs = new JMenuItem("Save Logs As");
-        menuItemOpen = new JMenuItem("Open Logs");
         menuItemAddLink = new JMenuItem("Add New Link");
         menuItemDeleteLink = new JMenuItem("Delete Link");
         menuItemRefreshStoriesLinks = new JMenuItem("Refresh Stories And Links");
@@ -202,8 +192,6 @@ public class EditorView extends javax.swing.JFrame {
         menuItemChangeFontSize = new JMenuItem("Change Font Size");
         menuitemEditLink = new JMenuItem("Edit Link");
         menuItemAbout = new JMenuItem("About");
-        menuItemLogout = new JMenuItem("Logout");
-        menuItemOpenSecurity = new JMenuItem("Open Security");
         menuItemDeleteStory = new JMenuItem("Delete Story");
     }
 
@@ -219,10 +207,6 @@ public class EditorView extends javax.swing.JFrame {
         optionsMenu.add(menuitemEditLink);
         optionsMenu.add(menuItemAddLink);
         optionsMenu.add(menuItemDeleteLink);
-        /*optionsMenu.add(menuItemSaveAs);
-        optionsMenu.add(menuItemOpen);
-        optionsMenu.add(menuItemLogout);
-        optionsMenu.add(menuItemOpenSecurity);*/
         optionsMenu.add(menuItemExit);
         editMenu.add(menuItemChangeFontSize);
         aboutMenu.add(menuItemAbout);
@@ -410,21 +394,6 @@ public class EditorView extends javax.swing.JFrame {
         this.menuItemDeleteLink = menuItemDeleteLink;
     }
 
-    public JMenuItem getMenuItemSaveAs() {
-        return menuItemSaveAs;
-    }
-
-    public void setMenuItemSaveAs(JMenuItem menuItemSaveAs) {
-        this.menuItemSaveAs = menuItemSaveAs;
-    }
-
-    public JMenuItem getMenuItemLogout() {
-        return menuItemLogout;
-    }
-
-    public void setMenuItemLogout(JMenuItem menuItemLogout) {
-        this.menuItemLogout = menuItemLogout;
-    }
 
     public JMenuItem getMenuItemExit() {
         return menuItemExit;
@@ -471,21 +440,6 @@ public class EditorView extends javax.swing.JFrame {
         return menuItemAbout;
     }
 
-    public JMenuItem getMenuItemOpen() {
-        return menuItemOpen;
-    }
-
-    public void setMenuItemOpen(JMenuItem menuItemOpen) {
-        this.menuItemOpen = menuItemOpen;
-    }
-
-    public JMenuItem getMenuItemOpenSecurity() {
-        return menuItemOpenSecurity;
-    }
-
-    public void setMenuItemOpenSecurity(JMenuItem menuItemOpenSecurity) {
-        this.menuItemOpenSecurity = menuItemOpenSecurity;
-    }
 
     public User getUser() {
         return user;
@@ -533,10 +487,6 @@ public class EditorView extends javax.swing.JFrame {
         menuItemAddLink.addActionListener(listener);
         menuItemDeleteLink.addActionListener(listener);
         menuItemDeleteStory.addActionListener(listener);
-        menuItemSaveAs.addActionListener(listener);
-        menuItemOpen.addActionListener(listener);
-        menuItemLogout.addActionListener(listener);
-        menuItemOpenSecurity.addActionListener(listener);
         menuItemExit.addActionListener(listener);
         menuItemChangeFontSize.addActionListener(listener);
         menuItemAbout.addActionListener(listener);

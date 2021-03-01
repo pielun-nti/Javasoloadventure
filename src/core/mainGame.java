@@ -126,11 +126,6 @@ public class mainGame {
                             }
                             gameView.getContentPane().setBackground(Color.YELLOW);
                             gameView.setVisible(true);
-                                    /*LoginView loginView = new LoginView();
-                LoginModel loginModel = new LoginModel();
-                LoginController loginController = new LoginController(loginView, loginModel);
-                loginView.setVisible(true);
-                loginView.getTxtUsername().requestFocus();*/
                         }
                 } catch (Exception ex){
                     ex.printStackTrace();
