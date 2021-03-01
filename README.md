@@ -1,8 +1,10 @@
 # Java soloadventure
 
 JavaDocs länk - https://pielun-nti.github.io/Javasoloadventure/
-PostMortem Dokumentation finns här i rooten av github repot och det heter Postmortem.MD
 
+PostMortem Dokumentation finns här i rooten av github repot och det heter Postmortem.MD
+ (https://github.com/pielun-nti/Javasoloadventure/blob/main/Postmortem.MD)
+<br>
 Loggbok, tidsplan och projektplan finns här nere i Readme.
 
 # Projektplan
