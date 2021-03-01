@@ -1,6 +1,7 @@
 # Java soloadventure
 
 JavaDocs länk - https://pielun-nti.github.io/Javasoloadventure/
+PostMortem Dokumentation finns här i rooten av github repot och det heter Postmortem.MD
 
 Loggbok, tidsplan och projektplan finns här nere i Readme.
 
@@ -78,3 +79,7 @@ mer i spelet.
 2021-02-28: Gjort så att användaren kan skapa nya länkar samt lagt till en backup metod för att ändra länkar utifall
 den första metoden inte fungerar. Nästa gång så ska jag göra så att användarne kan ta bort länkar samt stories
 samt kanske lägga till något mer i spelet.
+
+2021-03-01: Nu kan användaren också ta bort en specifik länk och story om den anger ID för specifika länken eller
+storyn. Jag har också skrivit Postmortem denna lektion. Arbetet ska lämnas in idag så jag kommer inte hinna mera
+men jag har hunnit det mesta som jag hade tänkt hinna.
