@@ -46,7 +46,8 @@ det kommer även upp en varg bild på en annan position.
 Om användaren istället väljer scen 2 så kommer användaren
 behöva flytta den röda rutan till den svarta rutan för att forsätta spelet.
 Sagotexten visas i en JTextArea och länkarna
-finns som JMenuItems.
+finns som JMenuItems. Bilderna visas som ImageIcon i en JLabel, men
+formerna ritas ut genom ett Graphics objekt på en custom JPanel i JFramen.
 Jag har också lagt till en egen JPanel och JMenuBar
 (alltså extendat de klasserna) för att ändra lite färger samt rita ut saker.
 <br>
@@ -88,6 +89,12 @@ så kan en annan bild komma upp eller liknande samt
 att användaren kommer till olika scener beroende
 på vad användaren väljer för länk/alternativ.
 <br>
+Jag har också skrivit JavaDocs kommentarer till
+i princip all kod (förutom vissa getters och setters
+och vissa metoder som jag inte hunnit kommentera).
+JavaDocs länken finns i ReadMe. Jag har också
+skrivit i min loggbok vad jag gjort och ska göra
+efter varje lektion.
 
 # 1.3 Bakgrund
 Jag har använt min dator med IntelliJ som är ett programmeringsverktyg där man skriver sin programmeringskod.
@@ -114,7 +121,7 @@ och om jag skulle göra det så skulle jag behöva
 lägga till bilderna i databasen först kanske som base64 eller liknande.
 Jag tycker jag har gjort de två programmen effektiva
 och laggfria genom att skapa ny tråd när programmet gör mycket samtidigt eller gör
-stora operationer i ui tråden. 
+stora operationer i ui tråden.
 
 # 1.5 
 Nej inte vad jag kommer på.
