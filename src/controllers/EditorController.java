@@ -226,14 +226,11 @@ public class EditorController {
                     //ask user for link target id and then allow edit.
                     editLink();
                 }
-                if (command.equalsIgnoreCase("Add New Link")){
-
-                }
                 if (command.equalsIgnoreCase("Delete Link")){
-
+                    deleteLink();
                 }
                 if (command.equalsIgnoreCase("Delete Story")){
-
+                    deleteStory();
                 }
                 if (command.equalsIgnoreCase("Change font size")){
                     int fontSize = view.getFontSize();
@@ -255,6 +252,37 @@ public class EditorController {
             }
         }
         }
+
+    /**
+     * Tells the EditorModel to delete a story from database. If success then it updates the JComboBox
+     * with the new stories.
+     */
+    private void deleteStory() {
+        boolean success = model.deleteStory();
+        if (success){
+            //update stories in combobox etc.
+            refreshStoryAndLinksFromDatabase();
+            view.getSceneSelector().removeAllItems();
+            addScenesToComboBox();
+        } else {
+
+        }
+    }
+    /**
+     * Tells the EditorModel to delete a link from database. If success then it updates the JComboBox
+     * with the new stories.
+     */
+    private void deleteLink() {
+        boolean success = model.deleteLink();
+        if (success){
+            //update stories in combobox etc.
+            refreshStoryAndLinksFromDatabase();
+            view.getSceneSelector().removeAllItems();
+            addScenesToComboBox();
+        } else {
+
+        }
+    }
 
     /**
      * Tells the EditorModel to add a new link to database. If success then it updates the JComboBox

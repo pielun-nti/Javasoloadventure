@@ -62,6 +62,48 @@ public class EditorModel {
     }
 
     /**
+     * Ask user for story id and then delete story with that id in database.
+     * @return boolean that tells if it was deleted successfully or not
+     */
+    public boolean deleteStory(){
+        int storyId = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter ID for the story you want to delete", Env.EditorMessageBoxTitle, JOptionPane.QUESTION_MESSAGE));
+        if (storyId < 0) {
+            JOptionPane.showMessageDialog(null, "Invalid Story ID. Must be 0 or greater.", Env.EditorMessageBoxTitle, JOptionPane.QUESTION_MESSAGE);
+            return false;
+        }
+        ArrayList<String> c = new ArrayList<>();
+        ArrayList<String> v = new ArrayList<>();
+        c.add("id");
+        v.add(Integer.toString(storyId));
+        boolean deleted = dbManager.delete("story", c, v);
+        if (deleted) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Ask user for link id and then delete link with that id in database.
+     * @return boolean that tells if it was deleted successfully or not
+     */
+    public boolean deleteLink(){
+        int linkId = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter ID for the link you want to delete", Env.EditorMessageBoxTitle, JOptionPane.QUESTION_MESSAGE));
+        if (linkId < 0) {
+            JOptionPane.showMessageDialog(null, "Invalid Link ID. Must be 0 or greater.", Env.EditorMessageBoxTitle, JOptionPane.QUESTION_MESSAGE);
+            return false;
+        }
+        ArrayList<String> c = new ArrayList<>();
+        ArrayList<String> v = new ArrayList<>();
+        c.add("id");
+        v.add(Integer.toString(linkId));
+        boolean deleted = dbManager.delete("links", c, v);
+        if (deleted) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * Add new Link to database
      * @return boolean that tells if insert was successful
      */
