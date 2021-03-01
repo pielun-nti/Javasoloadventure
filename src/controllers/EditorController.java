@@ -256,6 +256,10 @@ public class EditorController {
         }
         }
 
+    /**
+     * Tells the EditorModel to add a new link to database. If success then it updates the JComboBox
+     * with the new stories.
+     */
     private void addNewLink() {
         boolean success = model.addNewLink();
         if (success){
@@ -267,7 +271,10 @@ public class EditorController {
 
         }
     }
-
+    /**
+     * Tells the EditorModel to edit existing link to database. If success then it updates the JComboBox
+     * with the new stories.
+     */
     private void editLink() {
        boolean success = model.editLink();
         if (success){
@@ -279,7 +286,10 @@ public class EditorController {
 
         }
     }
-
+    /**
+     * Tells the EditorModel to add a new story to database. If success then it updates the JComboBox
+     * with the new stories.
+     */
     private void addNewStory() {
         boolean success = model.addNewStory();
         if (success){
@@ -291,7 +301,10 @@ public class EditorController {
 
         }
     }
-
+    /**
+     * Tells the EditorModel to edit existing story body to database. If success then it updates the JComboBox
+     * with the new stories.
+     */
     private void editStoryBody() {
         boolean success = model.editStoryBody();
         if (success){
@@ -303,7 +316,10 @@ public class EditorController {
 
         }
     }
-
+    /**
+     * Tells the EditorModel to edit existing story id to database. If success then it updates the JComboBox
+     * with the new stories.
+     */
     private void editStoryID() {
         boolean success = model.editStoryID();
         if (success){
